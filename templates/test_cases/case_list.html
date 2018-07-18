@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load in_list %}
+
+{% block content %}
+
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+
+
+                        <div class="searchForm">
+                            <form action="">
+                                <div class="form-row">
+                                    <div class="input-group col-3">
+                                        <input class="form-control" name="search_string" type="search" placeholder="Поиск по названию" value="{{ request.GET.search_string }}"
+                                               id="search-input">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-md col-2" data-toggle="collapse" aria-control="extendedSearch"
+                                            type="button" data-target="#extendedSearch">Расширеный фильтр
+                                    </button>
+                                </div>
+                                <div class="collapse" id="extendedSearch">
+                                    <div class="form-row mt-2">
+                                        <div class="col-auto">
+                                            <lable class="" for="fromDate">Дата запуска"с"</lable>
+                                            <input class="form-control" type="date" name="date_from" value="{{ request.GET.date_from }}" id="fromDate">
+                                        </div>
+                                        <div class="col-auto">
+                                            <lable class="" for="toDate">"по"</lable>
+                                            <input class="form-control" type="date" name="date_to" value="{{ request.GET.date_to }}" id=toDate>
+                                        </div>
+                                        <div class="col-auto">
+                                            <lable class="" for="inlineFormUserSelect">Ответственный за запуск</lable>
+                                            <select class="custom-select mr-sm-2" id="inlineFormUserSelect" name="run_by">
+                                                <option value="">____</option>
+                                                {% for account in accounts_list %}
+                                                    {% if account.id|add:0 == request.GET.run_by|add:0  %}
+                                                        <option value="{{ account.pk }}" selected> {{ account.get_full_name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ account.pk }}"> {{ account.get_full_name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <lable class="" for="inlineFormResultSelect">Результат</lable>
+                                            <select class="custom-select mr-sm-2" name="result" id="inlineFormResultSelect">
+                                                <option value="">____</option>
+                                                {% if request.GET.result == '0' %}
+                                                    <option value="0" selected>Не выполнялось</option>
+                                                {% else %}
+                                                    <option value="0">Не выполнялось</option>
+                                                {% endif %}
+
+                                                {% if request.GET.result == '1' %}
+                                                    <option value="1" selected>Успешно</option>
+                                                {% else %}
+                                                    <option value="1">Успешно</option>
+                                                {% endif %}
+
+                                                {% if request.GET.result == '2' %}
+                                                    <option value="2" selected>Провалено</option>
+                                                {% else %}
+                                                    <option value="2">Провалено</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <lable class="" for="inlineFormPlanSelect">Тест план</lable>
+                                            <select class="custom-select mr-sm-2" id="inlineFormPlanSelect" name="plan">
+                                                <option value="">____</option>
+                                                {% for plan in plan_list %}
+                                                    {% if plan.id|add:0 == request.GET.plan|add:0 %}
+                                                        <option value="{{ plan.pk }}" selected> {{ plan.name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ plan.pk }}"> {{ plan.name }}</option>
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <lable class="" for="tagsSearch">Теги</lable>
+                                            <select class="tags-search" name="tags" id="" multiple="multiple">
+                                                {% for tag in tag_list %}
+                                                    {% if tag.pk|in_list:selected_tags %}
+                                                        <option value="{{ tag.pk }}" selected>{{ tag.name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ tag.pk }}">{{ tag.name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="content__table mt-4">
+                            <table class="display table table-lg table-hover border">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Дата последнего запуска</th>
+                                    <th scope="col">Запустил</th>
+                                    <th scope="col">Статус запуска</th>
+                                    <th scope="col">Тест план</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for case in case_list %}
+                                    <tr>
+                                        <td>{{ case.id }}</td>
+                                        <td><a class="text-dark"
+                                               href={% url 'case_detail' case.pk %}>{{ case.name }}</a></td>
+                                        <td>{{ case.last_run|default_if_none:"Не запускался" }}</td>
+                                        <td>{{ case.last_log.run_by }}</td>
+                                        {% if case.status == "0" %}
+                                            <td class="text-center bg-secondary text-light rounded">{{ case.get_status_display }}</td>
+                                        {% elif case.status == "1" %}
+                                            <td class="text-center bg-success text-light rounded">{{ case.get_status_display }}</td>
+                                        {% else %}
+                                            <td class="text-center bg-danger text-light rounded">{{ case.get_status_display }}</td>
+                                        {% endif %}
+                                        <td>{{ case.plan_set.all.count|default_if_none:"Нет плана" }}</td>
+                                        <td><a class="text-dark" href={% url 'case_edit' case.pk %}><i
+                                                class="fa fa-pencil-square-o"
+                                                aria-hidden="true"></i></a>
+                                            <a class="text-dark" href={% url 'case_delete' case.pk %}><i
+                                                    class="fa fa-trash-o"
+                                                    aria-hidden="true"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

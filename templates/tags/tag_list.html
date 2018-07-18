@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+          <div class="container-fludi container-wide">
+            <div class="card">
+              <article class="card-body">
+               <a class="btn btn-info mb-5" href={% url 'tag_add' %}>Добавить тег</a>
+              <table class="table table-lg table-hover border">
+                <thead>
+                  <tr>
+                    <th scope="col">Название тега</th>
+                    <th scope="col">Количество тестов</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for tag in tag_list %}
+                        <tr>
+                            <td>{{ tag.name }}</td>
+                            <td>{{ tag.tagged_cont }}</td>
+                            <td>
+                              <a href={% url 'tag_delete' tag.pk %} class="text-dark"><i class="fa fa-2x fa-trash-o" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

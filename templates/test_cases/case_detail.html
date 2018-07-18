@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2 class="section__title">{{ case.name }}</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a class="btn btn-info" href={% url 'case_edit' case.pk %}>Редактировать</a>
+                                <a href={% url 'case_list' %} class="btn btn-warning">Вернутся в список</a>
+                                <a href={% url 'case_delete' case.pk %} class="btn btn-danger">Удалить</a>
+                            </div>
+                        </div>
+                        <div class="precondition">
+                            <div class="precondition__title h4">
+                                Предусловия
+                            </div>
+                            <div class="precondition__content h6 mb-4">
+                                {{ case.precondition }}
+                            </div>
+                        </div>
+                        <div class="description">
+                            <div class="description__title h4">
+                                Описание
+                            </div>
+                            <div class="description__content h6 mb-4">
+                                {{ case.description }}
+                            </div>
+                        </div>
+                        <div class="expectedResults">
+                            <div class="expectedResults__title h4">Ожидаемые результаты</div>
+                            <div class="expectedResults__content h6 mb-4">
+                                {{ case.excepted_result }}
+                            </div>
+                        </div>
+                        <div class="testPlan">
+                            <div class="testPlan__title">
+                                Тест планы
+                            </div>
+                            <div class="testPlan__content mb-4">
+                                {% for plan in case.plan_set.all %}
+                                    <a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <div class="tags__title">
+                                Теги
+                            </div>
+                            <div class="tags__content mb-4">
+                                {% for tag in tags %}
+                                    <a class="text-dark" href="#">{{ tag.tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="runLog">
+                            <div class="runLog__title h4">
+                                Лог запуска
+                            </div>
+                            <table class="table table-lg table-hover table-bordered mb-4">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Дата запуска</th>
+                                    <th scope="col">Запустил</th>
+                                    <th scope="col">Статус</th>
+                                    <th scope="col">Комментарий</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for log in case.caselog_set.all %}
+                                    <tr>
+                                    <td>{{ log.date|date:"D d M Y" }}</td>
+                                    <td>{{ log.run_by }}</td>
+                                    {% if log.status == "0" %}
+                                        <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
+                                    {% else %}
+                                        <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
+                                    {% endif %}
+                                    <td>{{ log.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

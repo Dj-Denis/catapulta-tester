@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="laoyut__body">
+        <div class="section section--hero">
+            <div class="section__content">
+                <div class="container-fludi container-wide">
+                    <div class="card">
+                        <article class="card-body">
+                            <a class="btn btn-info mb-5" href={% url 'group_create' %}>Добавить группу</a>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Роль</th>
+                                    <th>Активный</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for group in customgroup_list %}
+                                    <tr>
+                                        <td>
+                                            {{ group.name }}
+                                        </td>
+                                        <td class="align-middle">
+                                            __
+                                        </td>
+                                        <td>
+                                            <a href={% url 'group_edit' group.pk %} class="text-dark"><i class="fa fa-2x fa-pencil-square-o"
+                                                                             aria-hidden="true"></i></a>
+                                            <a href={% url 'group_delete' group.pk %} class="text-dark"><i class="fa fa-2x fa-trash-o"
+                                                                             aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

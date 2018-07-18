@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="laoyut__body">
+        <div class="section section--hero">
+            <div class="section__content">
+                <div class="container-fludi container-wide">
+                    <div class="card">
+                        <article class="card-body">
+                            <p class="h3 text-center">Статистика тест планов</p>
+                            <div class="hero__date ml-auto">
+                                <form class="form-inline justify-content-between">
+                                    <span>Выберите преиод "с"</span>
+                                    <input class="form-control" type="date" name="date_from" value="{{ request.GET.date_from }}">
+                                    <span>"по"</span>
+                                    <input class="form-control" type="date" name="date_to" value="{{ request.GET.date_to }}">
+                                    <button type="submit" class="btn btn-primary">Подтвердить</button>
+                                </form>
+                            </div>
+                            <div class="hero__dashboard py-4">
+                                <div class="row">
+                                    <div class="col-5 border">
+                                        <div class="row mb-3">
+                                            <div class="col-9 border">
+                                                Запускалось более 1 месяца назад от выбраного периода
+                                            </div>
+                                            <div class="col-3 text-center border">
+                                                {{ plan_list.count }}
+                                            </div>
+                                        </div>
+                                        <table class="display table table-sm table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Название тест плана</th>
+                                                <th scope="col">Дата последнего запуска</th>
+                                                <th scope="col">Статус запуска</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for plan in plan_list %}
+                                                <tr>
+                                                    <td>{{ plan.log_count }}</td>
+                                                    <td><a class="text-dark"
+                                                           href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
+                                                    <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    {% if plan.status == "0" %}
+                                                        <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% elif plan.status == "1" %}
+                                                        <td class="text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% else %}
+                                                        <td class="text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-2"></div>
+                                    <div class="col-5 border">
+                                        <div class="row mb-3">
+                                            <div class="col-6 border">Запускалось за выбранный период</div>
+                                            <div class="col-2 border bg-secondary text-light">
+                                                <span>Всего</span>
+                                                <span class="selectedPeriod__all">{{ plan_list.count }}</span>
+                                            </div>
+                                            <div class="col-2 border bg-success text-light">
+                                                <span>PASS</span>
+                                                <span class="selectedPeriod__pass">{{ plan_success_count }}</span>
+                                            </div>
+                                            <div class="col-2 border bg-danger text-light">
+                                                <span>FAIL</span>
+                                                <span class="selectedPeriod__fail">{{ plan_failed_count }}</span>
+                                            </div>
+                                        </div>
+                                        <table class="display table table-sm table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Название тест плана</th>
+                                                <th scope="col">Дата последнего запуска</th>
+                                                <th scope="col">Статус запуска</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            {% for plan in plan_list %}
+                                                <tr>
+                                                    <td>{{ plan.log_count }}</td>
+                                                    <td><a class="text-dark"
+                                                           href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
+                                                    <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    {% if plan.status == "0" %}
+                                                        <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% elif plan.status == "1" %}
+                                                        <td class="text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% else %}
+                                                        <td class="text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

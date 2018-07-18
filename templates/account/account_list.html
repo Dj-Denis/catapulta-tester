@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="laoyut__body">
+        <div class="section section--hero">
+            <div class="section__content">
+                <div class="container-fludi container-wide">
+                    <div class="card">
+                        <article class="card-body">
+                         <a class="btn btn-info mb-3" href={% url 'account_add' %}>Добавить пользователя</a>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Имя</th>
+                                    <th>E-mail</th>
+                                    <th>Роль</th>
+                                    <th>Активный</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in account_list %}
+                                    <tr>
+                                        <td>
+                                            <img src="{{ user.avatar.url }}" class="avatar"
+                                                 alt="">
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ user.get_full_name|default:"-" }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ user.email|default:"-" }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ user.group.name }}
+                                        </td>
+                                        <td class="align-middle">
+                                            __
+                                        </td>
+                                        <td>
+                                            <a href={% url 'account_edit' user.pk %} class="text-dark"><i class="fa fa-2x fa-pencil-square-o"
+                                                                             aria-hidden="true"></i></a>
+                                            <a href={% url 'account_delete' user.pk %} class="text-dark"><i class="fa fa-2x fa-trash-o"
+                                                                             aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

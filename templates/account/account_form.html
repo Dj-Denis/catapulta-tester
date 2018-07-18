@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <div class="creteForm">
+
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% crispy form %}
+                            </form>
+
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
