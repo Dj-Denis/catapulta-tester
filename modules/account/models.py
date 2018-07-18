@@ -1,12 +1,12 @@
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.urls import reverse
-from django.utils.safestring import mark_safe
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from django.contrib.auth.models import PermissionsMixin
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from image_cropping import ImageCropField, ImageRatioField
 
 
@@ -62,6 +62,7 @@ class CustomGroup(models.Model):
         verbose_name='разешения',
         blank=True,
     )
+    is_admin = False
 
     objects = CustomGroupManager()
 
@@ -116,11 +117,11 @@ class Account(PermissionsMixin, AbstractBaseUser):
         CustomGroup,
         verbose_name='Группа',
         blank=True,
+        null=True,
         help_text="Группа к которой принадлежит пользователь",
         related_name="user_set",
         related_query_name="user",
-        default=3,
-        on_delete=models.SET_DEFAULT
+        on_delete=models.SET_NULL
     )
     user_permissions = models.ManyToManyField(
         CustomPermission,
@@ -138,7 +139,12 @@ class Account(PermissionsMixin, AbstractBaseUser):
         return '%s %s' % (self.first_name, self.second_name)
 
     def has_perm(self, perm, obj=None):
-        return True
+        if self.is_active and self.is_admin:
+            return True
+        if self.group:
+            if perm in [i[0] for i in list(self.group.permissions.all().values_list('codename'))]:
+                return True
+        return False
 
     def has_module_perms(self, app_label):
         return True

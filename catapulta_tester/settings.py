@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'easy_thumbnails',
     'image_cropping',
+    'djipsum',
 ]
 
 MIDDLEWARE = [

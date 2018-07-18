@@ -1,19 +1,17 @@
-from django.db.models import Q
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Case
-from django.contrib.contenttypes.models import ContentType
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.urls import reverse_lazy
-from .forms import CaseEditForm
-from modules.tags.models import TaggedItem, Tag
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
+from django.views.generic.edit import UpdateView
+
 from modules.account.models import Account
+from modules.tags.models import TaggedItem, Tag
 from modules.test_plans.models import Plan
-from django.contrib.auth.decorators import permission_required
-from django.utils.decorators import method_decorator
+from .forms import CaseEditForm
+from .models import Case
 
 
 # Create your views here.
@@ -66,8 +64,9 @@ class CaseDetail(DetailView):
         return ctx
 
 
-class CaseCreate(LoginRequiredMixin, CreateView):
+class CaseCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Case
+    permission_required = 'add_case'
     # form_class = CaseEditForm
     fields = ['name', 'description', 'precondition', 'excepted_result', 'comment']
 
@@ -77,10 +76,10 @@ class CaseCreate(LoginRequiredMixin, CreateView):
         return super(CaseCreate, self).form_valid(form)
 
 
-class CaseUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
+class CaseUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Case
     form_class = CaseEditForm
-    permission_required = 'edit_case'
+    permission_required = 'change_case'
     permission_denied_message = 'Вы не имеете права делать это'
     raise_exception = True
 
@@ -92,6 +91,7 @@ class CaseUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
         return initial
 
 
-class CaseDelete(LoginRequiredMixin, DeleteView):
+class CaseDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Case
+    permission_required = 'delete_case'
     success_url = reverse_lazy('case_list')

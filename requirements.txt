@@ -1,0 +1,17 @@
+Babel==2.6.0
+confusable-homoglyphs==3.1.1
+Delorean==1.0.0
+Django==2.0.7
+django-appconf==1.0.1
+django-crispy-forms==1.7.2
+django-image-cropping==1.1.0
+djipsum==1.1.5
+easy-thumbnails==2.5
+Faker==0.8.17
+humanize==0.5.1
+Pillow==5.2.0
+python-dateutil==2.7.3
+pytz==2018.4
+six==1.11.0
+text-unidecode==1.2
+tzlocal==1.5.1

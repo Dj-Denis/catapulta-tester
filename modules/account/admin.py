@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib import admin
-from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.models import Group, Permission
 from image_cropping import ImageCroppingMixin
 
 from .models import Account, CustomGroup, CustomPermission
@@ -95,6 +95,9 @@ class UserAdmin(ImageCroppingMixin, BaseUserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+
+class AdminCustomGroup(admin.ModelAdmin):
+    pass
 
 # Now register the new UserAdmin...
 admin.site.register(Account, UserAdmin)

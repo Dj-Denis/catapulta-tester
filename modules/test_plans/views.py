@@ -1,22 +1,17 @@
-import operator
-from functools import reduce
-
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.utils import timezone
-from django.views.generic import ListView
-from django.views.generic import DetailView
-from .models import Plan, PlanLog
-from modules.test_cases.models import Case
-from django.core.exceptions import ObjectDoesNotExist
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from modules.account.models import Account
-import delorean
+from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
+from django.views.generic.edit import UpdateView
 
+from modules.account.models import Account
+from modules.test_cases.models import Case
 from .forms import PlanUpdateForm
+from .models import Plan, PlanLog
+
 
 # Create your views here.
 
@@ -55,8 +50,9 @@ class PlanDetail(DetailView):
         return ctx
 
 
-class PlanCreate(LoginRequiredMixin, CreateView):
+class PlanCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Plan
+    permission_required = 'add_plan'
     fields = ['name', 'description']
 
     def form_valid(self, form):
@@ -65,12 +61,14 @@ class PlanCreate(LoginRequiredMixin, CreateView):
         return super(PlanCreate, self).form_valid(form)
 
 
-class PlanUpdate(LoginRequiredMixin, UpdateView):
+class PlanUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Plan
+    permission_required = 'change_plan'
     # fields = ['name', 'description']
     form_class = PlanUpdateForm
 
 
-class PlanDelete(LoginRequiredMixin, DeleteView):
+class PlanDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Plan
+    permission_required = ['delete_plan']
     success_url = reverse_lazy('plan_list')
