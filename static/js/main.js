@@ -3,7 +3,10 @@ $(document).ready(function () {
         "searching": false
     });
 
-
+    $('table.dashboard_table').DataTable( {
+        "searching": false,
+        "lengthChange": false
+    });
 
     $('.tags-select').select2({
         theme: "bootstrap4",

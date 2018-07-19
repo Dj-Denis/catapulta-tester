@@ -38,7 +38,7 @@
                 </ul>
                 {% if user.is_authenticated %}
                     <ul class="navbar_nav ml-auto my-auto">
-                        <div class="navbar-text">
+                        <div class="navbar-text d-none d-xl-inline-block">
                             Приветствую, {{ request.user.first_name }}, сделай свой продукт круче - покрой тестами все!
                         </div>
                         <button class="btn btn-md btn-primary-outline ml-2" type="button" data-toggle="dropdown"

@@ -28,7 +28,7 @@
                                                 {{ plan_list.count }}
                                             </div>
                                         </div>
-                                        <table class="display table table-sm table-hover">
+                                        <table class="dashboard_table table table-sm table-hover">
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -43,13 +43,13 @@
                                                     <td>{{ plan.log_count }}</td>
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                                    <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
                                                     {% if plan.status == "0" %}
-                                                        <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% elif plan.status == "1" %}
-                                                        <td class="text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% else %}
-                                                        <td class="text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% endif %}
                                                 </tr>
                                             {% endfor %}
@@ -73,7 +73,7 @@
                                                 <span class="selectedPeriod__fail">{{ plan_failed_count }}</span>
                                             </div>
                                         </div>
-                                        <table class="display table table-sm table-hover">
+                                        <table class="dashboard_table table table-sm table-hover">
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -89,13 +89,13 @@
                                                     <td>{{ plan.log_count }}</td>
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                                    <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
                                                     {% if plan.status == "0" %}
-                                                        <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% elif plan.status == "1" %}
-                                                        <td class="text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% else %}
-                                                        <td class="text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% endif %}
                                                 </tr>
                                             {% endfor %}

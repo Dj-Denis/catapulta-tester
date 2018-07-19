@@ -95,17 +95,17 @@
                                             <td>{{ plan.id }}</td>
                                             <td><a class="text-dark"
                                                    href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                            <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
-                                            <td>{{ plan.last_log.run_by }}</td>
-                                            <td>{{ plan.cases.count }}</td>
-                                            <td>{{ plan.succeed_count }}</td>
-                                            <td>{{ plan.failed_count }}</td>
+                                            <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                            <td class="align-middle">{{ plan.last_log.run_by }}</td>
+                                            <td class="align-middle">{{ plan.cases.count }}</td>
+                                            <td class="align-middle">{{ plan.succeed_count }}</td>
+                                            <td class="align-middle">{{ plan.failed_count }}</td>
                                             {%  if plan.status == "0" %}
-                                            <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
+                                            <td class="align-middle text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
                                             {% elif plan.status == "1" %}
-                                                <td class="text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                                <td class="align-middle text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
                                             {% else %}
-                                                <td class="text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                                <td class="align-middle text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
                                             {% endif %}
                                                 <td>
                                                 <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i class="fa fa-pencil-square-o"

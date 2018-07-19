@@ -10,10 +10,10 @@
 
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-7">
                                 <h2 class="plan__title">{{ plan.name }}</h2>
                             </div>
-                            <div class="col-6 text-right">
+                            <div class="col-5 text-right">
                                 <a class="btn btn-info" href={% url "plan_edit" plan.pk %}>Редактировать</a>
                                 <a href="#" class="btn btn-primary">Запустить тест план</a>
                                 <a href={% url 'plan_list' %} class="btn btn-warning">Вернутся в список</a>
