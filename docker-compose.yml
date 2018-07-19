@@ -14,6 +14,8 @@ services:
   postresql:
     image: postgres:9.5
     container_name: ctptester_psql
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: ctptester
       POSTGRES_USER: ctptester

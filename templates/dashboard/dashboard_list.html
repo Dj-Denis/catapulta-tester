@@ -38,7 +38,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for plan in plan_list %}
+                                            {% for plan in plan_list_before %}
                                                 <tr>
                                                     <td>{{ plan.log_count }}</td>
                                                     <td><a class="text-dark"
@@ -86,7 +86,7 @@
 
                                             {% for plan in plan_list %}
                                                 <tr>
-                                                    <td>{{ plan.log_count }}</td>
+                                                    <td>{{ plan.pk }}</td>
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
                                                     <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
