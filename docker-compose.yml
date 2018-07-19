@@ -1,0 +1,43 @@
+version: '2'
+
+volumes:
+  ctptester_psql:
+    external:
+      name: ctptester_psql
+
+networks:
+  ctptester:
+    external:
+      name: ctptester
+
+services:
+  postresql:
+    image: postgres:9.5
+    container_name: ctptester_psql
+    environment:
+      POSTGRES_PASSWORD: ctptester
+      POSTGRES_USER: ctptester
+      POSTGRES_DB: postgres
+    volumes:
+      - ctptester_psql:/var/lib/postgresql/data
+    restart: always
+    networks:
+      ctptester:
+        aliases:
+            - db
+  web:
+    container_name: web
+    image: ctp_testr:latest
+    user: root
+    ports:
+      - 8000:8000
+    command: python manage.py runserver 0.0.0.0:8000
+  #    restart: always
+    volumes:
+      - .:/home/project
+    depends_on:
+      - postresql
+    networks:
+      ctptester:
+        aliases:
+          - web

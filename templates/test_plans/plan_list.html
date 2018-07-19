@@ -98,8 +98,8 @@
                                             <td>{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
                                             <td>{{ plan.last_log.run_by }}</td>
                                             <td>{{ plan.cases.count }}</td>
-                                            <td>1</td>
-                                            <td>1</td>
+                                            <td>{{ plan.succeed_count }}</td>
+                                            <td>{{ plan.failed_count }}</td>
                                             {%  if plan.status == "0" %}
                                             <td class="text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
                                             {% elif plan.status == "1" %}

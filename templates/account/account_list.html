@@ -33,10 +33,14 @@
                                             {{ user.email|default:"-" }}
                                         </td>
                                         <td class="align-middle">
-                                            {{ user.groups.name }}
+                                            {{ user.group.name }}
                                         </td>
                                         <td class="align-middle">
-                                            __
+                                            {% if user.is_active %}
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            {% else %}
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            {% endif %}
                                         </td>
                                         <td>
                                             <a href={% url 'account_edit' user.pk %} class="text-dark"><i class="fa fa-2x fa-pencil-square-o"

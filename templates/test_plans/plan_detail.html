@@ -73,9 +73,9 @@
                                     <td>{{ log.date|date:"D d M Y" }}</td>
                                     <td>{{ log.plan.create_by }}</td>
                                         {%  if log.status == "0" %}
-                                            <td class="text-center bg-secondary text-light rounded">{{ log.get_status_display }}</td>
-                                        {% elif log.status == "1" %}
                                             <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
+                                        {% elif log.status == "1" %}
+                                            <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
                                         {% else %}
                                             <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
                                         {% endif %}

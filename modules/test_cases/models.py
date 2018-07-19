@@ -1,4 +1,3 @@
-from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 
@@ -23,8 +22,6 @@ class Case(models.Model):
 
     create_at = models.DateTimeField(verbose_name="Создан", auto_now_add=True)
     update_at = models.DateTimeField(verbose_name="Изменен", auto_now=True)
-
-    related_tag = GenericRelation('tags.TaggedItem')
 
     class Meta:
         verbose_name = "Кейс"

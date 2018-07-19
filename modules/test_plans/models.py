@@ -33,6 +33,14 @@ class Plan(models.Model):
     def last_log(self):
         return self.planlog_set.filter().last()
 
+    @property
+    def succeed_count(self):
+        return self.plancases_set.filter(case__status='1').count()
+
+    @property
+    def failed_count(self):
+        return self.plancases_set.filter(case__status='2').count()
+
 
 class PlanCases(models.Model):
     CASE_STATUS_CHOICES = (
