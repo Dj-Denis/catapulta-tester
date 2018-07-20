@@ -37,7 +37,7 @@ class CustomMultipleChoiceField(ChoiceField):
 
 
 class CaseEditForm(forms.ModelForm):
-    tags = CustomMultipleChoiceField(required=False)
+    tags = CustomMultipleChoiceField(required=False, label="Теги")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,16 +1,14 @@
-from django import forms
-from django.forms.widgets import FileInput
+from crispy_forms.bootstrap import (FormActions, Div)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, HTML
-from crispy_forms.bootstrap import (FormActions, Div, PrependedText)
-from .models import Account, CustomGroup
+from django import forms
+from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import password_validation
-from django.core.files.images import get_image_dimensions
-from django.contrib.auth.models import Group
+from django.forms.widgets import FileInput
 from image_cropping import ImageCropWidget
-from PIL import Image
+
+from .models import Account, CustomGroup
 
 
 class AccountEditForm(UserChangeForm):

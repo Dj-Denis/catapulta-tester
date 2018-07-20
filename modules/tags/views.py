@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView
-from .models import Tag
-from django.contrib.contenttypes.models import ContentType
+
 from modules.test_plans.models import Plan
+from .models import Tag
 
 
 # Create your views here.

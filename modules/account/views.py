@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 from django.views.generic import ListView, DeleteView
 from django.views.generic import UpdateView
-from django.views.generic import CreateView
-from django.urls import reverse_lazy
-from .models import Account, CustomGroup
+
 from .forms import (AccountEditForm,
                     CustomUserCreationForm,
                     GroupEditForm,
@@ -10,7 +11,7 @@ from .forms import (AccountEditForm,
                     AccountAddForm,
                     AdminAccountEditForm,
                     )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Account, CustomGroup
 
 
 # Create your views here.

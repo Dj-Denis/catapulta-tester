@@ -171,5 +171,6 @@ class Account(PermissionsMixin, AbstractBaseUser):
 def delete_old_avatars(sender, instance, *args, **kwargs):
     if instance.pk:
         existing_avatar = Account.objects.get(pk=instance.pk)
-        if instance.avatar and existing_avatar.avatar != instance.avatar:
+        if instance.avatar and existing_avatar.avatar != instance.avatar and existing_avatar.avatar.name != 'avatars/default-user.png':
+            print(existing_avatar.avatar.name)
             existing_avatar.avatar.delete(False)

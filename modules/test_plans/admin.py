@@ -1,7 +1,9 @@
 from django.contrib import admin
+
 from .models import Plan
-from .models import PlanLog
 from .models import PlanCases
+from .models import PlanLog
+
 
 # Register your tags here.
 

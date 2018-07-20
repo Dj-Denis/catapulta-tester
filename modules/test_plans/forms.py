@@ -1,10 +1,7 @@
 from django import forms
-from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ValidationError
-from django.forms import ChoiceField, MultipleHiddenInput, SelectMultiple
-from .models import PlanCases
 
 from .models import Plan
+from .models import PlanCases
 
 
 class PlanUpdateForm(forms.ModelForm):
