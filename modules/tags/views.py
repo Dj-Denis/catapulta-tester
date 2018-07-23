@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView
@@ -8,7 +9,7 @@ from .models import Tag
 
 # Create your views here.
 
-class TagsList(ListView):
+class TagsList(LoginRequiredMixin, ListView):
     model = Tag
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -20,12 +21,12 @@ class TagsList(ListView):
         return ctx
 
 
-class TagCreate(CreateView):
+class TagCreate(LoginRequiredMixin, CreateView):
     model = Tag
     fields = ('name',)
     success_url = reverse_lazy('tags_list')
 
 
-class TagDelete(DeleteView):
+class TagDelete(LoginRequiredMixin, DeleteView):
     model = Tag
     success_url = reverse_lazy('tags_list')

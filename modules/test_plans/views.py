@@ -16,7 +16,7 @@ from .models import Plan, PlanLog
 # Create your views here.
 
 
-class PlanList(ListView):
+class PlanList(LoginRequiredMixin, ListView):
     model = Plan
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -40,7 +40,7 @@ class PlanList(ListView):
         return ctx
 
 
-class PlanDetail(DetailView):
+class PlanDetail(LoginRequiredMixin, DetailView):
     model = Plan
 
     def get_context_data(self, **kwargs):

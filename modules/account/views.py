@@ -16,7 +16,7 @@ from .models import Account, CustomGroup
 
 # Create your views here.
 
-class AccountsList(ListView):
+class AccountsList(LoginRequiredMixin, ListView):
     model = Account
     template_name = 'account/account_list.html'
 
@@ -43,14 +43,14 @@ class AccountSettings(LoginRequiredMixin, UpdateView):
     #     return url
 
 
-class AccountAdd(CreateView):
+class AccountAdd(LoginRequiredMixin, CreateView):
     model = Account
     template_name = 'account/account_add.html'
     form_class = AccountAddForm
     success_url = reverse_lazy("account_list")
 
 
-class AccountDelete(DeleteView):
+class AccountDelete(LoginRequiredMixin, DeleteView):
     model = Account
     success_url = reverse_lazy('account_list')
 
@@ -62,12 +62,12 @@ class Registration(CreateView):
     success_url = reverse_lazy('dashboard')
 
 
-class GroupList(ListView):
+class GroupList(LoginRequiredMixin, ListView):
     model = CustomGroup
     template_name = 'account/groups_list.html'
 
 
-class GroupCreate(CreateView):
+class GroupCreate(LoginRequiredMixin, CreateView):
     model = CustomGroup
     # fields = ['name']
     form_class = GroupCreateForm
@@ -75,7 +75,7 @@ class GroupCreate(CreateView):
     success_url = reverse_lazy('groups_list')
 
 
-class GroupEdit(UpdateView):
+class GroupEdit(LoginRequiredMixin, UpdateView):
     model = CustomGroup
     template_name = 'account/group_form.html'
     success_url = reverse_lazy('groups_list')
@@ -83,7 +83,7 @@ class GroupEdit(UpdateView):
     form_class = GroupEditForm
 
 
-class GroupDelete(DeleteView):
+class GroupDelete(LoginRequiredMixin, DeleteView):
     model = CustomGroup
     # template_name = 'account/group_form.html'
     success_url = reverse_lazy('groups_list')

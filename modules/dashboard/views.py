@@ -1,6 +1,7 @@
 import datetime
 
 import delorean
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.views.generic import ListView
 
@@ -9,7 +10,7 @@ from modules.test_plans.models import Plan
 
 # Create your views here.
 
-class DashboardView(ListView):
+class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'dashboard/dashboard_list.html'
     model = Plan
 

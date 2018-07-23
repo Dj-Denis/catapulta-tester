@@ -16,7 +16,7 @@ from .models import Case
 
 # Create your views here.
 
-class CaseList(ListView):
+class CaseList(LoginRequiredMixin, ListView):
     model = Case
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -54,7 +54,7 @@ class CaseList(ListView):
         return ctx
 
 
-class CaseDetail(DetailView):
+class CaseDetail(LoginRequiredMixin, DetailView):
     model = Case
 
     def get_context_data(self, **kwargs):
