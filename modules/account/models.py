@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -170,7 +170,7 @@ class Account(PermissionsMixin, AbstractBaseUser):
         return reverse('account_edit', args=[str(self.pk)])
 
 
-@receiver(pre_save, sender=Account)
+@receiver(post_save, sender=Account)
 def delete_old_avatars(sender, instance, *args, **kwargs):
     if instance.pk:
         existing_avatar = Account.objects.get(pk=instance.pk)

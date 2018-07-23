@@ -1,5 +1,6 @@
 ve
 .idea/*
+.idea
 *.sqlite3
 *.pyc
-local.py
+catapulta_tester/local.py
