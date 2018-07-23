@@ -33,7 +33,7 @@ services:
     user: root
     ports:
       - 8000:8000
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python -u manage.py runserver 0.0.0.0:8000
   #    restart: always
     volumes:
       - .:/home/project

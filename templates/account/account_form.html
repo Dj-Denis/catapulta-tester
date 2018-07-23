@@ -1,17 +1,81 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load in_queryset %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
             <div class="container-fludi container-wide">
                 <div class="card">
-                    <article class="card-body">
-                        <div class="creteForm">
 
+                    <article class="card-body">
+                        <div class="card-title text-center">
+                            <h5>Настройки пользователя</h5>
+                        </div>
+                        <div class="creteForm">
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {% crispy form %}
                             </form>
+                        </div>
+                    </article>
+                </div>
+                <div class="card mt-2">
+                    <article class="card-body">
+                        <div class="card-title text-center">
+                            <h5>Привязка к социальным сетям</h5>
+                        </div>
+                        <div class="social__oauth d-flex">
+                            {% if 'google-oauth2' in object.social_auth.all|in_queryset %}
+                                <form class="m-1" action="{% url 'social:disconnect' 'google-oauth2' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="text-left social-button btn btn-block btn-outline-danger">
+                                        <i class="fa fa-google"></i>   Отвязать
+                                        аккаунт Google
+                                    </button>
+                                </form>
+                            {% else %}
+                                <div class="m-1">
+                                    <a href="{% url 'social:begin' 'google-oauth2' %}"
+                                       class="text-left social-button btn btn-block btn-danger">
+                                        <i class="fa fa-google"></i>   Привязать аккаунт
+                                        Google</a></div>
+                            {% endif %}
+
+                            {% if 'facebook' in object.social_auth.all|in_queryset %}
+                                <form class="m-1" action="{% url 'social:disconnect' 'facebook' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="text-left social-button btn btn-block btn-outline-primary">
+                                        <i class="fa fa-facebook-f"></i>  
+                                        Отвязать аккаунт Facebook
+                                    </button>
+                                </form>
+                            {% else %}
+                                <div class="m-1">
+                                    <a href="{% url 'social:begin' 'facebook' %}"
+                                       class="text-left social-button btn btn-block btn-primary">
+                                        <i class="fa fa-facebook-f"></i>  
+                                        Привязать аккаунт Facebook</a></div>
+                            {% endif %}
+
+                            {% if 'github' in object.social_auth.all|in_queryset %}
+                                <form class="m-1" action="{% url 'social:disconnect' 'github' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="text-left social-button btn btn-block btn-outline-dark">
+                                        <i class="fa fa-github"></i>  
+                                        Отвязать аккаунт GitHub
+                                    </button>
+                                </form>
+                            {% else %}
+                                <div class="m-1">
+                                    <a href="{% url 'social:begin' 'github' %}"
+                                       class="text-left social-button btn btn-block btn-dark">
+                                        <i class="fa fa-github"></i>  
+                                        Привязать аккаунт GitHub</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </article>
                 </div>

@@ -154,3 +154,14 @@ input:checked + .slider:before {
 .container-register {
     min-width: 500px;
 }
+
+.user__social {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate3d(225px, 0, 0);
+}
+
+.section__title {
+    text-align: center;
+}

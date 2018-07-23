@@ -28,6 +28,10 @@ class AccountSettings(LoginRequiredMixin, UpdateView):
     form_class = AccountEditForm
     # form_class = AccountEditForm
 
+    def get_context_data(self, **kwargs):
+        ctx = super(AccountSettings, self).get_context_data()
+        return ctx
+
     def get_form_class(self):
         if self.request.user.is_admin:
             return AdminAccountEditForm
