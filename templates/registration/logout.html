@@ -1,0 +1,18 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Logged out" %}{% endblock %}
+
+{% block content %}
+     <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <p>{% trans "Вы успешно вышли" %}.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+     </div>
+{% endblock %}

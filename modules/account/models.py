@@ -106,6 +106,9 @@ class Account(PermissionsMixin, AbstractBaseUser):
     avatar = ImageCropField(upload_to='avatars/', default='avatars/default-user.png',
                             verbose_name='Аватар')
     cropping = ImageRatioField('avatar', '400x400')
+    date_joined = models.DateTimeField(verbose_name="Дата регистрации", auto_now_add=True)
+    password = models.CharField(verbose_name='Пароль', max_length=128)
+
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

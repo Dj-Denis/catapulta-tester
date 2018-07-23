@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.widgets import FileInput
 from image_cropping import ImageCropWidget
+from registration.forms import RegistrationFormUniqueEmail
 
 from .models import Account, CustomGroup
 
@@ -237,3 +238,20 @@ class AccountAddForm(UserCreationForm):
     class Meta:
         model = Account
         fields = ('email', 'first_name', 'second_name', 'group')
+
+
+class CustomRegistrationForm(RegistrationFormUniqueEmail):
+    password1 = forms.CharField(
+        label="Пароль",
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+    password2 = forms.CharField(
+        label="Подтверждение пароля",
+        widget=forms.PasswordInput,
+        strip=False,
+    )
+
+    class Meta:
+        model = Account
+        fields = ("email", 'first_name', 'second_name')

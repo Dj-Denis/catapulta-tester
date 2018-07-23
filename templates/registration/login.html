@@ -1,26 +1,57 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
+
+{% block title %}{% trans "Log in" %}{% endblock %}
+
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
             <div class="container-fludi container-wide">
                 <div class="card">
                     <article class="card-body">
-                        <div class="creteForm">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input class="btn btn-primary" type="submit" value="{% trans 'Войти' %}"/>
+                            <input type="hidden" name="next" value="{{ next }}"/>
 
-                            <form method="POST">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                                <div class="actions mt-2 d-flex justify-content-between align-items-center">
-                                    <button type="submit" name="submit" class="btn btn-md btn-success">Подтвердить</button>
-                                    <button type="button" class="btn btn-md btn-danger" name="button">Отменить</button>
-                                </div>
-                            </form>
-
-                        </div>
+                            <p class="float-right">{% trans "Забыли пароль?" %} <a
+                                    href="{% url 'auth_password_reset' %}">{% trans "Сбросить" %}</a>.</p>
+                        </form>
                     </article>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
+
+
+{% comment %}
+**registration/login.html**
+
+It's your responsibility to provide the login form in a template called
+registration/login.html by default. This template gets passed four
+template context variables:
+
+``form``
+    A Form object representing the login form. See the forms
+    documentation for more on Form objects.
+
+``next``
+    The URL to redirect to after successful login. This may contain a
+    query string, too.
+
+``site``
+    The current Site, according to the SITE_ID setting. If you don't
+    have the site framework installed, this will be set to an instance
+    of RequestSite, which derives the site name and domain from the
+    current HttpRequest.
+
+``site_name``
+    An alias for site.name. If you don't have the site framework
+    installed, this will be set to the value of
+    request.META['SERVER_NAME']. For more on sites, see The
+    "sites" framework.
+{% endcomment %}
