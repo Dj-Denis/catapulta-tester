@@ -7,26 +7,34 @@
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
-            <div class="container-fludi container-wide">
+            <div class="container-fludi container-login centered">
                 <div class="card">
                     <article class="card-body">
+                        <a href="{% url 'registration_register' %}" class="float-right btn btn-outline-primary">Регистрация</a>
+                        <h4 class="card-title mb-4 mt-1">Авторизация</h4>
+                        <p>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block
+                            btn-outline-danger"> <i class="fa fa-google"></i>   Войти с
+                            помощью Google</a>
+                            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-outline-primary"> <i
+                                    class="fa fa-facebook-f"></i>  
+                                Войти с помощью Facebook</a>
+                        </p>
                         <form method="post" action="">
                             {% csrf_token %}
                             {{ form|crispy }}
-                            <input class="btn btn-primary" type="submit" value="{% trans 'Войти' %}"/>
-                            <input type="hidden" name="next" value="{{ next }}"/>
-                            <p class="float-right">{% trans "Забыли пароль?" %} <a
-                                    href="{% url 'auth_password_reset' %}">{% trans "Сбросить" %}</a>.</p>
-                        </form>
-                        <div class="social-login">
-                            <a class="text-dark" style="text-decoration: none"
-                               href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa fa-google fa-2x"
-                                                                                  aria-hidden="true"></i></a>
-                            <a class="text-dark" style="text-decoration: none"
-                               href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-facebook fa-2x"
-                                                                             aria-hidden="true"></i></a>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a class="small" href="{% url 'auth_password_reset' %}">Забыли пароль?</a>
+                                </div>
+                            </div>
 
+                        </form>
 
                     </article>
                 </div>

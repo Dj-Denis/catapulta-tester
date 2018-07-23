@@ -4,3 +4,4 @@ ve
 *.sqlite3
 *.pyc
 catapulta_tester/local.py
+local.py

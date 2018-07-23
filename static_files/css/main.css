@@ -146,3 +146,11 @@ input:checked + .slider:before {
     margin: -.35rem 0 0 .1875rem !important;
     padding: 2px .75rem !important;
 }
+
+.container-login {
+    min-width: 450px;
+}
+
+.container-register {
+    min-width: 500px;
+}
