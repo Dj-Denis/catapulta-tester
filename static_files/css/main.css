@@ -148,7 +148,7 @@ input:checked + .slider:before {
 }
 
 .container-login {
-    min-width: 450px;
+    min-width: 480px;
 }
 
 .container-register {

@@ -48,9 +48,7 @@ class AccountEditForm(UserChangeForm):
                     Field('first_name', css_class='input_sm'),
                     Field('second_name', css_class='input_sm'),
                     HTML("<div>Роли:</div>"
-                         "{% for group in object.groups.all %}"
-                         "<div class='ml-2'> {{ group.name }} </div>"
-                         "{% endfor %}"),
+                         "<div class='ml-2'> {{ object.group.name|default:'Без группы' }} </div>"),
                     Field('password1', css_class='input-sm'),
                     Field('password2', css_class='input-sm'),
                     FormActions(Submit('submit', 'Сохранить', css_class='btn-primary'), css_class=''),
@@ -64,7 +62,7 @@ class AccountEditForm(UserChangeForm):
 
     class Meta:
         model = Account
-        fields = ['email', 'password', 'avatar', 'first_name', 'second_name']
+        fields = ['email', 'password', 'avatar', 'first_name', 'second_name', 'group']
         widgets = {
             "avatar": ImageCropWidget
         }

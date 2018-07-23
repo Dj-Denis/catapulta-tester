@@ -19,6 +19,9 @@
                             <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-outline-primary"> <i
                                     class="fa fa-facebook-f"></i>  
                                 Войти с помощью Facebook</a>
+                            <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-outline-dark"> <i
+                                    class="fa fa-github"></i>  
+                                Войти с помощью GitHub</a>
                         </p>
                         <form method="post" action="">
                             {% csrf_token %}

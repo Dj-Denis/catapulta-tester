@@ -34,14 +34,6 @@ class AccountSettings(LoginRequiredMixin, UpdateView):
         else:
             return AccountEditForm
 
-    # def get_success_url(self):
-    #     if len(self.request.POST['password1']) != 0:
-    #         url = reverse_lazy('login')
-    #     else:
-    #         print(self.request)
-    #         url = reverse_lazy('account_edit', args=[self.request.user.pk])
-    #     return url
-
 
 class AccountAdd(LoginRequiredMixin, CreateView):
     model = Account
