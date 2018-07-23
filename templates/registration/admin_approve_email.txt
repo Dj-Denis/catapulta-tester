@@ -1,0 +1,10 @@
+{% load i18n %}
+{% blocktrans with site_name=site.name %}
+Пользователь ({{ user }}) запросил регистрацию аккаунта на
+{{ site_name }}.
+{% endblocktrans %}
+{% blocktrans %}
+Что бы подтвердить, пожалуйста нажмите на ссылку
+{% endblocktrans %}
+
+http://{{site.domain}}{% url 'registration_admin_approve' profile_id %}

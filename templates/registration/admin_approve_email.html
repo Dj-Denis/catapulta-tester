@@ -1,0 +1,24 @@
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ site.name }} {% trans "регистрация" %}</title>
+</head>
+
+<body>
+<p>
+    {% blocktrans with site_name=site.name %}
+        Пользователь ({{ user }}) запросил регистрацию
+    {{ site_name }}.
+    {% endblocktrans %}
+</p>
+<p>
+    {% blocktrans %}
+        Что бы подтвердить, пожалуйста
+    {% endblocktrans %}
+    <a href="http://{{site.domain}}{% url 'registration_admin_approve' profile_id %}"> {% trans "нажмите здесь" %}</a>.
+</p>
+</body>
+
+</html>

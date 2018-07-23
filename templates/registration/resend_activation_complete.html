@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account Activation Resent" %}{% endblock %}
+
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <p>
+                            {% blocktrans %}
+                                Мы отправили письмо активации на {{ email }} с инструкциями.
+                            {% endblocktrans %}
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% comment %}
+**registration/resend_activation_complete.html**
+Used after form for resending account activation is submitted. By default has
+the following context:
+
+``email``
+    The email address submitted in the resend activation form.
+{% endcomment %}

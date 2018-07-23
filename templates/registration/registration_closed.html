@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Registration is closed" %}{% endblock %}
+
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <p>{% trans "Извините но регистрация в данный момент закрыта. Возвращайтесь позже." %}</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
