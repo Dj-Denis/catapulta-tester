@@ -16,8 +16,8 @@ class AccountEditForm(UserChangeForm):
     email = forms.CharField(label="Почтовый адрес", required=True)
     password1 = forms.CharField(label='Пароль', required=False, widget=forms.PasswordInput)
     password2 = forms.CharField(label='Подтверждение пароля', required=False, widget=forms.PasswordInput)
-    first_name = forms.CharField(label="Имя", required=False, disabled=True)
-    second_name = forms.CharField(label="Фамилия", required=False, disabled=True)
+    first_name = forms.CharField(label="Имя")
+    second_name = forms.CharField(label="Фамилия")
     avatar = forms.ImageField(label="", required=False, widget=FileInput)
 
     def clean_password2(self):
