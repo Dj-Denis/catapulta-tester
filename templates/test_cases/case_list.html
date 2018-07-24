@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load in_list %}
+{% load selected %}
 
 {% block content %}
 
@@ -76,27 +77,13 @@
                                             <lable class="" for="inlineFormPlanSelect">Тест план</lable>
                                             <select class="custom-select mr-sm-2" id="inlineFormPlanSelect" name="plan">
                                                 <option value="">____</option>
-                                                {% for plan in plan_list %}
-                                                    {% if plan.id|add:0 == request.GET.plan|add:0 %}
-                                                        <option value="{{ plan.pk }}" selected> {{ plan.name }}</option>
-                                                    {% else %}
-                                                        <option value="{{ plan.pk }}"> {{ plan.name }}</option>
-                                                    {% endif %}
-
-                                                {% endfor %}
+                                                {% selected plan_list request.GET.plan %}
                                             </select>
                                         </div>
                                         <div class="col-auto">
                                             <lable class="" for="tagsSearch">Теги</lable>
                                             <select class="tags-search" name="tags" id="" multiple="multiple">
-                                                {% for tag in tag_list %}
-                                                    {% if tag.pk|in_list:selected_tags %}
-                                                        <option value="{{ tag.pk }}" selected>{{ tag.name }}</option>
-                                                    {% else %}
-                                                        <option value="{{ tag.pk }}">{{ tag.name }}</option>
-                                                    {% endif %}
-                                                {% endfor %}
-
+                                                {% selected tag_list selected_tags %}
                                             </select>
                                         </div>
                                     </div>

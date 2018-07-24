@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $('table.display').DataTable( {
+    $('table.display').DataTable({
         "searching": false
     });
 
-    $('table.dashboard_table').DataTable( {
+    $('table.dashboard_table').DataTable({
         "searching": false,
         "lengthChange": false
     });

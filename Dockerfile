@@ -8,4 +8,7 @@ RUN mkdir -p /home/project
 ADD requirements.txt /home/project/
 WORKDIR /home/project/
 
+
+ENV PYTHONUNBUFFERED=0
+
 RUN pip install -r requirements.txt

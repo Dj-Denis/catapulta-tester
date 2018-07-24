@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import ListView, DeleteView
@@ -21,12 +23,19 @@ class AccountsList(LoginRequiredMixin, ListView):
     template_name = 'account/account_list.html'
 
 
-class AccountSettings(LoginRequiredMixin, UpdateView):
+class AccountSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Account
     template_name = 'account/account_form.html'
-    # success_url = reverse_lazy('dashboard')
     form_class = AccountEditForm
-    # form_class = AccountEditForm
+    success_message = "Настройки успешно сохранены"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_admin:
+            return super(AccountSettings, self).dispatch(request, *args, **kwargs)
+        elif self.request.path_info.split('/')[3] != str(self.request.user.id):
+            return redirect(self.request.user)
+        else:
+            return super(AccountSettings, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super(AccountSettings, self).get_context_data()

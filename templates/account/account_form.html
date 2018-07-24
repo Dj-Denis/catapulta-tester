@@ -6,7 +6,6 @@
         <div class="section__content">
             <div class="container-fludi container-wide">
                 <div class="card">
-
                     <article class="card-body">
                         <div class="card-title text-center">
                             <h5>Настройки пользователя</h5>
@@ -24,7 +23,7 @@
                         <div class="card-title text-center">
                             <h5>Привязка к социальным сетям</h5>
                         </div>
-                        <div class="social__oauth d-flex">
+                        <div class="social__oauth d-flex justify-content-center">
                             {% if 'google-oauth2' in object.social_auth.all|in_queryset %}
                                 <form class="m-1" action="{% url 'social:disconnect' 'google-oauth2' %}?next={{ request.path }}" method="post">
                                     {% csrf_token %}

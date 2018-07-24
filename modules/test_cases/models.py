@@ -40,6 +40,10 @@ class Case(models.Model):
     def last_log(self):
         return self.caselog_set.filter().last()
 
+    @property
+    def last_two_logs(self):
+        return self.caselog_set.filter().order_by('-id')[:2][::-1]
+
 
 class CaseLog(models.Model):
     CASE_STATUS_CHOICES = (
