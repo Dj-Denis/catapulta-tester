@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
     <div class="section section--hero">
@@ -14,26 +14,26 @@
                                 <h2 class="plan__title">{{ plan.name }}</h2>
                             </div>
                             <div class="col-5 text-right">
-                                <a class="btn btn-info" href={% url "plan_edit" plan.pk %}>Редактировать</a>
+                                <a class="btn btn-info" href={% url "plan_edit" plan.pk %}> {% trans "Редактировать" %}</a>
                                 <a href="#" class="btn btn-primary">Запустить тест план</a>
-                                <a href={% url 'plan_list' %} class="btn btn-warning">Вернутся в список</a>
-                                <a href={% url 'plan_delete' plan.pk %} class="btn btn-danger">Удалить</a>
+                                <a class="btn btn-warning" href={% url 'plan_list' %}> {% trans "Вернутся в список" %}</a>
+                                <a  class="btn btn-danger" href={% url 'plan_delete' plan.pk %}>{% trans "Удалить" %}</a>
                             </div>
                         </div>
                         <div class="plan__decription">
                             {{ plan.description }}
                         </div>
-                        <h2 class="planDetail__title mt-2">Детали тест плана</h2>
+                        <h2 class="planDetail__title mt-2">{% trans "Детали тест плана" %}</h2>
                         <div class="planDetail__table">
                             <table class="table table-lg table-hover border justify-content-center">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Название тест кейса</th>
-                                    <th scope="col">Дата последнего запуска</th>
-                                    <th scope="col">Запустил</th>
-                                    <th scope="col">Статут запуска</th>
-                                    <th scope="col">Коментарий</th>
+                                    <th scope="col">{% trans "Название тест кейса" %}</th>
+                                    <th scope="col">{% trans "Дата последнего запуска" %}</th>
+                                    <th scope="col">{% trans "Запустил" %}</th>
+                                    <th scope="col">{% trans "Статут запуска" %}</th>
+                                    <th scope="col">{% trans "Коментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>{{ case.id }}</td>
                                         <td><a class="text-dark" href={% url 'case_detail' case.pk %}>{{ case.name }}</a></td>
-                                        <td>{{ case.last_run|date:"D d M Y"|default:"Не запускалось" }}</td>
+                                        <td>{{ case.last_run|date:"D d M Y"|default:_("Не запускалось") }}</td>
                                         <td>{{ case.create_by }}</td>
                                         {%  if case.status == "0" %}
                                             <td class="text-center bg-secondary text-light rounded">{{ case.get_status_display }}</td>
@@ -56,15 +56,15 @@
                                 </tbody>
                             </table>
                         </div>
-                        <h2 class="planLog__title">Лог тест плана</h2>
+                        <h2 class="planLog__title">{% trans "Лог тест плана" %}</h2>
                         <div class="planLog__table">
                             <table class="table table-lg table-hover border">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Дата последнего запуска</th>
-                                    <th scope="col">Запустил</th>
-                                    <th scope="col">Статус запуска</th>
-                                    <th scope="col">Коментарий</th>
+                                    <th scope="col">{% trans "Дата последнего запуска" %}</th>
+                                    <th scope="col">{% trans "Запустил" %}</th>
+                                    <th scope="col">{% trans "Статус запуска" %}</th>
+                                    <th scope="col">{% trans "Коментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -1,6 +1,7 @@
 from django import template
 from django.contrib import messages
 from django.utils.html import format_html
+from django.utils.translation import gettext as _
 
 register = template.Library()
 
@@ -14,9 +15,8 @@ def case_status(request):
                 logs = case.last_two_logs
                 if logs[0].status != logs[1].status:
                     if logs[1].status == '1':
-                        print(2)
-                        messages.add_message(request, messages.WARNING,
-                                             format_html("Кейс <a href='{}' class='alert-warning-link'> {}</a> закончился с ошибкой".format(
-                                                 logs[1].case.get_absolute_url(), logs[1].case.name)))
+                        messages.add_message(request, messages.WARNING, format_html(
+                            "{} <a href='{}' class='alert-warning-link font-weight-bold'> {}</a> {}".format(_("Кейс"), logs[1].case.get_absolute_url(), logs[1].case.name, _("закончился с ошибкой"))))
             except IndexError:
                 pass
+    return ""

@@ -1,4 +1,5 @@
 {% load case_status %}
+{% load i18n %}
 <header>
     <!DOCTYPE html>
     <html lang="en" dir="ltr">    </html>
@@ -29,19 +30,17 @@
                         <ul class="navbar_nav mr-auto my-auto d-flex align-items-center">
                             <a class="btn btn-md d-flex align-items-center text-dark"
                                style="background-color: transparent;" href={% url 'plan_create' %}>
-                                <i class="fa fa-2x fa-plus-circle mr-1" aria-hidden="true"></i>
-                                Добавить тест план
-                            </a>
+                                <i class="fa fa-2x fa-plus-circle mr-1" aria-hidden="true"></i>{% trans "Добавить тест план" %}</a>
                             <a class="btn btn-md d-flex align-items-center text-dark "
                                style="background-color: transparent;" href={% url 'case_create' %}>
                                 <i class="fa fa-2x fa-plus-circle mr-1" aria-hidden="true"></i>
-                                Добавить тест кейс
+                                {% trans "Добавить тест кейс" %}
                             </a>
                         </ul>
                         {% if user.is_authenticated %}
                             <ul class="navbar_nav ml-auto my-auto">
                                 <div class="navbar-text d-none d-xl-inline-block">
-                                    Приветствую, {{ request.user.first_name }}, сделай свой продукт круче - покрой тестами все!
+                                    {% trans "Приветствую" %}, {{ request.user.first_name }}, {% trans "сделай свой продукт круче - покрой тестами все!" %}
                                 </div>
                                 <button class="btn btn-md btn-primary-outline ml-2" type="button" data-toggle="dropdown"
                                         id="userMenu" style="background-color:transparent; border:none">
@@ -56,7 +55,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="text-dark d-flex align-items-center ml-3" style="text-decoration: none"
-                                           href={% url 'account_edit' user.pk %}>Настройки
+                                           href={% url 'account_edit' user.pk %}>{% trans "Настройки" %}
                                             <i class="fa fa-cog fa-2x ml-2"></i></a>
                                     </li>
                                 </ul>
@@ -67,17 +66,16 @@
                                         id="userMenu" style="background-color:transparent; border:none">
                                     <img src="/media/avatars/default-user.png" , style="height: 36px; width: 36px"
                                          class="rounded-circle">
-                                    {#                            <i class="fa fa-2x fa-user-o" aria-hidden="true"></i>#}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
                                     <li class="nav-item">
                                         <a class="text-dark d-flex align-items-center ml-3" style="text-decoration: none"
-                                           href={% url 'login' %}>Войти
+                                           href={% url 'login' %}>{% trans "Войти" %}
                                             <i class="fa fa-angle-right fa-2x ml-2"></i></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="text-dark d-flex align-items-center ml-3" style="text-decoration: none"
-                                           href={% url 'registration_register' %}>Регистрация
+                                           href={% url 'registration_register' %}>{% trans "Регистрация" %}
                                             <i class="fa fa-angle-right fa-2x ml-2"></i></a>
                                     </li>
                                 </ul>
@@ -90,22 +88,22 @@
                                 <div class="collapse navbar-collapse" id="navbar">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url "dashboard" %}>Главная</a>
+                                            <a class="nav-link" href={% url "dashboard" %}>{% trans "Главная" %}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url 'plan_list' %}>Список тест планов</a>
+                                            <a class="nav-link" href={% url 'plan_list' %}>{% trans "Список тест планов" %}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url 'case_list' %}>Списов тест кейсов</a>
+                                            <a class="nav-link" href={% url 'case_list' %}>{% trans "Списов тест кейсов" %}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url "tags_list" %}>Теги</a>
+                                            <a class="nav-link" href={% url "tags_list" %}>{% trans "Теги" %}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url 'account_list' %}>Пользователи</a>
+                                            <a class="nav-link" href={% url 'account_list' %}>{% trans "Пользователи" %}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href={% url 'groups_list' %}>Роли</a>
+                                            <a class="nav-link" href={% url 'groups_list' %}>{% trans "Роли" %}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -114,16 +112,34 @@
                     </div>
                 </div>
             </div>
-        </body>
+        {% load i18n %}
+    </body>
 </header>
-{% case_status request %}
 {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+    {% if message %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
             <span aria-hidden="true">&times;</span></button>
-        {{ message }}</div>
+            {{ message }}</div>
+    {% endif %}
 {% endfor %}
 {% block content %}{% endblock %}
+
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go" />
+</form>
 
 <footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

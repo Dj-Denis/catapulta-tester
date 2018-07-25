@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load in_queryset %}
+{% load i18n %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
@@ -8,7 +9,7 @@
                 <div class="card">
                     <article class="card-body">
                         <div class="card-title text-center">
-                            <h5>Настройки пользователя</h5>
+                            <h5>{% trans "Настройки пользователя" %}</h5>
                         </div>
                         <div class="creteForm">
                             <form method="POST" enctype="multipart/form-data">
@@ -21,7 +22,7 @@
                 <div class="card mt-2">
                     <article class="card-body">
                         <div class="card-title text-center">
-                            <h5>Привязка к социальным сетям</h5>
+                            <h5>{% trans "Привязка к социальным сетям" %}</h5>
                         </div>
                         <div class="social__oauth d-flex justify-content-center">
                             {% if 'google-oauth2' in object.social_auth.all|in_queryset %}
@@ -29,16 +30,14 @@
                                     {% csrf_token %}
                                     <button type="submit"
                                             class="text-left social-button btn btn-block btn-outline-danger">
-                                        <i class="fa fa-google"></i>   Отвязать
-                                        аккаунт Google
+                                        <i class="fa fa-google"></i>   {% trans "Отвязать аккаунт Google" %}
                                     </button>
                                 </form>
                             {% else %}
                                 <div class="m-1">
                                     <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"
                                        class="text-left social-button btn btn-block btn-danger">
-                                        <i class="fa fa-google"></i>   Привязать аккаунт
-                                        Google</a></div>
+                                        <i class="fa fa-google"></i> {% trans "Привязать аккаунт Google" %} </a></div>
                             {% endif %}
 
                             {% if 'facebook' in object.social_auth.all|in_queryset %}
@@ -46,16 +45,14 @@
                                     {% csrf_token %}
                                     <button type="submit"
                                             class="text-left social-button btn btn-block btn-outline-primary">
-                                        <i class="fa fa-facebook-f"></i>  
-                                        Отвязать аккаунт Facebook
+                                        <i class="fa fa-facebook-f"></i>   {% trans "Отвязать аккаунт Facebook" %}
                                     </button>
                                 </form>
                             {% else %}
                                 <div class="m-1">
                                     <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"
                                        class="text-left social-button btn btn-block btn-primary">
-                                        <i class="fa fa-facebook-f"></i>  
-                                        Привязать аккаунт Facebook</a></div>
+                                        <i class="fa fa-facebook-f"></i> {% trans "Привязать аккаунт Facebook" %}</a></div>
                             {% endif %}
 
                             {% if 'github' in object.social_auth.all|in_queryset %}
@@ -63,16 +60,14 @@
                                     {% csrf_token %}
                                     <button type="submit"
                                             class="text-left social-button btn btn-block btn-outline-dark">
-                                        <i class="fa fa-github"></i>  
-                                        Отвязать аккаунт GitHub
+                                        <i class="fa fa-github"></i> {% trans "Отвязать аккаунт GitHub" %}
                                     </button>
                                 </form>
                             {% else %}
                                 <div class="m-1">
                                     <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}"
                                        class="text-left social-button btn btn-block btn-dark">
-                                        <i class="fa fa-github"></i>  
-                                        Привязать аккаунт GitHub</a>
+                                        <i class="fa fa-github"></i> {% trans "Привязать аккаунт GitHub" %}</a>
                                 </div>
                             {% endif %}
                         </div>

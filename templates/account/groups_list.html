@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load i18n %}
     <div class="laoyut__body">
         <div class="section section--hero">
             <div class="section__content">
                 <div class="container-fludi container-wide">
                     <div class="card">
                         <article class="card-body">
-                            <a class="btn btn-info mb-5" href={% url 'group_create' %}>Добавить группу</a>
+                            <a class="btn btn-info mb-5" href={% url 'group_create' %}> {% trans "Добавить группу" %}</a>
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Роль</th>
-                                    <th>Активный</th>
+                                    <th>{% trans "Роль" %}</th>
+                                    <th>{% trans "Активный" %}</th>
                                     <th></th>
                                 </tr>
                                 </thead>

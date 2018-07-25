@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
@@ -7,8 +8,8 @@
                     <article class="card-body">
                         <div class="deleteForm">
                             <form method="post">{% csrf_token %}
-                                <p>Вы действительно хотите удалить "{{ object }}"?</p>
-                                <input class="btn btn-danger" type="submit" value="Подтвердить"/>
+                                <p>{% trans "Вы действительно хотите удалить " %}"{{ object }}"?</p>
+                                <input class="btn btn-danger" type="submit" value="{% trans "Подтвердить" %}"/>
                             </form>
                         </div>
                     </article>

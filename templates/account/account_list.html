@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+    {% load i18n %}
 
     <div class="laoyut__body">
         <div class="section section--hero">
@@ -7,15 +8,15 @@
                 <div class="container-fludi container-wide">
                     <div class="card">
                         <article class="card-body">
-                         <a class="btn btn-info mb-3" href={% url 'account_add' %}>Добавить пользователя</a>
+                         <a class="btn btn-info mb-3" href={% url 'account_add' %}> {% trans "Добавить пользователя" %}</a>
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Имя</th>
-                                    <th>E-mail</th>
-                                    <th>Роль</th>
-                                    <th>Активный</th>
+                                    <th> {% trans "Имя" %}</th>
+                                    <th> {% trans "E-mail" %} </th>
+                                    <th> {% trans "Роль" %}</th>
+                                    <th> {% trans "Активный" %}</th>
                                     <th></th>
                                 </tr>
                                 </thead>

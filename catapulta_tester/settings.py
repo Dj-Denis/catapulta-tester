@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -147,7 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static_files/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join('static_files'),)
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -181,3 +182,12 @@ REGISTRATION_FORM = 'modules.account.forms.CustomRegistrationForm'
 
 from django.contrib.messages import constants as message_constants
 MESSAGE_LEVEL = message_constants.INFO
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = [
+  ('ru', _('Russian')),
+  ('en', _('English')),
+]
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )

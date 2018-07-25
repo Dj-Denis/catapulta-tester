@@ -10,18 +10,17 @@
             <div class="container-fludi container-login centered">
                 <div class="card">
                     <article class="card-body">
-                        <a href="{% url 'registration_register' %}" class="float-right btn btn-outline-primary">Регистрация</a>
-                        <h4 class="card-title mb-4 mt-1">Авторизация</h4>
+                        <a href="{% url 'registration_register' %}" class="float-right btn btn-outline-primary"> {% trans "Регистрация" %}</a>
+                        <h4 class="card-title mb-4 mt-1"> {% trans "Авторизация" %}</h4>
                         <p>
                             <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block
-                            btn-outline-danger"> <i class="fa fa-google"></i>   Войти с
-                            помощью Google</a>
+                            btn-outline-danger"> <i class="fa fa-google"></i> {% trans "Войти с помощью Google" %}</a>
                             <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-outline-primary"> <i
                                     class="fa fa-facebook-f"></i>  
-                                Войти с помощью Facebook</a>
+                                {% trans "Войти с помощью Facebook" %}</a>
                             <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-outline-dark"> <i
                                     class="fa fa-github"></i>  
-                                Войти с помощью GitHub</a>
+                                {% trans "Войти с помощью GitHub" %}</a>
                         </p>
                         <form method="post" action="">
                             {% csrf_token %}
@@ -29,11 +28,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                        <button type="submit" class="btn btn-primary btn-block">{% trans "Войти" %}</button>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a class="small" href="{% url 'auth_password_reset' %}">Забыли пароль?</a>
+                                    <a class="small" href="{% url 'auth_password_reset' %}"> {% trans  "Забыли пароль?" %} </a>
                                 </div>
                             </div>
 

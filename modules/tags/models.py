@@ -1,16 +1,17 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.translation import gettext as _
 
 
 # Create your models here.
 
 class Tag(models.Model):
-    name = models.CharField(max_length=30, verbose_name='Имя')
+    name = models.CharField(max_length=30, verbose_name=_('Имя'))
 
     class Meta:
-        verbose_name = "Тег"
-        verbose_name_plural = 'Теги'
+        verbose_name = _("Тег")
+        verbose_name_plural = _('Теги')
 
     def __str__(self):
         return self.name

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
           <div class="container-fludi container-wide">
             <div class="card">
               <article class="card-body">
-               <a class="btn btn-info mb-5" href={% url 'tag_add' %}>Добавить тег</a>
+               <a class="btn btn-info mb-5" href={% url 'tag_add' %}> {% trans "Добавить тег" %} </a>
               <table class="table table-lg table-hover border">
                 <thead>
                   <tr>
-                    <th scope="col">Название тега</th>
-                    <th scope="col">Количество тестов</th>
+                    <th scope="col">{% trans "Название тега" %}</th>
+                    <th scope="col">{% trans "Количество тестов" %}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>

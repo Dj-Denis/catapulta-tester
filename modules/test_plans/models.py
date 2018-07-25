@@ -1,27 +1,27 @@
 from django.db import models
 from django.urls import reverse
-
+from django.utils.translation import gettext as _
 
 # Create your tags here.
 
 
 class Plan(models.Model):
     PLAN_STATUS_CHOICES = (
-        ('0', 'Не выполнялось'),
-        ('1', 'Успешно'),
-        ('2', 'Провалено')
+        ('0', _('Не выполнялось')),
+        ('1', _('Успешно')),
+        ('2', _('Провалено'))
     )
-    name = models.CharField(verbose_name="Имя", blank=False, max_length=300)
-    description = models.TextField(verbose_name="Описание")
-    create_at = models.DateTimeField(verbose_name="Создан", auto_now_add=True)
-    update_at = models.DateTimeField(verbose_name="Изменен", auto_now=True)
+    name = models.CharField(verbose_name=_("Имя"), blank=False, max_length=300)
+    description = models.TextField(verbose_name=_("Описание"))
+    create_at = models.DateTimeField(verbose_name=_("Создан"), auto_now_add=True)
+    update_at = models.DateTimeField(verbose_name=_("Изменен"), auto_now=True)
     status = models.CharField(max_length=30, choices=PLAN_STATUS_CHOICES, default='0')
-    create_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name='Создан')
+    create_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Создан'))
     cases = models.ManyToManyField('test_cases.Case', through='PlanCases')
 
     class Meta:
-        verbose_name = "План"
-        verbose_name_plural = 'Планы'
+        verbose_name = _("План")
+        verbose_name_plural = _('Планы')
 
     def __str__(self):
         return self.name
@@ -44,18 +44,18 @@ class Plan(models.Model):
 
 class PlanCases(models.Model):
     CASE_STATUS_CHOICES = (
-        ('0', 'Не выполнялось'),
-        ('1', 'Успешно'),
-        ('2', 'Провалено')
+        ('0', _('Не выполнялось')),
+        ('1', _('Успешно')),
+        ('2', _('Провалено'))
     )
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
     case = models.ForeignKey('test_cases.Case', on_delete=models.CASCADE)
     status = models.CharField(max_length=30, choices=CASE_STATUS_CHOICES, default='0')
-    comment = models.TextField(verbose_name="Коментарий", blank=True, default='')
+    comment = models.TextField(verbose_name=_("Коментарий"), blank=True, default='')
 
     class Meta:
-        verbose_name = "Отношение"
-        verbose_name_plural = "Отношения"
+        verbose_name = _("Связь")
+        verbose_name_plural = _("Связи")
 
     def __str__(self):
         return "%s - %s" % (self.plan.name, self.case.name)
@@ -63,18 +63,18 @@ class PlanCases(models.Model):
 
 class PlanLog(models.Model):
     PLAN_STATUS_CHOICES = (
-        ('0', 'Успешно'),
-        ('1', 'Провалено')
+        ('0', _('Успешно')),
+        ('1', _('Провалено'))
     )
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, verbose_name='План')
-    comment = models.TextField(verbose_name="Коментарий")
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, verbose_name=_('План'))
+    comment = models.TextField(verbose_name=_("Коментарий"))
     status = models.CharField(max_length=30, choices=PLAN_STATUS_CHOICES, default='0')
-    last_run = models.DateTimeField(verbose_name='Дата', auto_now_add=True)
-    run_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name='Запущен')
+    last_run = models.DateTimeField(verbose_name=_('Дата'), auto_now_add=True)
+    run_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Запущен'))
 
     class Meta:
-        verbose_name = "Лог плана"
-        verbose_name_plural = 'Логи планов'
+        verbose_name = _("Лог плана")
+        verbose_name_plural = _('Логи планов')
 
     def __str__(self):
         return self.plan.name

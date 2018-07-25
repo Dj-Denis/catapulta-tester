@@ -1,0 +1,2178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: modules/account/forms.py:22 modules/account/forms.py:78
+#: modules/account/forms.py:134
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-25 12:23+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: catapulta_tester/settings.py:189
+msgid "Russian"
+msgstr "Русский"
+
+#: catapulta_tester/settings.py:190
+msgid "English"
+msgstr ""
+
+#: modules/account/forms.py:17 modules/account/forms.py:73
+#: modules/account/forms.py:129 modules/account/models.py:104
+msgid "Почтовый адрес"
+msgstr "E-mail"
+
+#: modules/account/forms.py:18 modules/account/forms.py:74
+#: modules/account/forms.py:130 modules/account/forms.py:224
+#: modules/account/forms.py:244 modules/account/models.py:111
+msgid "Пароль"
+msgstr "Password"
+
+#: modules/account/forms.py:19 modules/account/forms.py:75
+#: modules/account/forms.py:131 modules/account/forms.py:249
+msgid "Подтверждение пароля"
+msgstr "Confirm password"
+
+#: modules/account/forms.py:76 modules/account/forms.py:132
+#: modules/account/models.py:105 modules/tags/models.py:10
+#: modules/test_cases/models.py:14 modules/test_plans/models.py:14
+#: templates/account/account_list.html:16
+msgid "Имя"
+msgstr "Name"
+
+#: modules/account/forms.py:77 modules/account/forms.py:133
+#: modules/account/models.py:106
+msgid "Фамилия"
+msgstr "Second name"
+
+#: modules/account/forms.py:111
+msgid "Сохранить"
+msgstr "Save"
+
+#: modules/account/forms.py:192 templates/account/account_add.html:16
+#: templates/account/account_confirm_delete.html:12
+#: templates/account/customgroup_confirm_delete.html:12
+#: templates/account/registration_form.html:16
+#: templates/dashboard/dashboard_list.html:20
+#: templates/registration/registration_form.html:16
+#: templates/registration/resend_activation_form.html:16
+#: templates/tags/tag_confirm_delete.html:12 templates/tags/tag_form.html:16
+#: templates/test_cases/case_confirm_delete.html:12
+#: templates/test_cases/case_form.html:15
+#: templates/test_plans/plan_confirm_delete.html:12
+#: templates/test_plans/plan_form.html:16
+msgid "Подтвердить"
+msgstr "Submit"
+
+#: modules/account/forms.py:201 modules/account/models.py:27
+#: templates/test_cases/case_list.html:97
+#: templates/test_plans/plan_list.html:81
+msgid "Название"
+msgstr "Title"
+
+#: modules/account/models.py:37
+msgid "Разрешение"
+msgstr "Permission"
+
+#: modules/account/models.py:38
+msgid "Разрешения"
+msgstr "Permissons"
+
+#: modules/account/models.py:60
+msgid "Названия"
+msgstr "Title"
+
+#: modules/account/models.py:63
+msgid "разешения"
+msgstr "permissions"
+
+#: modules/account/models.py:71 modules/account/models.py:121
+msgid "Группа"
+msgstr "Group"
+
+#: modules/account/models.py:72
+msgid "Группы"
+msgstr "Groups"
+
+#: modules/account/models.py:108
+msgid "Аватар"
+msgstr "Avatar"
+
+#: modules/account/models.py:110
+msgid "Дата регистрации"
+msgstr "Register date"
+
+#: modules/account/models.py:124
+msgid "Группа к которой принадлежит пользователь"
+msgstr "User group"
+
+#: modules/account/models.py:131
+msgid "Права пользователя"
+msgstr "User permissions"
+
+#: modules/account/models.py:133
+msgid "Выставить права пользователю."
+msgstr "Set user permissions"
+
+#: modules/account/models.py:160 modules/account/models.py:161
+msgid "Аккаунт"
+msgstr "Account"
+
+#: modules/dashboard/templatetags/case_status.py:19
+#: modules/test_cases/models.py:27 modules/test_cases/models.py:50
+msgid "Кейс"
+msgstr "Case"
+
+#: modules/dashboard/templatetags/case_status.py:19
+msgid "закончился с ошибкой"
+msgstr "failed"
+
+#: modules/tags/models.py:13
+msgid "Тег"
+msgstr "Tag"
+
+#: modules/tags/models.py:14 templates/base.html:100
+#: templates/test_cases/case_list.html:83
+msgid "Теги"
+msgstr "Tags"
+
+#: modules/test_cases/models.py:9 modules/test_plans/models.py:10
+#: modules/test_plans/models.py:47 templates/test_cases/case_list.html:57
+#: templates/test_cases/case_list.html:59
+#: templates/test_plans/plan_list.html:54
+#: templates/test_plans/plan_list.html:56
+msgid "Не выполнялось"
+msgstr "Not started"
+
+#: modules/test_cases/models.py:10 modules/test_cases/models.py:47
+#: modules/test_plans/models.py:11 modules/test_plans/models.py:48
+#: modules/test_plans/models.py:66 templates/test_cases/case_list.html:63
+#: templates/test_cases/case_list.html:65
+#: templates/test_plans/plan_list.html:60
+#: templates/test_plans/plan_list.html:62
+msgid "Успешно"
+msgstr "Success"
+
+#: modules/test_cases/models.py:11 modules/test_cases/models.py:48
+#: modules/test_plans/models.py:12 modules/test_plans/models.py:49
+#: modules/test_plans/models.py:67 templates/test_cases/case_list.html:69
+#: templates/test_cases/case_list.html:71
+#: templates/test_plans/plan_list.html:66
+#: templates/test_plans/plan_list.html:68
+#: templates/test_plans/plan_list.html:86
+msgid "Провалено"
+msgstr "Failed"
+
+#: modules/test_cases/models.py:15 modules/test_plans/models.py:15
+#: templates/test_cases/case_detail.html:29
+msgid "Описание"
+msgstr ""
+
+#: modules/test_cases/models.py:16
+msgid "Автор"
+msgstr ""
+
+#: modules/test_cases/models.py:17
+msgid "Предварительные условия"
+msgstr ""
+
+#: modules/test_cases/models.py:18
+msgid "Ожидаемый результат"
+msgstr ""
+
+#: modules/test_cases/models.py:19 modules/test_cases/models.py:53
+#: templates/test_cases/case_detail.html:68
+msgid "Статус"
+msgstr ""
+
+#: modules/test_cases/models.py:20 modules/test_cases/models.py:51
+#: modules/test_plans/models.py:54 modules/test_plans/models.py:70
+#: templates/test_plans/plan_detail.html:36
+#: templates/test_plans/plan_detail.html:67
+msgid "Коментарий"
+msgstr ""
+
+#: modules/test_cases/models.py:21
+msgid "Последний запуск"
+msgstr ""
+
+#: modules/test_cases/models.py:23 modules/test_plans/models.py:16
+#: modules/test_plans/models.py:19
+msgid "Создан"
+msgstr ""
+
+#: modules/test_cases/models.py:24 modules/test_plans/models.py:17
+msgid "Изменен"
+msgstr ""
+
+#: modules/test_cases/models.py:28
+msgid "Кейсы"
+msgstr ""
+
+#: modules/test_cases/models.py:52 modules/test_plans/models.py:72
+msgid "Дата"
+msgstr ""
+
+#: modules/test_cases/models.py:54
+msgid "Запускал"
+msgstr ""
+
+#: modules/test_cases/models.py:57
+msgid "Лог кейса"
+msgstr ""
+
+#: modules/test_cases/models.py:58
+msgid "Логи кейсов"
+msgstr ""
+
+#: modules/test_plans/models.py:23 modules/test_plans/models.py:69
+msgid "План"
+msgstr ""
+
+#: modules/test_plans/models.py:24
+msgid "Планы"
+msgstr ""
+
+#: modules/test_plans/models.py:57
+msgid "Связь"
+msgstr ""
+
+#: modules/test_plans/models.py:58
+msgid "Связи"
+msgstr ""
+
+#: modules/test_plans/models.py:73
+msgid "Запущен"
+msgstr ""
+
+#: modules/test_plans/models.py:76
+msgid "Лог плана"
+msgstr ""
+
+#: modules/test_plans/models.py:77
+msgid "Логи планов"
+msgstr ""
+
+#: templates/account/account_add.html:17
+#: templates/account/registration_form.html:17 templates/tags/tag_form.html:17
+#: templates/test_cases/case_form.html:17
+#: templates/test_plans/plan_form.html:17
+msgid "Отменить"
+msgstr ""
+
+#: templates/account/account_confirm_delete.html:11
+#: templates/test_plans/plan_confirm_delete.html:11
+msgid "Вы действительно хотите удалить"
+msgstr ""
+
+#: templates/account/account_form.html:12
+msgid "Настройки пользователя"
+msgstr ""
+
+#: templates/account/account_form.html:25
+msgid "Привязка к социальным сетям"
+msgstr ""
+
+#: templates/account/account_form.html:33
+msgid "Отвязать аккаунт Google"
+msgstr ""
+
+#: templates/account/account_form.html:40
+msgid "Привязать аккаунт Google"
+msgstr ""
+
+#: templates/account/account_form.html:48
+msgid "Отвязать аккаунт Facebook"
+msgstr ""
+
+#: templates/account/account_form.html:55
+msgid "Привязать аккаунт Facebook"
+msgstr ""
+
+#: templates/account/account_form.html:63
+msgid "Отвязать аккаунт GitHub"
+msgstr ""
+
+#: templates/account/account_form.html:70
+msgid "Привязать аккаунт GitHub"
+msgstr ""
+
+#: templates/account/account_list.html:11
+msgid "Добавить пользователя"
+msgstr ""
+
+#: templates/account/account_list.html:17
+msgid "E-mail"
+msgstr ""
+
+#: templates/account/account_list.html:18 templates/account/groups_list.html:14
+msgid "Роль"
+msgstr ""
+
+#: templates/account/account_list.html:19 templates/account/groups_list.html:15
+msgid "Активный"
+msgstr ""
+
+#: templates/account/customgroup_confirm_delete.html:11
+#: templates/tags/tag_confirm_delete.html:11
+#: templates/test_cases/case_confirm_delete.html:11
+msgid "Вы действительно хотите удалить "
+msgstr ""
+
+#: templates/account/groups_list.html:10
+msgid "Добавить группу"
+msgstr ""
+
+#: templates/base.html:33
+msgid "Добавить тест план"
+msgstr "Add test plan"
+
+#: templates/base.html:37
+msgid "Добавить тест кейс"
+msgstr "Add test case"
+
+#: templates/base.html:43
+msgid "Приветствую"
+msgstr "Hello"
+
+#: templates/base.html:43
+msgid "сделай свой продукт круче - покрой тестами все!"
+msgstr "make your product better - cover all in tests!"
+
+#: templates/base.html:58
+msgid "Настройки"
+msgstr "Settings"
+
+#: templates/base.html:73 templates/registration/login.html:31
+msgid "Войти"
+msgstr "Log-in"
+
+#: templates/base.html:78 templates/registration/login.html:13
+msgid "Регистрация"
+msgstr "Register"
+
+#: templates/base.html:91
+msgid "Главная"
+msgstr "Home"
+
+#: templates/base.html:94
+msgid "Список тест планов"
+msgstr "Test plan list"
+
+#: templates/base.html:97
+msgid "Списов тест кейсов"
+msgstr "Test case list"
+
+#: templates/base.html:103
+msgid "Пользователи"
+msgstr "Users"
+
+#: templates/base.html:106
+msgid "Роли"
+msgstr "Roles"
+
+#: templates/dashboard/dashboard_list.html:13
+msgid "Статистика тест планов"
+msgstr "Test plan statistic"
+
+#: templates/dashboard/dashboard_list.html:16
+msgid "Выберите преиод \"с\""
+msgstr "Select period \"from\""
+
+#: templates/dashboard/dashboard_list.html:18
+msgid "\"по\""
+msgstr "\"to\""
+
+#: templates/dashboard/dashboard_list.html:28
+msgid "Запускалось более 1 месяца назад от выбраного периода"
+msgstr "Run month before selected"
+
+#: templates/dashboard/dashboard_list.html:38
+#: templates/dashboard/dashboard_list.html:83
+msgid "Название тест плана"
+msgstr "Test plan name"
+
+#: templates/dashboard/dashboard_list.html:39
+#: templates/dashboard/dashboard_list.html:84
+#: templates/test_cases/case_list.html:98
+#: templates/test_plans/plan_detail.html:33
+#: templates/test_plans/plan_detail.html:64
+#: templates/test_plans/plan_list.html:82
+msgid "Дата последнего запуска"
+msgstr "Last run date"
+
+#: templates/dashboard/dashboard_list.html:40
+#: templates/dashboard/dashboard_list.html:85
+#: templates/test_cases/case_list.html:100
+#: templates/test_plans/plan_detail.html:66
+msgid "Статус запуска"
+msgstr "Run status"
+
+#: templates/dashboard/dashboard_list.html:49
+#: templates/dashboard/dashboard_list.html:95
+#: templates/test_cases/case_list.html:112
+#: templates/test_plans/plan_list.html:97
+msgid "Не запускался"
+msgstr "Was not run"
+
+#: templates/dashboard/dashboard_list.html:65
+msgid "Запускалось за выбранный период"
+msgstr "Run in selected period"
+
+#: templates/registration/activate.html:4
+msgid "Activation Failure"
+msgstr ""
+
+#: templates/registration/activate.html:12
+msgid "Ошибка активации."
+msgstr ""
+
+#: templates/registration/activation_complete.html:12
+#: templates/registration/activation_complete_admin_pending.html:13
+msgid "Ваш аккаунт активирован."
+msgstr ""
+
+#: templates/registration/activation_complete.html:14
+msgid "Вы можете войти."
+msgstr ""
+
+#: templates/registration/activation_complete_admin_pending.html:4
+msgid "Account Activated"
+msgstr ""
+
+#: templates/registration/activation_complete_admin_pending.html:15
+msgid "Когда администратор активирует вашу запись вы сможете войти."
+msgstr ""
+
+#: templates/registration/activation_email.html:6
+msgid "registration"
+msgstr ""
+
+#: templates/registration/activation_email.html:11
+#, python-format
+msgid ""
+"\n"
+"    Вы (или кто-то другой) попытался зарегестрировать аккаунт на сайте\n"
+"    %(site_name)s.  Если это были не вы, проигнорируйте это письмо\n"
+"    и ваш почтовый адресс будет удален с наших записей.\n"
+"    "
+msgstr ""
+
+#: templates/registration/activation_email.html:18
+#, python-format
+msgid ""
+"\n"
+"        Что бы активировать этот аккаунт, пожалуйста нажмите на ссылку на "
+"протяжении\n"
+"    %(expiration_days)s дней:\n"
+"    "
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"Вы (или кто-то другой) попытался зарегестрировать аккаунт на сайте\n"
+"%(site_name)s.  Если это были не вы, проигнорируйте это письмо\n"
+"и ваш почтовый адресс будет удален с наших записей.\n"
+msgstr ""
+
+#: templates/registration/activation_email.txt:7
+#, python-format
+msgid ""
+"\n"
+"Что бы активировать этот аккаунт, пожалуйста нажмите на ссылку на "
+"протяжении\n"
+"    %(expiration_days)s дней:\n"
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:1
+#: templates/registration/admin_approve_complete_email_subject.txt:1
+#: templates/registration/admin_approve_email_subject.txt:1
+msgid "Активация аккаунта на"
+msgstr ""
+
+#: templates/registration/admin_approve.html:4
+msgid "Approval Failure"
+msgstr ""
+
+#: templates/registration/admin_approve.html:12
+msgid "Ошибка активации аккаунта."
+msgstr ""
+
+#: templates/registration/admin_approve_complete.html:4
+msgid "Account Approved"
+msgstr ""
+
+#: templates/registration/admin_approve_complete.html:13
+msgid "Аккаунт пользователя активирован."
+msgstr ""
+
+#: templates/registration/admin_approve_complete_email.html:6
+msgid "admin approval"
+msgstr ""
+
+#: templates/registration/admin_approve_complete_email.html:11
+msgid ""
+"\n"
+"        Ваш аккаунт активирован. Вы можете\n"
+"    "
+msgstr ""
+
+#: templates/registration/admin_approve_complete_email.html:14
+msgid "Войти."
+msgstr ""
+
+#: templates/registration/admin_approve_complete_email.txt:2
+msgid ""
+"\n"
+"Ваш аккаунт активирован. Вы можете войти используя эту ссылку\n"
+msgstr ""
+
+#: templates/registration/admin_approve_email.html:6
+msgid "регистрация"
+msgstr ""
+
+#: templates/registration/admin_approve_email.html:11
+#, python-format
+msgid ""
+"\n"
+"        Пользователь (%(user)s) запросил регистрацию\n"
+"    %(site_name)s.\n"
+"    "
+msgstr ""
+
+#: templates/registration/admin_approve_email.html:17
+msgid ""
+"\n"
+"        Что бы подтвердить, пожалуйста\n"
+"    "
+msgstr ""
+
+#: templates/registration/admin_approve_email.html:20
+msgid "нажмите здесь"
+msgstr ""
+
+#: templates/registration/admin_approve_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"Пользователь (%(user)s) запросил регистрацию аккаунта на\n"
+"%(site_name)s.\n"
+msgstr ""
+
+#: templates/registration/admin_approve_email.txt:6
+msgid ""
+"\n"
+"Что бы подтвердить, пожалуйста нажмите на ссылку\n"
+msgstr ""
+
+#: templates/registration/login.html:5
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/login.html:14
+msgid "Авторизация"
+msgstr ""
+
+#: templates/registration/login.html:17
+msgid "Войти с помощью Google"
+msgstr ""
+
+#: templates/registration/login.html:20
+msgid "Войти с помощью Facebook"
+msgstr ""
+
+#: templates/registration/login.html:23
+msgid "Войти с помощью GitHub"
+msgstr ""
+
+#: templates/registration/login.html:35
+msgid "Забыли пароль?"
+msgstr ""
+
+#: templates/registration/logout.html:4
+msgid "Logged out"
+msgstr ""
+
+#: templates/registration/logout.html:12
+msgid "Вы успешно вышли"
+msgstr ""
+
+#: templates/registration/password_change_done.html:4
+msgid "Password changed"
+msgstr ""
+
+#: templates/registration/password_change_done.html:12
+msgid "Пароль успешно изменен"
+msgstr ""
+
+#: templates/registration/password_change_form.html:5
+msgid "Change password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:16
+msgid "Изминенить пароль"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:4
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:13
+msgid "Ваш пароль успешно изминен!"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:14
+#, python-format
+msgid "Теперь вы можете <a href=\"%(login_url)s\">войти</a>"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
+msgid "Confirm password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:19
+msgid "Введите ваш новый пароль ниже:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:23
+msgid "Установить пароль"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:4
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:13
+msgid ""
+"\n"
+"                                Мы отправили вам письмо с ссылкой на "
+"активацию вашего пароля. Пожалуйста проверьте\n"
+"                                ваш почтовый ящик. Пожалуйста нажмите на "
+"ссылку в письме\n"
+"                            "
+msgstr ""
+
+#: templates/registration/password_reset_email.html:3
+msgid "Greetings"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:5
+#, python-format
+msgid ""
+"\n"
+"    Вы получили это письмо потому что вы (или кто-то другой) запросили "
+"восстановление пароля\n"
+"    на сайте %(domain)s. Если вы этого не делали, пожалуйста проигнорируйте "
+"это письмо.\n"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:10
+msgid ""
+"\n"
+"    Что бы сбросить ваш пароль, пожалуйста нажмите на ссылку, или скопируйте "
+"и вставьте её в ваш браузер\n"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:5
+#: templates/registration/password_reset_form.html:22
+msgid "Reset password"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid ""
+"\n"
+"                                Забыли пароль? Введите ваш почтовый адрес в "
+"форме ниже и мы вышлем вам инструкцию по\n"
+"                                восстановлению.\n"
+"                            "
+msgstr ""
+
+#: templates/registration/registration_closed.html:4
+msgid "Registration is closed"
+msgstr ""
+
+#: templates/registration/registration_closed.html:12
+msgid "Извините но регистрация в данный момент закрыта. Возвращайтесь позже."
+msgstr ""
+
+#: templates/registration/registration_complete.html:4
+msgid "Activation email sent"
+msgstr ""
+
+#: templates/registration/registration_complete.html:12
+msgid "Пожалуйста проверте ваш почтовый ящик что бы закончить регистрацию."
+msgstr ""
+
+#: templates/registration/registration_form.html:5
+msgid "Register for an account"
+msgstr ""
+
+#: templates/registration/resend_activation_complete.html:4
+msgid "Account Activation Resent"
+msgstr ""
+
+#: templates/registration/resend_activation_complete.html:13
+#, python-format
+msgid ""
+"\n"
+"                                Мы отправили письмо активации на %(email)s с "
+"инструкциями.\n"
+"                            "
+msgstr ""
+
+#: templates/registration/resend_activation_form.html:5
+msgid "Resend Activation Email"
+msgstr ""
+
+#: templates/tags/tag_list.html:9
+msgid "Добавить тег"
+msgstr ""
+
+#: templates/tags/tag_list.html:13
+msgid "Название тега"
+msgstr ""
+
+#: templates/tags/tag_list.html:14
+msgid "Количество тестов"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:14
+#: templates/test_plans/plan_detail.html:17
+msgid "Редактировать"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:15
+#: templates/test_plans/plan_detail.html:19
+msgid "Вернутся в список"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:16
+#: templates/test_plans/plan_detail.html:20
+msgid "Удалить"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:21
+msgid "Предусловия"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:36
+msgid "Ожидаемые результаты"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:42
+msgid "Тест планы"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:61
+msgid "Лог запуска"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:66
+msgid "Дата запуска"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:67
+#: templates/test_cases/case_list.html:99
+#: templates/test_plans/plan_detail.html:34
+#: templates/test_plans/plan_detail.html:65
+#: templates/test_plans/plan_list.html:83
+msgid "Запустил"
+msgstr ""
+
+#: templates/test_cases/case_detail.html:69
+msgid "Комментарий"
+msgstr ""
+
+#: templates/test_cases/case_list.html:18
+#: templates/test_plans/plan_list.html:15
+msgid "Поиск по названию"
+msgstr ""
+
+#: templates/test_cases/case_list.html:27
+#: templates/test_plans/plan_list.html:24
+msgid "Расширеный фильтр"
+msgstr ""
+
+#: templates/test_cases/case_list.html:32
+#: templates/test_plans/plan_list.html:29
+msgid "Дата запуска 'с'"
+msgstr ""
+
+#: templates/test_cases/case_list.html:36
+#: templates/test_plans/plan_list.html:33
+msgid "'по'"
+msgstr ""
+
+#: templates/test_cases/case_list.html:40
+#: templates/test_plans/plan_list.html:37
+msgid "Ответственный за запуск"
+msgstr ""
+
+#: templates/test_cases/case_list.html:53
+#: templates/test_plans/plan_list.html:50
+#: templates/test_plans/plan_list.html:87
+msgid "Результат"
+msgstr ""
+
+#: templates/test_cases/case_list.html:76
+#: templates/test_cases/case_list.html:101
+msgid "Тест план"
+msgstr ""
+
+#: templates/test_cases/case_list.html:121
+msgid "Нет плана"
+msgstr ""
+
+#: templates/test_plans/plan_detail.html:26
+msgid "Детали тест плана"
+msgstr ""
+
+#: templates/test_plans/plan_detail.html:32
+msgid "Название тест кейса"
+msgstr ""
+
+#: templates/test_plans/plan_detail.html:35
+msgid "Статут запуска"
+msgstr ""
+
+#: templates/test_plans/plan_detail.html:44
+msgid "Не запускалось"
+msgstr ""
+
+#: templates/test_plans/plan_detail.html:59
+msgid "Лог тест плана"
+msgstr ""
+
+#: templates/test_plans/plan_list.html:84
+msgid "Всего кейсов"
+msgstr ""
+
+#: templates/test_plans/plan_list.html:85
+msgid "Выполнено"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/crispy_forms/tests/test_form_helper.py:140
+#: ve/lib/python3.6/site-packages/crispy_forms/tests/test_form_helper.py:150
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:53
+msgid "This field is required."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/crispy_forms/tests/test_layout.py:355
+msgid "i18n text"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/crispy_forms/tests/test_layout.py:357
+msgid "i18n legend"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/crispy_forms/tests/test_layout_objects.py:127
+#: ve/lib/python3.6/site-packages/django/core/validators.py:31
+msgid "Enter a valid value."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/contrib/messages/apps.py:7
+msgid "Messages"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/contrib/sitemaps/apps.py:7
+msgid "Site Maps"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/paginator.py:40
+msgid "That page number is not an integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/paginator.py:42
+msgid "That page number is less than 1"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/paginator.py:47
+msgid "That page contains no results"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:102
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:649
+msgid "Enter a valid URL."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:154
+msgid "Enter a valid integer."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:165
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: ve/lib/python3.6/site-packages/django/core/validators.py:239
+msgid ""
+"Enter a valid 'slug' consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:246
+msgid ""
+"Enter a valid 'slug' consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:255
+#: ve/lib/python3.6/site-packages/django/core/validators.py:275
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:260
+#: ve/lib/python3.6/site-packages/django/core/validators.py:276
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:270
+#: ve/lib/python3.6/site-packages/django/core/validators.py:274
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:304
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:310
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:341
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:350
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:360
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:375
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:395
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:400
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:405
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:465
+#, python-format
+msgid ""
+"File extension '%(extension)s' is not allowed. Allowed extensions are: "
+"'%(allowed_extensions)s'."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/core/validators.py:518
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/base.py:1125
+#: ve/lib/python3.6/site-packages/django/forms/models.py:753
+msgid "and"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/base.py:1127
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:105
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:106
+msgid "This field cannot be null."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:107
+msgid "This field cannot be blank."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:108
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or 'month'.
+#. Eg: "Title must be unique for pub_date year"
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:112
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:129
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:882
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1782
+msgid "Integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:886
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1780
+#, python-format
+msgid "'%(value)s' value must be an integer."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:959
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1851
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:971
+#, python-format
+msgid "'%(value)s' value must be either True or False."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:973
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1039
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1102
+msgid "Comma-separated integers"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1150
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1152
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1294
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1155
+msgid "Date (without time)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1292
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1296
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1300
+msgid "Date (with time)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1447
+#, python-format
+msgid "'%(value)s' value must be a decimal number."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1449
+msgid "Decimal number"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1601
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in [DD] [HH:[MM:]]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1604
+msgid "Duration"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1656
+msgid "Email address"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1680
+msgid "File path"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1746
+#, python-format
+msgid "'%(value)s' value must be a float."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1748
+msgid "Floating point number"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1866
+msgid "IPv4 address"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1897
+msgid "IP address"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1978
+#, python-format
+msgid "'%(value)s' value must be either None, True or False."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1980
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2043
+msgid "Positive integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2055
+msgid "Positive small integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2068
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2098
+msgid "Small integer"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2105
+msgid "Text"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2133
+#, python-format
+msgid ""
+"'%(value)s' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2135
+#, python-format
+msgid ""
+"'%(value)s' value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2138
+msgid "Time"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2263
+msgid "URL"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2286
+msgid "Raw binary data"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/__init__.py:2333
+#, python-format
+msgid "'%(value)s' is not a valid UUID."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/files.py:221
+msgid "File"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/files.py:359
+msgid "Image"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:780
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:782
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:1001
+msgid "One-to-one relationship"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:1051
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:1052
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/db/models/fields/related.py:1094
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: ve/lib/python3.6/site-packages/django/forms/boundfield.py:171
+msgid ":?.!"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:245
+msgid "Enter a whole number."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:290
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:325
+msgid "Enter a number."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:396
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:1114
+msgid "Enter a valid date."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:420
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:1115
+msgid "Enter a valid time."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:442
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:471
+msgid "Enter a valid duration."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:525
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:526
+msgid "No file was submitted."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:527
+msgid "The submitted file is empty."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:529
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:532
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:597
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:753
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:843
+#: ve/lib/python3.6/site-packages/django/forms/models.py:1267
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:844
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:959
+#: ve/lib/python3.6/site-packages/django/forms/models.py:1266
+msgid "Enter a list of values."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:960
+msgid "Enter a complete value."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/fields.py:1173
+msgid "Enter a valid UUID."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: ve/lib/python3.6/site-packages/django/forms/forms.py:86
+msgid ":"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/forms.py:207
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:91
+msgid "ManagementForm data is missing or has been tampered with"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:338
+#, python-format
+msgid "Please submit %d or fewer forms."
+msgid_plural "Please submit %d or fewer forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:345
+#, python-format
+msgid "Please submit %d or more forms."
+msgid_plural "Please submit %d or more forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:371
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:373
+msgid "Order"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/formsets.py:375
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:13
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:38
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorized-token-delete.html:7
+msgid "Delete"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:748
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:752
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:758
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:767
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:1094
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:1155
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/models.py:1269
+#, python-format
+msgid "\"%(pk)s\" is not a valid value."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/utils.py:162
+#, python-format
+msgid ""
+"%(datetime)s couldn't be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:391
+msgid "Clear"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:392
+msgid "Currently"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:393
+msgid "Change"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:708
+msgid "Unknown"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:709
+msgid "Yes"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/forms/widgets.py:710
+msgid "No"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:783
+msgid "yes,no,maybe"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:812
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:829
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:831
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:833
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:835
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:837
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/template/defaultfilters.py:839
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:62
+msgid "p.m."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:63
+msgid "a.m."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:68
+msgid "PM"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:69
+msgid "AM"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:150
+msgid "midnight"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dateformat.py:152
+msgid "noon"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:6
+msgid "Monday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:6
+msgid "Tuesday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:6
+msgid "Wednesday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:6
+msgid "Thursday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:6
+msgid "Friday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:7
+msgid "Saturday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:7
+msgid "Sunday"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:10
+msgid "Mon"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:10
+msgid "Tue"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:10
+msgid "Wed"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:10
+msgid "Thu"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:10
+msgid "Fri"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:11
+msgid "Sat"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:11
+msgid "Sun"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "January"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "February"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "March"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "April"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "May"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:18
+msgid "June"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:19
+msgid "July"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:19
+msgid "August"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:19
+msgid "September"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:19
+msgid "October"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:19
+msgid "November"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:20
+msgid "December"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "jan"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "feb"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "mar"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "apr"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "may"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:23
+msgid "jun"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "jul"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "aug"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "sep"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "oct"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "nov"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:24
+msgid "dec"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:31
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:32
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:33
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:34
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:35
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:36
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:37
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:38
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:39
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:40
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:41
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:42
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:45
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:46
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:47
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:48
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:49
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:50
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:51
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:52
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:53
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:54
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:55
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/dates.py:56
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/text.py:70
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s..."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/text.py:237
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: ve/lib/python3.6/site-packages/django/utils/text.py:256
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:69
+msgid ", "
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:14
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ve/lib/python3.6/site-packages/django/utils/timesince.py:58
+msgid "0 minutes"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:110
+msgid "Forbidden"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:111
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:115
+msgid ""
+"You are seeing this message because this HTTPS site requires a 'Referer "
+"header' to be sent by your Web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:120
+msgid ""
+"If you have configured your browser to disable 'Referer' headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for 'same-"
+"origin' requests."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:124
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the 'Referrer-Policy: no-referrer' header, please remove them. The "
+"CSRF protection requires the 'Referer' header to do strict referer checking. "
+"If you're concerned about privacy, use alternatives like <a rel=\"noreferrer"
+"\" ...> for links to third-party sites."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:132
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:137
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for 'same-origin' requests."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/csrf.py:142
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:41
+msgid "No year specified"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:61
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:111
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:208
+msgid "Date out of range"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:90
+msgid "No month specified"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:142
+msgid "No day specified"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:188
+msgid "No week specified"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:338
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:367
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:585
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/dates.py:619
+#, python-format
+msgid "Invalid date string '%(datestr)s' given format '%(format)s'"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/detail.py:53
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/list.py:67
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/list.py:72
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/generic/list.py:154
+#, python-format
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/static.py:41
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/static.py:43
+#, python-format
+msgid "\"%(path)s\" does not exist"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/static.py:83
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:6
+msgid "Django: the Web framework for perfectionists with deadlines."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:345
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:367
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:368
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:383
+msgid "Django Documentation"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:384
+msgid "Topics, references, &amp; how-to's"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:395
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:396
+msgid "Get started with Django"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:407
+msgid "Django Community"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:408
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/image_cropping/backends/base.py:54
+#, python-brace-format
+msgid "There's no widget registered to the class {class_name}"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/image_cropping/utils.py:28
+msgid "Can't retrieve the image backend '{}'. Message: '{}'."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:41
+msgid "Confidential"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:42
+msgid "Public"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:50
+msgid "Authorization code"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:51
+msgid "Implicit"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:52
+msgid "Resource owner password-based"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:53
+msgid "Client credentials"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:67
+msgid "Allowed URIs list, space separated"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:143
+#, python-brace-format
+msgid "Unauthorized redirect scheme: {scheme}"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/models.py:148
+#, python-brace-format
+msgid "redirect_uris cannot be empty with grant_type {grant_type}"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/oauth2_validators.py:166
+msgid "The access token is invalid."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/oauth2_validators.py:171
+msgid "The access token has expired."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/oauth2_validators.py:176
+msgid "The access token is valid but does not have enough scope."
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:6
+msgid "Are you sure to delete the application"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_confirm_delete.html:12
+msgid "Cancel"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:10
+msgid "Client id"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:15
+msgid "Client secret"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:20
+msgid "Client type"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:25
+msgid "Authorization Grant Type"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:30
+msgid "Redirect Uris"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:36
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_form.html:35
+msgid "Go Back"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_detail.html:37
+msgid "Edit"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_form.html:9
+msgid "Edit application"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:6
+msgid "Your applications"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:16
+msgid "No applications defined"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:16
+msgid "Click here"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_list.html:16
+msgid "if you want to register a new one"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/application_registration_form.html:5
+msgid "Register a new application"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:8
+msgid "Authorize"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorize.html:17
+msgid "Application requires following permissions"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorized-token-delete.html:6
+msgid "Are you sure you want to delete this token?"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorized-tokens.html:6
+msgid "Tokens"
+msgstr ""
+
+#: ve/lib/python3.6/site-packages/oauth2_provider/templates/oauth2_provider/authorized-tokens.html:19
+msgid "There are no authorized tokens yet."
+msgstr ""

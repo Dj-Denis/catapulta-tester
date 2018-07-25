@@ -31,7 +31,8 @@ urlpatterns = [
     path('account/', include('modules.account.urls')),
     path('accounts/login/', auth_view.login, name='login'),
     path('logout/', auth_view.LogoutView.as_view(), name='logout'),
-    path('auth/', include('social_django.urls', namespace='social'))
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('i18n/', include('django.conf.urls.i18n'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

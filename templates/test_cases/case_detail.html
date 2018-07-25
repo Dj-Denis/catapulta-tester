@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
@@ -11,14 +11,14 @@
                                 <h2 class="section__title">{{ case.name }}</h2>
                             </div>
                             <div class="col-6 text-right">
-                                <a class="btn btn-info" href={% url 'case_edit' case.pk %}>Редактировать</a>
-                                <a href={% url 'case_list' %} class="btn btn-warning">Вернутся в список</a>
-                                <a href={% url 'case_delete' case.pk %} class="btn btn-danger">Удалить</a>
+                                <a class="btn btn-info" href={% url 'case_edit' case.pk %}> {% trans "Редактировать" %}</a>
+                                <a class="btn btn-warning" href={% url 'case_list' %}> {% trans "Вернутся в список" %}</a>
+                                <a class="btn btn-danger" href={% url 'case_delete' case.pk %}>{% trans "Удалить" %}</a>
                             </div>
                         </div>
                         <div class="precondition">
                             <div class="precondition__title h4">
-                                Предусловия
+                                {% trans "Предусловия" %}
                             </div>
                             <div class="precondition__content h6 mb-4">
                                 {{ case.precondition }}
@@ -26,22 +26,20 @@
                         </div>
                         <div class="description">
                             <div class="description__title h4">
-                                Описание
+                                {% trans "Описание" %}
                             </div>
                             <div class="description__content h6 mb-4">
                                 {{ case.description }}
                             </div>
                         </div>
                         <div class="expectedResults">
-                            <div class="expectedResults__title h4">Ожидаемые результаты</div>
+                            <div class="expectedResults__title h4">{% trans "Ожидаемые результаты" %}</div>
                             <div class="expectedResults__content h6 mb-4">
                                 {{ case.excepted_result }}
                             </div>
                         </div>
                         <div class="testPlan">
-                            <div class="testPlan__title">
-                                Тест планы
-                            </div>
+                            <div class="testPlan__title">{% trans "Тест планы" %}</div>
                             <div class="testPlan__content mb-4">
                                 {% for plan in case.plan_set.all %}
                                     <a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a>
@@ -60,15 +58,15 @@
                         </div>
                         <div class="runLog">
                             <div class="runLog__title h4">
-                                Лог запуска
+                                {% trans "Лог запуска" %}
                             </div>
                             <table class="table table-lg table-hover table-bordered mb-4">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Дата запуска</th>
-                                    <th scope="col">Запустил</th>
-                                    <th scope="col">Статус</th>
-                                    <th scope="col">Комментарий</th>
+                                    <th scope="col">{% trans "Дата запуска" %}</th>
+                                    <th scope="col">{% trans "Запустил" %}</th>
+                                    <th scope="col">{% trans "Статус" %}</th>
+                                    <th scope="col">{% trans "Комментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

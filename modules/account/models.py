@@ -7,6 +7,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext as _
 from image_cropping import ImageCropField, ImageRatioField
 
 
@@ -23,7 +24,7 @@ class CustomPermissionManager(models.Manager):
 
 
 class CustomPermission(models.Model):
-    name = models.CharField('Название', max_length=255)
+    name = models.CharField(_('Название'), max_length=255)
     content_type = models.ForeignKey(
         ContentType,
         models.CASCADE,
@@ -33,8 +34,8 @@ class CustomPermission(models.Model):
     objects = CustomPermissionManager()
 
     class Meta:
-        verbose_name = 'Разрешение'
-        verbose_name_plural = 'Разрешения'
+        verbose_name = _('Разрешение')
+        verbose_name_plural = _('Разрешения')
         unique_together = (('content_type', 'codename'),)
         ordering = ('content_type__app_label', 'content_type__model',
                     'codename')
@@ -56,10 +57,10 @@ class CustomGroupManager(models.Manager):
 
 
 class CustomGroup(models.Model):
-    name = models.CharField('Названия', max_length=80, unique=True)
+    name = models.CharField(_('Названия'), max_length=80, unique=True)
     permissions = models.ManyToManyField(
         CustomPermission,
-        verbose_name='разешения',
+        verbose_name=_('разешения'),
         blank=True,
     )
     is_admin = False
@@ -67,8 +68,8 @@ class CustomGroup(models.Model):
     objects = CustomGroupManager()
 
     class Meta:
-        verbose_name = 'Группа'
-        verbose_name_plural = 'Группы'
+        verbose_name = _('Группа')
+        verbose_name_plural = _('Группы')
 
     def __str__(self):
         return self.name
@@ -100,15 +101,14 @@ class AccountManager(BaseUserManager):
 
 
 class Account(PermissionsMixin, AbstractBaseUser):
-    email = models.EmailField(verbose_name='Почтовый адрес', max_length=255, unique=True)
-    first_name = models.CharField(verbose_name='Имя', max_length=255)
-    second_name = models.CharField(verbose_name='Фамилия', max_length=255)
+    email = models.EmailField(verbose_name=_('Почтовый адрес'), max_length=255, unique=True)
+    first_name = models.CharField(verbose_name=_('Имя'), max_length=255)
+    second_name = models.CharField(verbose_name=_('Фамилия'), max_length=255)
     avatar = ImageCropField(upload_to='avatars/', default='avatars/default-user.png',
-                            verbose_name='Аватар')
+                            verbose_name=_('Аватар'))
     cropping = ImageRatioField('avatar', '400x400')
-    date_joined = models.DateTimeField(verbose_name="Дата регистрации", auto_now_add=True)
-    password = models.CharField(verbose_name='Пароль', max_length=128)
-
+    date_joined = models.DateTimeField(verbose_name=_("Дата регистрации"), auto_now_add=True)
+    password = models.CharField(verbose_name=_('Пароль'), max_length=128)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -118,19 +118,19 @@ class Account(PermissionsMixin, AbstractBaseUser):
 
     group = models.ForeignKey(
         CustomGroup,
-        verbose_name='Группа',
+        verbose_name=_('Группа'),
         blank=True,
         null=True,
-        help_text="Группа к которой принадлежит пользователь",
+        help_text=_("Группа к которой принадлежит пользователь"),
         related_name="user_set",
         related_query_name="user",
         on_delete=models.SET_NULL
     )
     user_permissions = models.ManyToManyField(
         CustomPermission,
-        verbose_name='user permissions',
+        verbose_name=_('Права пользователя'),
         blank=True,
-        help_text='Specific permissions for this user.',
+        help_text=_('Выставить права пользователю.'),
         related_name="user_set",
         related_query_name="user",
     )
@@ -157,8 +157,8 @@ class Account(PermissionsMixin, AbstractBaseUser):
         return self.is_admin
 
     class Meta:
-        verbose_name = "Аккаунт"
-        verbose_name_plural = 'Аккаунт'
+        verbose_name = _("Аккаунт")
+        verbose_name_plural = _('Аккаунт')
 
     def image_tag(self):  # receives the instance as an argument
         return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.avatar.url)

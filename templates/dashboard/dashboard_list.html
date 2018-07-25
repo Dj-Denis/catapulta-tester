@@ -1,20 +1,23 @@
 {% extends "base.html" %}
-
+{% load case_status %}
+{% load i18n %}
 {% block content %}
+    {% case_status request %}
+
     <div class="laoyut__body">
         <div class="section section--hero">
             <div class="section__content">
                 <div class="container-fludi container-wide">
                     <div class="card">
                         <article class="card-body">
-                            <p class="h3 text-center">Статистика тест планов</p>
+                            <p class="h3 text-center"> {% trans "Статистика тест планов" %}</p>
                             <div class="hero__date ml-auto">
                                 <form class="form-inline justify-content-between">
-                                    <span>Выберите преиод "с"</span>
+                                    <span>{% trans 'Выберите преиод "с"' %}</span>
                                     <input class="form-control" type="date" name="date_from" value="{{ request.GET.date_from }}">
-                                    <span>"по"</span>
+                                    <span>{% trans '"по"' %}</span>
                                     <input class="form-control" type="date" name="date_to" value="{{ request.GET.date_to }}">
-                                    <button type="submit" class="btn btn-primary">Подтвердить</button>
+                                    <button type="submit" class="btn btn-primary">{% trans "Подтвердить" %}</button>
                                 </form>
                             </div>
                             <div class="hero__dashboard py-4">
@@ -22,7 +25,7 @@
                                     <div class="col-5 border">
                                         <div class="row mb-3">
                                             <div class="col-9 border">
-                                                Запускалось более 1 месяца назад от выбраного периода
+                                                {% trans "Запускалось более 1 месяца назад от выбраного периода"%}
                                             </div>
                                             <div class="col-3 text-center border">
                                                 {{ plan_list.count }}
@@ -32,9 +35,9 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Название тест плана</th>
-                                                <th scope="col">Дата последнего запуска</th>
-                                                <th scope="col">Статус запуска</th>
+                                                <th scope="col">{% trans "Название тест плана" %}</th>
+                                                <th scope="col">{% trans "Дата последнего запуска" %}</th>
+                                                <th scope="col">{% trans "Статус запуска" %}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -43,7 +46,7 @@
                                                     <td>{{ plan.pk }}</td>
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался")}}</td>
                                                     {% if plan.status == "0" %}
                                                         <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% elif plan.status == "1" %}
@@ -59,9 +62,9 @@
                                     <div class="col-2"></div>
                                     <div class="col-5 border">
                                         <div class="row mb-3">
-                                            <div class="col-6 border">Запускалось за выбранный период</div>
+                                            <div class="col-6 border">{% trans "Запускалось за выбранный период" %}</div>
                                             <div class="col-2 border bg-secondary text-light">
-                                                <span>Всего</span>
+                                                <span>{% trans Всего %}</span>
                                                 <span class="selectedPeriod__all">{{ plan_list.count }}</span>
                                             </div>
                                             <div class="col-2 border bg-success text-light">
@@ -77,9 +80,9 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Название тест плана</th>
-                                                <th scope="col">Дата последнего запуска</th>
-                                                <th scope="col">Статус запуска</th>
+                                                <th scope="col">{% trans "Название тест плана" %}</th>
+                                                <th scope="col">{% trans "Дата последнего запуска" %}</th>
+                                                <th scope="col">{% trans "Статус запуска" %}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -89,7 +92,7 @@
                                                     <td>{{ plan.pk }}</td>
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:"Не запускался" }}</td>
+                                                    <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
                                                     {% if plan.status == "0" %}
                                                         <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
                                                     {% elif plan.status == "1" %}

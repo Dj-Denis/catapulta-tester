@@ -6,6 +6,7 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.widgets import FileInput
+from django.utils.translation import gettext as _
 from image_cropping import ImageCropWidget
 from registration.forms import RegistrationFormUniqueEmail
 
@@ -13,12 +14,12 @@ from .models import Account, CustomGroup
 
 
 class AccountEditForm(UserChangeForm):
-    email = forms.CharField(label="Почтовый адрес", required=True)
-    password1 = forms.CharField(label='Пароль', required=False, widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Подтверждение пароля', required=False, widget=forms.PasswordInput)
+    email = forms.CharField(label=_("Почтовый адрес"), required=True)
+    password1 = forms.CharField(label=_('Пароль'), required=False, widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('Подтверждение пароля'), required=False, widget=forms.PasswordInput)
     first_name = forms.CharField(label="Имя")
     second_name = forms.CharField(label="Фамилия")
-    avatar = forms.ImageField(label="", required=False, widget=FileInput)
+    avatar = forms.ImageField(label=_(""), required=False, widget=FileInput)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -69,12 +70,12 @@ class AccountEditForm(UserChangeForm):
 
 
 class AdminAccountEditForm(UserChangeForm):
-    email = forms.CharField(label="Почтовый адрес", required=True)
-    password1 = forms.CharField(label='Пароль', required=False, widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Подтверждение пароля', required=False, widget=forms.PasswordInput)
-    first_name = forms.CharField(label="Имя", )
-    second_name = forms.CharField(label="Фамилия")
-    avatar = forms.ImageField(label="", required=False, widget=FileInput)
+    email = forms.CharField(label=_("Почтовый адрес"), required=True)
+    password1 = forms.CharField(label=_('Пароль'), required=False, widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('Подтверждение пароля'), required=False, widget=forms.PasswordInput)
+    first_name = forms.CharField(label=_("Имя"))
+    second_name = forms.CharField(label=_("Фамилия"))
+    avatar = forms.ImageField(label=_(""), required=False, widget=FileInput)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -107,7 +108,7 @@ class AdminAccountEditForm(UserChangeForm):
                     Field('is_active', template='account/select.html'),
                     Field('password1', css_class='input-sm'),
                     Field('password2', css_class='input-sm'),
-                    FormActions(Submit('submit', 'Сохранить', css_class='btn-primary'), css_class=''),
+                    FormActions(Submit('submit', _('Сохранить'), css_class='btn-primary'), css_class=''),
                     css_class='col-6'),
                 Div(Field(HTML('<img src="{{ object.avatar.url }}" style="width: 200px; height:200px;" class="mb-3"/>'
                                '<p><small>Максимальный размер картинки 400х400px</small></p>'),
@@ -125,12 +126,12 @@ class AdminAccountEditForm(UserChangeForm):
 
 
 class AccountRegisterForm(UserCreationForm):
-    email = forms.CharField(label="Почтовый адрес", required=True)
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput)
-    first_name = forms.CharField(label="Имя", required=True)
-    second_name = forms.CharField(label="Фамилия", required=True)
-    avatar = forms.ImageField(label="", required=False, widget=FileInput)
+    email = forms.CharField(label=_("Почтовый адрес"), required=True)
+    password1 = forms.CharField(label=_('Пароль'), widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('Подтверждение пароля'), widget=forms.PasswordInput)
+    first_name = forms.CharField(label=_("Имя"), required=True)
+    second_name = forms.CharField(label=_("Фамилия"), required=True)
+    avatar = forms.ImageField(label=_(""), required=False, widget=FileInput)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -188,7 +189,7 @@ class GroupCreateForm(forms.ModelForm):
         self.helper.form_method = 'POST'
         self.helper.layout = Layout(
             Field('name'),
-            FormActions(Submit('submit', 'Подтвердить', css_class='btn-primary btn-success'), css_class='mt-3'),
+            FormActions(Submit('submit', _('Подтвердить'), css_class='btn-primary btn-success'), css_class='mt-3'),
         )
 
     class Meta:
@@ -197,7 +198,7 @@ class GroupCreateForm(forms.ModelForm):
 
 
 class GroupEditForm(forms.ModelForm):
-    name = forms.CharField(label="Название", required=True)
+    name = forms.CharField(label=_("Название"), required=True)
     permissions = forms.CheckboxSelectMultiple()
 
     def __init__(self, *args, **kwargs):
@@ -220,7 +221,7 @@ class GroupEditForm(forms.ModelForm):
 
 class AccountAddForm(UserCreationForm):
     password1 = forms.CharField(
-        label="Пароль",
+        label=_("Пароль"),
         strip=False,
         widget=forms.PasswordInput,
     )
@@ -240,12 +241,12 @@ class AccountAddForm(UserCreationForm):
 
 class CustomRegistrationForm(RegistrationFormUniqueEmail):
     password1 = forms.CharField(
-        label="Пароль",
+        label=_("Пароль"),
         strip=False,
         widget=forms.PasswordInput,
     )
     password2 = forms.CharField(
-        label="Подтверждение пароля",
+        label=_("Подтверждение пароля"),
         widget=forms.PasswordInput,
         strip=False,
     )
