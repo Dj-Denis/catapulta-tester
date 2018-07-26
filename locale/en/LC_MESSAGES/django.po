@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-25 12:23+0300\n"
+"POT-Creation-Date: 2018-07-26 07:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,12 +21,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: catapulta_tester/settings.py:189
-msgid "Russian"
-msgstr "Русский"
+#, fuzzy
+#| msgid "Russian"
+msgid "Russian🇷🇺"
+msgstr "U+1F1F7"
 
 #: catapulta_tester/settings.py:190
-msgid "English"
-msgstr ""
+msgid "🇺🇸🇺🇸🇺🇸🇺🇸U+1F1FA🇺🇸"
+msgstr "U+1F1EC"
 
 #: modules/account/forms.py:17 modules/account/forms.py:73
 #: modules/account/forms.py:129 modules/account/models.py:104
@@ -198,8 +200,8 @@ msgstr ""
 
 #: modules/test_cases/models.py:20 modules/test_cases/models.py:51
 #: modules/test_plans/models.py:54 modules/test_plans/models.py:70
-#: templates/test_plans/plan_detail.html:36
-#: templates/test_plans/plan_detail.html:67
+#: templates/test_plans/plan_detail.html:37
+#: templates/test_plans/plan_detail.html:68
 msgid "Коментарий"
 msgstr ""
 
@@ -406,8 +408,8 @@ msgstr "Test plan name"
 #: templates/dashboard/dashboard_list.html:39
 #: templates/dashboard/dashboard_list.html:84
 #: templates/test_cases/case_list.html:98
-#: templates/test_plans/plan_detail.html:33
-#: templates/test_plans/plan_detail.html:64
+#: templates/test_plans/plan_detail.html:34
+#: templates/test_plans/plan_detail.html:65
 #: templates/test_plans/plan_list.html:82
 msgid "Дата последнего запуска"
 msgstr "Last run date"
@@ -415,7 +417,7 @@ msgstr "Last run date"
 #: templates/dashboard/dashboard_list.html:40
 #: templates/dashboard/dashboard_list.html:85
 #: templates/test_cases/case_list.html:100
-#: templates/test_plans/plan_detail.html:66
+#: templates/test_plans/plan_detail.html:67
 msgid "Статус запуска"
 msgstr "Run status"
 
@@ -786,8 +788,8 @@ msgstr ""
 
 #: templates/test_cases/case_detail.html:67
 #: templates/test_cases/case_list.html:99
-#: templates/test_plans/plan_detail.html:34
-#: templates/test_plans/plan_detail.html:65
+#: templates/test_plans/plan_detail.html:35
+#: templates/test_plans/plan_detail.html:66
 #: templates/test_plans/plan_list.html:83
 msgid "Запустил"
 msgstr ""
@@ -836,23 +838,23 @@ msgstr ""
 msgid "Нет плана"
 msgstr ""
 
-#: templates/test_plans/plan_detail.html:26
+#: templates/test_plans/plan_detail.html:27
 msgid "Детали тест плана"
 msgstr ""
 
-#: templates/test_plans/plan_detail.html:32
+#: templates/test_plans/plan_detail.html:33
 msgid "Название тест кейса"
 msgstr ""
 
-#: templates/test_plans/plan_detail.html:35
+#: templates/test_plans/plan_detail.html:36
 msgid "Статут запуска"
 msgstr ""
 
-#: templates/test_plans/plan_detail.html:44
+#: templates/test_plans/plan_detail.html:45
 msgid "Не запускалось"
 msgstr ""
 
-#: templates/test_plans/plan_detail.html:59
+#: templates/test_plans/plan_detail.html:60
 msgid "Лог тест плана"
 msgstr ""
 

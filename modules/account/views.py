@@ -30,6 +30,8 @@ class AccountSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Настройки успешно сохранены"
 
     def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
         if self.request.user.is_admin:
             return super(AccountSettings, self).dispatch(request, *args, **kwargs)
         elif self.request.path_info.split('/')[3] != str(self.request.user.id):

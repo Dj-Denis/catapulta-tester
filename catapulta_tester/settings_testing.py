@@ -88,14 +88,11 @@ WSGI_APPLICATION = 'catapulta_tester.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'ctptester',
-        'PASSWORD': 'ctptester',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
+    'default': {'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': ':memory:',
+                'ATOMIC_REQUESTS': True,
+                'TEST_CHARSET': "utf8",
+                'TEST_COLLATION': "utf8_general_ci", },
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -165,14 +162,9 @@ THUMBNAIL_PROCESSORS = (
                        ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.mailtrap.io'
-# EMAIL_HOST_USER = '86145ee0e6b499'
-# EMAIL_HOST_PASSWORD = '3b818a35467ddc'
-# EMAIL_PORT = '2525'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-from .local import *
 
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, '/tmp')
@@ -192,4 +184,3 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
-
