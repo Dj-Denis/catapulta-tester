@@ -3,9 +3,12 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import View
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
+from djqscsv import render_to_csv_response
 
 from modules.account.models import Account
 from modules.test_cases.models import Case
@@ -72,3 +75,10 @@ class PlanDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Plan
     permission_required = ['delete_plan']
     success_url = reverse_lazy('plan_list')
+
+
+class CSVExportView(SingleObjectMixin, View):
+    model = Plan
+
+    def get(self, request, *args, **kwargs):
+        return render_to_csv_response(Case.objects.filter(plancases__plan_id=self.get_object().pk).all())
