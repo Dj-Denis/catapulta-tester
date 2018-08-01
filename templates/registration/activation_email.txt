@@ -9,7 +9,7 @@
     {{ expiration_days }} дней:
 {% endblocktrans %}
 
-http://{{site.domain}}{% url 'registration_activate' activation_key %}
+http://{{site.domain}}/?activation_key={{ activation_key }}
 
 
 

@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_view
 from django.urls import include
 from django.urls import path
+from rest_framework.documentation import include_docs_urls
 
 from modules.dashboard.views import DashboardView
 
@@ -32,7 +33,9 @@ urlpatterns = [
     path('accounts/login/', auth_view.login, name='login'),
     path('logout/', auth_view.LogoutView.as_view(), name='logout'),
     path('auth/', include('social_django.urls', namespace='social')),
-    path('i18n/', include('django.conf.urls.i18n'))
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('api/', include('modules.api.urls')),
+    path('docs/', include_docs_urls(title="Documentation"))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

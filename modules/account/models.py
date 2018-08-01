@@ -3,13 +3,13 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from image_cropping import ImageCropField, ImageRatioField
-
+from rest_framework.authtoken.models import Token
 
 # Create your tags here.
 
@@ -177,3 +177,9 @@ def delete_old_avatars(sender, instance, raw, *args, **kwargs):
             existing_avatar = Account.objects.get(pk=instance.pk)
             if instance.avatar and existing_avatar.avatar != instance.avatar and existing_avatar.avatar.name != 'avatars/default-user.png':
                 existing_avatar.avatar.delete(False)
+
+
+@receiver(post_save, sender=Account)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

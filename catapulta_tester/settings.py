@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'psycopg2',
     'registration',
     'social_django',
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -165,10 +167,6 @@ THUMBNAIL_PROCESSORS = (
                        ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.mailtrap.io'
-# EMAIL_HOST_USER = '86145ee0e6b499'
-# EMAIL_HOST_PASSWORD = '3b818a35467ddc'
-# EMAIL_PORT = '2525'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -187,9 +185,12 @@ MESSAGE_LEVEL = message_constants.INFO
 from django.utils.translation import gettext_lazy as _
 
 LANGUAGES = [
-    ('ru', _('Russian🇷🇺')),
-    ('en', _('🇺🇸🇺🇸🇺🇸🇺🇸English🇺🇸')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
 ]
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication', )
+}

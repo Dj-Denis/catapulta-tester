@@ -19,3 +19,9 @@ psycopg2==2.7.5
 django-registration-redux
 social-auth-app-django
 social-auth-core
+django-queryset-csv
+djangorestframework
+markdown
+coreapi
+pygments
+django-filter
