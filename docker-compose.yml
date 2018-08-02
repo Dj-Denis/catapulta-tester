@@ -11,6 +11,16 @@ networks:
       name: ctptester
 
 services:
+  redis:
+    image: redis:5.0-rc
+    container_name: ctptester_redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      ctptester:
+        aliases:
+            - redis
   postresql:
     image: postgres:9.5
     container_name: ctptester_psql
@@ -33,12 +43,14 @@ services:
     user: root
     ports:
       - 8000:8000
-    command: python -u manage.py runserver 0.0.0.0:8000
+    command: /usr/bin/supervisord -n
   #    restart: always
     volumes:
       - .:/home/project
+      - ./.conf/supervisor.d:/etc/supervisor/conf.d:ro
     depends_on:
       - postresql
+      - redis
     networks:
       ctptester:
         aliases:

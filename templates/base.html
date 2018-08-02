@@ -124,21 +124,21 @@
     {% endif %}
 {% endfor %}
 {% block content %}{% endblock %}
-
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}" />
-    <select name="language">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Go" />
-</form>
+{##}
+{#<form action="{% url 'set_language' %}" method="post">{% csrf_token %}#}
+{#    <input name="next" type="hidden" value="{{ redirect_to }}" />#}
+{#    <select name="language">#}
+{#        {% get_current_language as LANGUAGE_CODE %}#}
+{#        {% get_available_languages as LANGUAGES %}#}
+{#        {% get_language_info_list for LANGUAGES as languages %}#}
+{#        {% for language in languages %}#}
+{#            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>#}
+{#                {{ language.name }} ({{ language.code }})#}
+{#            </option>#}
+{#        {% endfor %}#}
+{#    </select>#}
+{#    <input type="submit" value="Go" />#}
+{#</form>#}
 
 <footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -153,6 +153,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.1/js/select2.min.js"></script>
     <script src="{% static 'js/jquery.multi-select.js' %}"></script>
+    <script src="{% static 'js/moment-with-locales.js' %}"></script>
     <script src="{% static 'js/jquery.quicksearch.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% block script %}
+    {% endblock %}
 </footer>

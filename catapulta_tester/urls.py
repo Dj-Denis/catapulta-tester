@@ -35,7 +35,9 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('api/', include('modules.api.urls')),
-    path('docs/', include_docs_urls(title="Documentation"))
+    path('docs/', include_docs_urls(title="Documentation")),
+    path('django-rq/', include('django_rq.urls')),
+    path('report/', include('modules.report.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

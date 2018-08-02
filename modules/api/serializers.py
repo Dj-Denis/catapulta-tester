@@ -1,10 +1,14 @@
+import django_rq
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
 from registration.models import RegistrationProfile
 from registration.signals import user_registered, user_activated
 from rest_framework import serializers
 
 from modules.account.models import Account
-from modules.tags.models import TaggedItem
+from modules.report.models import Report
+from modules.report.tasks import create_report
+from modules.tags.models import TaggedItem, Tag
 from modules.test_cases.models import Case
 from modules.test_plans.models import Plan, PlanCases
 
@@ -34,7 +38,8 @@ class TaggedItemSerializer(serializers.ModelSerializer):
 
 class TaggedRelatedField(serializers.RelatedField):
     def to_internal_value(self, data):
-        pass
+        print(data)
+        return Tag.objects.get(pk=data)
 
     def to_representation(self, value):
         serializer = TaggedItemSerializer(value)
@@ -56,8 +61,10 @@ class CaseSerializer(serializers.ModelSerializer):
         return case
 
     def update(self, instance, validated_data):
-        print(instance)
-        print(validated_data)
+        tag_list = validated_data.pop('tag_list')
+        print(self.context['request'])
+        for tag in tag_list:
+            TaggedItem.objects.create(tag=tag, content_type=ContentType.objects.get_for_model(instance), object_id=instance.pk)
         return super(CaseSerializer, self).update(instance, validated_data)
 
 
@@ -92,7 +99,6 @@ class PlanUpdateSerializer(serializers.ModelSerializer):
         return plan
 
     def update(self, instance, validated_data):
-        print(validated_data)
         cases = validated_data.pop('cases', None)
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -124,7 +130,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('email', 'password', 'first_name', 'second_name')
 
     def create(self, validated_data):
-        print(validated_data)
         new_user = Account.objects.create_user(email=validated_data['email'], password=validated_data['password'])
         new_user.first_name = validated_data['first_name']
         new_user.second_name = validated_data['second_name']
@@ -157,3 +162,15 @@ class ActivationSerializer(serializers.Serializer):
                                 user=user,
                                 request=self.context['request'])
         return user
+
+
+class ReportSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Report
+        fields = ('name',)
+
+    def create(self, validated_data):
+        queue = django_rq.get_queue('default')
+        queue.enqueue(create_report, validated_data['name'])
+        return {'name': 'ok'}

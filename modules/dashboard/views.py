@@ -30,14 +30,14 @@ class DashboardView(LoginRequiredMixin, ListView):
                 ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
                 ctx['plan_list_before'] = Plan.objects.filter(
                     planlog__last_run__lte=(
-                                delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
+                            delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
             elif len(date_from) != 0:
                 ctx['plan_list'] = Plan.objects.filter(planlog__last_run__range=[date_from, timezone.now()])
                 ctx['plan_success_count'] = ctx['plan_list'].filter(status='1').count() or 0
                 ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
                 ctx['plan_list_before'] = Plan.objects.filter(
                     planlog__last_run__lte=(
-                                delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
+                            delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
             elif len(date_to) != 0:
                 ctx['plan_list'] = Plan.objects.filter(planlog__last_run__range=['1990-1-1',
                                                                                  delorean.parse(date_to).end_of_day])
@@ -45,6 +45,6 @@ class DashboardView(LoginRequiredMixin, ListView):
                 ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
                 ctx['plan_list_before'] = Plan.objects.filter(
                     planlog__last_run__lte=(
-                                delorean.parse(date_to, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
+                            delorean.parse(date_to, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day)
 
         return ctx

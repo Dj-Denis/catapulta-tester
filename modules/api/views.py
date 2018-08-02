@@ -2,10 +2,11 @@ from registration.models import RegistrationProfile
 from rest_framework import generics
 
 from modules.account.models import Account
+from modules.report.models import Report
 from modules.test_cases.models import Case
 from modules.test_plans.models import Plan, PlanCases
 from .serializers import PlanSerializer, AccountSerializer, CaseSerializer, PlanCaseSerializer, PlanUpdateSerializer, \
-    RegisterSerializer, ActivationSerializer
+    RegisterSerializer, ActivationSerializer, ReportSerializer
 
 # Create your views here.
 
@@ -122,3 +123,8 @@ class RegistrationApi(generics.CreateAPIView):
 class ActivationApi(generics.CreateAPIView):
     queryset = RegistrationProfile.objects.all()
     serializer_class = ActivationSerializer
+
+
+class ReportsApi(generics.CreateAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer

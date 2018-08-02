@@ -20,5 +20,6 @@ urlpatterns = [
     path('case/<int:pk>/del', CaseDeleteApi.as_view()),
     path('plan/link', PlanCasesApi.as_view()),
     path('register/', RegistrationApi.as_view()),
-    path('activate/', ActivationApi.as_view())
+    path('activate/', ActivationApi.as_view()),
+    path('report/', ReportsApi.as_view())
 ]

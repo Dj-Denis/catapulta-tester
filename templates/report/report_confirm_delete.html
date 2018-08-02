@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="section section--hero">
+        <div class="section__content">
+            <div class="container-fludi container-wide">
+                <div class="card">
+                    <article class="card-body">
+                        <div class="deleteForm">
+                            <form method="post">{% csrf_token %}
+                                <p>{% trans "Вы действительно хотите удалить" %} "{{ object }}"?</p>
+                                <input class="btn btn-danger" type="submit" value="{% trans "Подтвердить" %}"/>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

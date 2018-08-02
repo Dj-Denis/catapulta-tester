@@ -25,3 +25,8 @@ markdown
 coreapi
 pygments
 django-filter
+django-rq
+channels
+asgi_redis
+channels_redis
+websocket-client

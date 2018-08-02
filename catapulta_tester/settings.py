@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'modules.account',
     'modules.tags',
     'modules.dashboard',
+    'modules.report',
     'crispy_forms',
     'easy_thumbnails',
     'image_cropping',
@@ -48,7 +49,9 @@ INSTALLED_APPS = [
     'registration',
     'social_django',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_rq',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -193,4 +196,15 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication', )
+}
+
+ASGI_APPLICATION = "catapulta_tester.routing.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('redis', 6379)],
+        },
+    },
 }
