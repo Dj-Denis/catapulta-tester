@@ -22,6 +22,7 @@ from .models import Account, CustomGroup
 class AccountsList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Account
     template_name = 'account/account_list.html'
+    paginate_by = 50
 
 
 class AccountSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -103,7 +104,6 @@ class GroupEdit(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('groups_list')
     # fields = ['name', 'permissions']
     form_class = GroupEditForm
-
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_admin:

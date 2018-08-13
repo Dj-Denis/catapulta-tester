@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
@@ -19,6 +20,7 @@ from .models import Case
 
 class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Case
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super(CaseList, self).get_context_data(**kwargs)
@@ -28,6 +30,8 @@ class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
         req = self.request.GET.dict()
         selected_tags = self.request.GET.getlist('tags')
         ctx['selected_tags'] = selected_tags
+        if 'page' in req:
+            del req['page']
         if len(req) != 0:
             q_list = []
             whit_tags = []
@@ -51,7 +55,16 @@ class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
                 q_list.append(Q(pk__in=set(whit_tags)))
 
             resp = Case.objects.filter(*q_list).distinct()
-            ctx['case_list'] = resp
+            paginator = Paginator(resp, self.paginate_by)
+            page = self.request.GET.get('page')
+            try:
+                _resp = paginator.page(page)
+            except PageNotAnInteger:
+                _resp = paginator.page(1)
+            except EmptyPage:
+                _resp = paginator.page(paginator.num_pages)
+            ctx['case_list'] = _resp
+            ctx['paginator'] = paginator
         return ctx
 
 

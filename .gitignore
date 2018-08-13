@@ -5,3 +5,4 @@ ve
 *.pyc
 catapulta_tester/local.py
 local.py
+media/report/*

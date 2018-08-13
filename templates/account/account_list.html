@@ -8,7 +8,8 @@
                 <div class="container-fludi container-wide">
                     <div class="card">
                         <article class="card-body">
-                         <a class="btn btn-info mb-3" href={% url 'account_add' %}> {% trans "Добавить пользователя" %}</a>
+                            <a class="btn btn-info mb-3"
+                               href={% url 'account_add' %}> {% trans "Добавить пользователя" %}</a>
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -44,16 +45,46 @@
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <a href={% url 'account_edit' user.pk %} class="text-dark"><i class="fa fa-2x fa-pencil-square-o"
-                                                                             aria-hidden="true"></i></a>
-                                            <a href={% url 'account_delete' user.pk %} class="text-dark"><i class="fa fa-2x fa-trash-o"
-                                                                             aria-hidden="true"></i></a>
+                                            <a href={% url 'account_edit' user.pk %} class="text-dark"><i
+                                                    class="fa fa-2x fa-pencil-square-o"
+                                                    aria-hidden="true"></i></a>
+                                            <a href={% url 'account_delete' user.pk %} class="text-dark"><i
+                                                    class="fa fa-2x fa-trash-o"
+                                                    aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
 
                                 </tbody>
                             </table>
+                            {% if is_paginated %}
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                                    {% endif %}
+                                    {% for i in paginator.page_range %}
+                                        {% if page_obj.number == i %}
+                                            <li class="active page-item"><span class="page-link">{{ i }} <span
+                                                    class="sr-only">(current)</span></span>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
                         </article>
                     </div>
                 </div>

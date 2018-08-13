@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load case_status %}
 {% load i18n %}
+{% load get_filter_dashboard %}
 {% block content %}
     {% case_status request %}
 
@@ -28,10 +29,10 @@
                                                 {% trans "Запускалось более 1 месяца назад от выбраного периода"%}
                                             </div>
                                             <div class="col-3 text-center border">
-                                                {{ plan_list.count }}
+                                                {{ plan_list_before.count }}
                                             </div>
                                         </div>
-                                        <table class="dashboard_table table table-sm table-hover">
+                                        <table class="table table-sm table-hover">
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -58,6 +59,42 @@
                                             {% endfor %}
                                             </tbody>
                                         </table>
+
+                                        {% if is_paginated %}
+                                            <ul class="pagination">
+                                                {% if plan_list_before.has_previous %}
+                                                    <li class="page-item"><a class="page-link"
+                                                                             href="?page_l={{ plan_list_before.previous_page_number }}&{{ request.get_full_path|get_filter_dashboard:'left' }}">&laquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="disabled page-item"><span
+                                                            class="page-link">&laquo;</span></li>
+                                                {% endif %}
+
+                                                {% for i in paginator_l.page_range %}
+                                                    {% if plan_list_before.number == i %}
+                                                        <li class="active page-item"><span
+                                                                class="page-link">{{ i }}<span
+                                                                class="sr-only">(current)</span></span></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link"
+                                                                                 href="?page_l={{ i }}&{{ request.get_full_path|get_filter_dashboard:'left' }}">{{ i }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if plan_list_before.has_next %}
+                                                    <li class="page-item"><a class="page-link"
+                                                                             href="?page_l={{ plan_list_before.next_page_number }}&{{ request.get_full_path|get_filter_dashboard:'left' }}">&raquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="disabled page-item"><span
+                                                            class="page-link">&raquo;</span></li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+
+
                                     </div>
                                     <div class="col-2"></div>
                                     <div class="col-5 border">
@@ -76,7 +113,7 @@
                                                 <span class="selectedPeriod__fail">{{ plan_failed_count }}</span>
                                             </div>
                                         </div>
-                                        <table class="dashboard_table table table-sm table-hover">
+                                        <table class="table table-sm table-hover">
                                             <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -105,6 +142,39 @@
 
                                             </tbody>
                                         </table>
+                                    {% if is_paginated %}
+                                            <ul class="pagination">
+                                                {% if plan_list.has_previous %}
+                                                    <li class="page-item"><a class="page-link"
+                                                                             href="?page_r={{ plan_list.previous_page_number }}&{{ request.get_full_path|get_filter_dashboard:'right' }}">&laquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="disabled page-item"><span
+                                                            class="page-link">&laquo;</span></li>
+                                                {% endif %}
+
+                                                {% for i in paginator_r.page_range %}
+                                                    {% if plan_list.number == i %}
+                                                        <li class="active page-item"><span
+                                                                class="page-link">{{ i }}<span
+                                                                class="sr-only">(current)</span></span></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link"
+                                                                                 href="?page_r={{ i }}&{{ request.get_full_path|get_filter_dashboard:'right' }}">{{ i }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if plan_list.has_next %}
+                                                    <li class="page-item"><a class="page-link"
+                                                                             href="?page_r={{ plan_list.next_page_number }}&{{ request.get_full_path|get_filter_dashboard:'right' }}">&raquo;</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="disabled page-item"><span
+                                                            class="page-link">&raquo;</span></li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -22,11 +23,14 @@ from .models import Plan, PlanLog
 
 class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Plan
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super(PlanList, self).get_context_data(**kwargs)
         ctx['accounts_list'] = Account.objects.all()
         req = self.request.GET.dict()
+        if 'page' in req:
+            del req['page']
         if len(req) != 0:
             q_list = []
             if req['search_string'] != '':
@@ -40,7 +44,16 @@ class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
             if req['date_to'] != '':
                 q_list.append(Q(planlog__last_run__lte=req['date_to'] + ' 23:59:59'))
             resp = Plan.objects.filter(*q_list).distinct()
-            ctx['plan_list'] = resp
+            paginator = Paginator(resp, self.paginate_by)
+            page = self.request.GET.get('page')
+            try:
+                _resp = paginator.page(page)
+            except PageNotAnInteger:
+                _resp = paginator.page(1)
+            except EmptyPage:
+                _resp = paginator.page(paginator.num_pages)
+            ctx['plan_list'] = _resp
+            ctx['paginator'] = paginator
         return ctx
 
 

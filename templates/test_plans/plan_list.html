@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load get_filter %}
 {% block content %}
     <div class="section section--hero">
         <div class="section__content">
@@ -12,7 +13,9 @@
                             <form>
                                 <div class="form-row">
                                     <div class="input-group col-3">
-                                        <input class="form-control" type="search" name="search_string" placeholder="{% trans "Поиск по названию" %}" value="{{ request.GET.search_string }}"
+                                        <input class="form-control" type="search" name="search_string"
+                                               placeholder="{% trans "Поиск по названию" %}"
+                                               value="{{ request.GET.search_string }}"
                                                id="search-input">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="submit">
@@ -20,26 +23,33 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <button class="btn btn-md col-2" data-toggle="collapse" aria-control="extendedSearch"
-                                            type="button" data-target="#extendedSearch">{% trans "Расширеный фильтр" %}</button>
+                                    <button class="btn btn-md col-2" data-toggle="collapse"
+                                            aria-control="extendedSearch"
+                                            type="button"
+                                            data-target="#extendedSearch">{% trans "Расширеный фильтр" %}</button>
                                 </div>
                                 <div class="collapse" id="extendedSearch">
                                     <div class="form-row mt-2">
                                         <div class="col-auto">
                                             <lable class="" for="fromDate">{% trans "Дата запуска 'с'" %}</lable>
-                                            <input class="form-control" type="date" name="date_from" value="{{ request.GET.date_from }}" id="fromDate">
+                                            <input class="form-control" type="date" name="date_from"
+                                                   value="{{ request.GET.date_from }}" id="fromDate">
                                         </div>
                                         <div class="col-auto">
                                             <lable class="" for="toDate">{% trans "'по'" %}</lable>
-                                            <input class="form-control" type="date" name="date_to" value="{{ request.GET.date_to }}" id=toDate>
+                                            <input class="form-control" type="date" name="date_to"
+                                                   value="{{ request.GET.date_to }}" id=toDate>
                                         </div>
                                         <div class="col-auto">
-                                            <lable class="" for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</lable>
-                                            <select class="custom-select mr-sm-2" id="inlineFormUserSelect" name="run_by">
+                                            <lable class=""
+                                                   for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</lable>
+                                            <select class="custom-select mr-sm-2" id="inlineFormUserSelect"
+                                                    name="run_by">
                                                 <option value="">____</option>
                                                 {% for account in accounts_list %}
-                                                    {% if account.id|add:0 == request.GET.run_by|add:0  %}
-                                                        <option value="{{ account.pk }}" selected> {{ account.get_full_name }}</option>
+                                                    {% if account.id|add:0 == request.GET.run_by|add:0 %}
+                                                        <option value="{{ account.pk }}"
+                                                                selected> {{ account.get_full_name }}</option>
                                                     {% else %}
                                                         <option value="{{ account.pk }}"> {{ account.get_full_name }}</option>
                                                     {% endif %}
@@ -48,7 +58,8 @@
                                         </div>
                                         <div class="col-auto">
                                             <lable class="" for="inlineFormResultSelect">{% trans "Результат" %}</lable>
-                                            <select class="custom-select mr-sm-2" name="result" id="inlineFormResultSelect">
+                                            <select class="custom-select mr-sm-2" name="result"
+                                                    id="inlineFormResultSelect">
                                                 <option value="">____</option>
                                                 {% if request.GET.result == '0' %}
                                                     <option value="0" selected>{% trans "Не выполнялось" %}</option>
@@ -74,7 +85,7 @@
                             </form>
                         </div>
                         <div class="content__table mt-4">
-                            <table class="display table table-lg table-hover border">
+                            <table class=" table table-lg table-hover border">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -89,33 +100,58 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for plan in plan_list %}
-                                        <tr>
-                                            <td>{{ plan.id }}</td>
-                                            <td><a class="text-dark"
-                                                   href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                            <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
-                                            <td class="align-middle">{{ plan.last_log.run_by }}</td>
-                                            <td class="align-middle">{{ plan.cases.count }}</td>
-                                            <td class="align-middle">{{ plan.succeed_count }}</td>
-                                            <td class="align-middle">{{ plan.failed_count }}</td>
-                                            {%  if plan.status == "0" %}
+                                {% for plan in plan_list %}
+                                    <tr>
+                                        <td>{{ plan.id }}</td>
+                                        <td><a class="text-dark"
+                                               href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
+                                        <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
+                                        <td class="align-middle">{{ plan.last_log.run_by }}</td>
+                                        <td class="align-middle">{{ plan.cases.count }}</td>
+                                        <td class="align-middle">{{ plan.succeed_count }}</td>
+                                        <td class="align-middle">{{ plan.failed_count }}</td>
+                                        {% if plan.status == "0" %}
                                             <td class="align-middle text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
-                                            {% elif plan.status == "1" %}
-                                                <td class="align-middle text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
-                                            {% else %}
-                                                <td class="align-middle text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
-                                            {% endif %}
-                                                <td>
-                                                <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i class="fa fa-pencil-square-o"
-                                                                                 aria-hidden="true"></i></a>
-                                                <a class="text-dark" href={% url 'plan_delete' plan.pk %}><i class="fa fa-trash-o"
-                                                                                 aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
+                                        {% elif plan.status == "1" %}
+                                            <td class="align-middle text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                        {% else %}
+                                            <td class="align-middle text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                        {% endif %}
+                                        <td>
+                                            <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i
+                                                    class="fa fa-pencil-square-o"
+                                                    aria-hidden="true"></i></a>
+                                            <a class="text-dark" href={% url 'plan_delete' plan.pk %}><i
+                                                    class="fa fa-trash-o"
+                                                    aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
+                            {% if is_paginated %}
+                                <ul class="pagination">
+                                    {% if plan_list.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ plan_list.previous_page_number }}&{{ request.get_full_path|get_filter }}">&laquo;</a></li>
+                                    {% else %}
+                                        <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                                    {% endif %}
+
+                                    {% for i in paginator.page_range %}
+                                        {% if plan_list.number == i %}
+                                            <li class="active page-item"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}&{{ request.get_full_path|get_filter }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if plan_list.has_next %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ plan_list.next_page_number }}&{{ request.get_full_path|get_filter }}">&raquo;</a></li>
+                                    {% else %}
+                                        <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </article>
                 </div>
