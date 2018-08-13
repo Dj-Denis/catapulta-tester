@@ -29,7 +29,7 @@
                                                 {% trans "Запускалось более 1 месяца назад от выбраного периода"%}
                                             </div>
                                             <div class="col-3 text-center border">
-                                                {{ plan_list_before.count }}
+                                                {{ plan_before_count }}
                                             </div>
                                         </div>
                                         <table class="table table-sm table-hover">
@@ -102,7 +102,7 @@
                                             <div class="col-6 border">{% trans "Запускалось за выбранный период" %}</div>
                                             <div class="col-2 border bg-secondary text-light">
                                                 <span>{% trans Всего %}</span>
-                                                <span class="selectedPeriod__all">{{ plan_list.count }}</span>
+                                                <span class="selectedPeriod__all">{{ plan_count }}</span>
                                             </div>
                                             <div class="col-2 border bg-success text-light">
                                                 <span>PASS</span>

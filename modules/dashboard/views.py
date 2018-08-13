@@ -22,8 +22,7 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, ListView):
         date_from = self.request.GET.get('date_from')
         date_to = self.request.GET.get('date_to')
         ctx = super(DashboardView, self).get_context_data(**kwargs)
-        # ctx['plan_success_count'] = ctx['plan_list'].filter(status='1').count() or 0
-        # ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
+
         ctx['plan_list_before'] = ctx['plan_list']
         q_list_l = []
         q_list_r = []
@@ -31,28 +30,24 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, ListView):
 
             if len(date_from) != 0 and len(date_to) != 0:
                 q_list_r.append(Q(planlog__last_run__range=[date_from, delorean.parse(date_to, dayfirst=False).end_of_day]))
-                ctx['plan_success_count'] = ctx['plan_list'].filter(status='1').count() or 0
-                ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
                 q_list_l.append(Q(planlog__last_run__lte=(delorean.parse(date_from, dayfirst=False)
                                                           - datetime.timedelta(weeks=4)).end_of_day))
             elif len(date_from) != 0:
                 q_list_r.append(Q(planlog__last_run__range=[date_from, timezone.now()]))
-                ctx['plan_success_count'] = ctx['plan_list'].filter(status='1').count() or 0
-                ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
                 q_list_l.append(Q(
                     planlog__last_run__lte=(
                             delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day))
             elif len(date_to) != 0:
                 q_list_r.append(Q(planlog__last_run__range=['1990-1-1',
                                                                                  delorean.parse(date_to).end_of_day]))
-                ctx['plan_success_count'] = ctx['plan_list'].filter(status='1').count() or 0
-                ctx['plan_failed_count'] = ctx['plan_list'].filter(status='2').count() or 0
-                q_list_r.append(Q(
-                    planlog__last_run__lte=(
-                            delorean.parse(date_to, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day))
+                q_list_r.append(Q(planlog__last_run__lte=(delorean.parse(date_to, dayfirst=False) -
+                                                          datetime.timedelta(weeks=4)).end_of_day))
         table_l = Plan.objects.filter(*q_list_l)
         table_r = Plan.objects.filter(*q_list_r)
-
+        ctx['plan_success_count'] = table_r.filter(status='1').count() or 0
+        ctx['plan_failed_count'] = table_r.filter(status='2').count() or 0
+        ctx['plan_count'] = table_r.count()
+        ctx['plan_before_count'] = table_l.count()
         paginator_l = Paginator(table_l, self.paginate_by)
         paginator_r = Paginator(table_r, self.paginate_by)
         page_l = self.request.GET.get('page_l')
@@ -75,4 +70,6 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, ListView):
             table_l = paginator_l.page(paginator_l.num_pages)
         ctx['plan_list_before'] = table_l
         ctx['paginator_l'] = paginator_l
+
+
         return ctx

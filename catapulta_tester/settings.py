@@ -210,3 +210,19 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'redis',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+    'high': {
+        'HOST': 'redis',
+        'PORT': 6379,
+        'DB': 1,
+        'DEFAULT_TIMEOUT': 360,
+    },
+}
