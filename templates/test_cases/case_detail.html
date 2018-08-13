@@ -41,9 +41,22 @@
                         <div class="testPlan">
                             <div class="testPlan__title">{% trans "Тест планы" %}</div>
                             <div class="testPlan__content mb-4">
-                                {% for plan in case.plan_set.all %}
-                                    <a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a>
-                                {% endfor %}
+                                <table class="table table-lg table-hover border justify-content-center">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Название</th>
+                                    </tr>
+                                    </thead>
+                                <tbody>
+                                    {% for plan in case.plan_set.all %}
+                                        <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                       <td> <a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="tags">

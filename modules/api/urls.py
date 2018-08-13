@@ -15,7 +15,7 @@ urlpatterns = [
     path('plan/<int:pk>/del', PlanDeleteApi.as_view()),
     path('case/', CaseListApi.as_view()),
     path('case/new', CaseCreateApi.as_view()),
-    path('case/<int:pk>', CaseDetailApi.as_view(), name='case_detail'),
+    path('case/<int:pk>', CaseDetailApi.as_view(), name='case_detail_api'),
     path('case/<int:pk>/edit', CaseUpdateApi.as_view()),
     path('case/<int:pk>/del', CaseDeleteApi.as_view()),
     path('plan/link', PlanCasesApi.as_view()),

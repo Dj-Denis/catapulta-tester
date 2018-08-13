@@ -90,10 +90,11 @@ class AdminAccountEditForm(UserChangeForm):
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super().save(commit=False)
-        if self.cleaned_data['group'].pk == 1:
-            user.is_admin = True
-        else:
-            user.is_admin = False
+        if self.cleaned_data['group']:
+            if self.cleaned_data['group'].pk == 1:
+                user.is_admin = True
+            else:
+                user.is_admin = False
         if len(self.cleaned_data["password1"]) != 0:
             user.set_password(self.cleaned_data["password1"])
         if commit:

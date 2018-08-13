@@ -70,7 +70,7 @@ class CaseSerializer(serializers.ModelSerializer):
 
 class PlanSerializer(serializers.ModelSerializer):
     create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
-    cases = serializers.HyperlinkedRelatedField(view_name='case_detail', many=True, read_only=True)
+    cases = serializers.HyperlinkedRelatedField(view_name='case_detail_api', many=True, read_only=True)
     id = serializers.IntegerField(read_only=True)
 
     class Meta:
