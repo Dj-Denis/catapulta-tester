@@ -9,6 +9,10 @@ from .models import Report
 
 
 class ReportList(ListView):
+    def get_queryset(self):
+        qs = super(ReportList, self).get_queryset()
+        return qs.filter(create_by=self.request.user)
+
     model = Report
 
 

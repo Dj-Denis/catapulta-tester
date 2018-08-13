@@ -5,6 +5,7 @@
             <div class="container-fludi container-wide">
                 <div class="card">
                     <article class="card-body">
+
                         <table class="report_table table table-sm table-hover" id="report_table">
                             <thead>
                             <tr>
@@ -37,7 +38,7 @@
 
 {% block script %}
     <script>
-        var roomName = 'lobby';
+        var userPk = {{ user.pk }};
 
         var table = $('#report_table').DataTable({
             "searching": false,
@@ -46,19 +47,19 @@
 
         });
 
-        var chatSocket = new WebSocket(
+        var channelSocket = new WebSocket(
             'ws://' + window.location.host +
-            '/ws/chat/' + roomName + '/');
+            '/ws/channel/report_'+ userPk +'/');
 
-        chatSocket.onmessage = function (e) {
+        channelSocket.onmessage = function (e) {
             var data = JSON.parse(e.data);
             table.row.add([data['name'],
                 moment(data['create_at']).locale('ru').format('D MMMM YYYY г. H:mm'),
-                "<a download class=\"btn btn-md btn-primaryhref=\" + data['file'] + ">Скачать</a>",
+                "<a download class=\"btn btn-md btn-primaryhref=" + data['file'] + ">Скачать</a>",
             "<a class=\"text-dark\" href=\"report/delete/" + data['id'] + "\"><i class=\"fa fa-trash-o aria-hidden=\"true\"></i></a>"]).draw();
         };
 
-        chatSocket.onclose = function (e) {
+        channelSocket.onclose = function (e) {
             console.error('Chat socket closed unexpectedly');
         };
     </script>

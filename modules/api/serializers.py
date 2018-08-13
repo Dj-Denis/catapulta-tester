@@ -166,11 +166,14 @@ class ActivationSerializer(serializers.Serializer):
 
 class ReportSerializer(serializers.ModelSerializer):
 
+    name = serializers.CharField(max_length=300, write_only=True)
+    status = serializers.CharField(max_length=30, read_only=True)
+
     class Meta:
         model = Report
-        fields = ('name',)
+        fields = ('name', 'status')
 
     def create(self, validated_data):
         queue = django_rq.get_queue('default')
-        queue.enqueue(create_report, validated_data['name'])
-        return {'name': 'ok'}
+        queue.enqueue(create_report, validated_data['name'], self.context['request'].user)
+        return {'status': '1'}

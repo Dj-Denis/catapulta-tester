@@ -8,15 +8,16 @@ from modules.test_plans.models import Plan
 
 
 @job
-def create_report(name):
+def create_report(name, user):
     with File(open('{}.txt'.format(name), 'w+')) as f:
         f.write(str(list(Plan.objects.values())))
-        report = Report.objects.create(name=name, report_file=f)
+        report = Report.objects.create(name=name, report_file=f, create_by=user)
 
         channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)('chat_lobby', {"type": "chat_message",
-                                                               "id": report.pk,
-                                                               "name": name,
-                                                               'file': report.report_file.url,
-                                                               "create_at": str(report.create_at)})
+        async_to_sync(channel_layer.group_send)('channel_report_{}'.format(user.pk), {"type": "chat_message",
+                                                                                      "id": report.pk,
+                                                                                      "name": name,
+                                                                                      'file': report.report_file.url,
+                                                                                      "create_at": str(
+                                                                                          report.create_at)})
         return report
