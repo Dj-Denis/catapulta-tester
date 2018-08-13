@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -64,12 +65,13 @@ class AccountAdd(LoginRequiredMixin, CreateView):
 class AccountDelete(LoginRequiredMixin, DeleteView):
     model = Account
     success_url = reverse_lazy('account_list')
+    permission_denied_message = ''
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_admin:
             return super(AccountDelete, self).dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            raise PermissionDenied()
 
 
 class Registration(CreateView):

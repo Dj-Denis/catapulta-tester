@@ -177,3 +177,17 @@ input:checked + .slider:before {
     background-color: #fff3cd;
     border-color: #ffeeba;
 }
+
+.container__dashboard {
+    display: flex;
+}
+
+.table__dashboard {
+    margin: 15px;
+}
+
+@media (max-width: 1200px) {
+    .container__dashboard{
+        flex-direction: column;
+    }
+}
