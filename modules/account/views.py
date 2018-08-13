@@ -6,6 +6,7 @@ from django.views.generic import CreateView
 from django.views.generic import ListView, DeleteView
 from django.views.generic import UpdateView
 
+from modules.test_cases.mixins import GroupRequiredMixin
 from .forms import (AccountEditForm,
                     CustomUserCreationForm,
                     GroupEditForm,
@@ -18,7 +19,7 @@ from .models import Account, CustomGroup
 
 # Create your views here.
 
-class AccountsList(LoginRequiredMixin, ListView):
+class AccountsList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Account
     template_name = 'account/account_list.html'
 
@@ -52,10 +53,22 @@ class AccountAdd(LoginRequiredMixin, CreateView):
     form_class = AccountAddForm
     success_url = reverse_lazy("account_list")
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_admin:
+            return super(AccountAdd, self).dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
+
 
 class AccountDelete(LoginRequiredMixin, DeleteView):
     model = Account
     success_url = reverse_lazy('account_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_admin:
+            return super(AccountDelete, self).dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
 
 
 class Registration(CreateView):
@@ -65,7 +78,7 @@ class Registration(CreateView):
     success_url = reverse_lazy('dashboard')
 
 
-class GroupList(LoginRequiredMixin, ListView):
+class GroupList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = CustomGroup
     template_name = 'account/groups_list.html'
 
@@ -77,6 +90,12 @@ class GroupCreate(LoginRequiredMixin, CreateView):
     template_name = 'account/group_form.html'
     success_url = reverse_lazy('groups_list')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_admin:
+            return super(GroupCreate, self).dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
+
 
 class GroupEdit(LoginRequiredMixin, UpdateView):
     model = CustomGroup
@@ -86,7 +105,20 @@ class GroupEdit(LoginRequiredMixin, UpdateView):
     form_class = GroupEditForm
 
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_admin:
+            return super(GroupEdit, self).dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
+
+
 class GroupDelete(LoginRequiredMixin, DeleteView):
     model = CustomGroup
     # template_name = 'account/group_form.html'
     success_url = reverse_lazy('groups_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_admin:
+            return super(GroupDelete, self).dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()

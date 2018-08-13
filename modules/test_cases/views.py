@@ -11,12 +11,13 @@ from modules.account.models import Account
 from modules.tags.models import TaggedItem, Tag
 from modules.test_plans.models import Plan
 from .forms import CaseEditForm
+from .mixins import GroupRequiredMixin
 from .models import Case
 
 
 # Create your views here.
 
-class CaseList(LoginRequiredMixin, ListView):
+class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Case
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -54,7 +55,7 @@ class CaseList(LoginRequiredMixin, ListView):
         return ctx
 
 
-class CaseDetail(LoginRequiredMixin, DetailView):
+class CaseDetail(LoginRequiredMixin, GroupRequiredMixin, DetailView):
     model = Case
 
     def get_context_data(self, **kwargs):

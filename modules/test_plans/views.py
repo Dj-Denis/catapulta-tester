@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView
 from djqscsv import render_to_csv_response
 
 from modules.account.models import Account
+from modules.test_cases.mixins import GroupRequiredMixin
 from modules.test_cases.models import Case
 from .forms import PlanUpdateForm
 from .models import Plan, PlanLog
@@ -19,7 +20,7 @@ from .models import Plan, PlanLog
 # Create your views here.
 
 
-class PlanList(LoginRequiredMixin, ListView):
+class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Plan
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -43,7 +44,7 @@ class PlanList(LoginRequiredMixin, ListView):
         return ctx
 
 
-class PlanDetail(LoginRequiredMixin, DetailView):
+class PlanDetail(LoginRequiredMixin, GroupRequiredMixin, DetailView):
     model = Plan
 
     def get_context_data(self, **kwargs):

@@ -63,6 +63,9 @@ class CustomGroup(models.Model):
         verbose_name=_('разешения'),
         blank=True,
     )
+
+    verified = models.BooleanField(_('Потвержденный'), default=True)
+
     is_admin = False
 
     objects = CustomGroupManager()

@@ -30,3 +30,4 @@ channels
 asgi_redis
 channels_redis
 websocket-client
+django-braces
