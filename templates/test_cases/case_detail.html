@@ -6,9 +6,10 @@
             <div class="container-fludi container-wide">
                 <div class="card">
                     <article class="card-body">
+                        <div class="text-center"><h2 class="section__title">Тест кейс</h2></div>
                         <div class="row mb-4">
                             <div class="col-6">
-                                <h2 class="section__title">{{ case.name }}</h2>
+                                <h4 class="section__title">{{ case.name }}</h4>
                             </div>
                             <div class="col-6 text-right">
                                 <a class="btn btn-info" href={% url 'case_edit' case.pk %}> {% trans "Редактировать" %}</a>

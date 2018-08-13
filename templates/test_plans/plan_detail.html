@@ -7,11 +7,10 @@
             <div class="container-fludi container-wide">
                 <div class="card">
                     <article class="card-body">
-
-
+                        <div class="text-center"><h2 class="section__title">Тест план</h2></div>
                         <div class="row">
                             <div class="col-7">
-                                <h2 class="plan__title">{{ plan.name }}</h2>
+                                <h4 class="plan__title">{{ plan.name }}</h4>
                             </div>
                             <div class="col-5 text-right">
                                 <a class="btn btn-info" href={% url "plan_edit" plan.pk %}> {% trans "Редактировать" %}</a>
