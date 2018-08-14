@@ -1,6 +1,6 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Field, Fieldset, Submit
+from crispy_forms.layout import Layout, Div, Field, Submit, HTML
 from django import forms
 
 from modules.test_cases.models import CaseLog
@@ -87,12 +87,12 @@ class PlanLogForm(forms.ModelForm):
         self.helper.layout = Layout()
         for case in self.cases:
             self.fields['case_status_%s' % case.case_id] = forms.BooleanField(label='Выполнено', required=False)
-            self.fields['case_comment_%s' % case.case_id] = forms.CharField(max_length=300, label='Коментарий',
+            self.fields['case_comment_%s' % case.case_id] = forms.CharField(widget=forms.Textarea, max_length=300, label='Коментарий',
                                                                        required=False)
 
             self.helper.layout.append(
-                Div(Fieldset(case.case.name, Field('case_status_%s' % case.case_id, template='account/select.html'),
-                             Field('case_comment_%s' % case.case_id, css_class='planrun__comment-case')), css_class='planrun__card'),)
+                Div(HTML("<h5 class=card_title>%s</h5>" % case.case.name),case.case.name, Div(Field('case_status_%s' % case.case_id, template='account/select.html'),
+                             Field('case_comment_%s' % case.case_id, css_class='planrun__comment-case'), css_class='planrun_card-body'), css_class='planrun__card'),)
 
         self.helper.layout.append(Div(Field('comment'), FormActions(Submit('submit', 'Сохранить',
                                                                            css_class='btn-primary ml-3')),

@@ -25,7 +25,7 @@
                         </div>
                         <h2 class="planDetail__title mt-2">{% trans "Детали тест плана" %}</h2>
                         <div class="planDetail__table">
-                            <table class="table table-lg table-hover border justify-content-center">
+                            <table class="display_plan_cases table table-lg table-hover border justify-content-center">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -37,28 +37,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for case_log in plan.last_log.caselog_set.all %}
-                                    <tr>
-                                        <td>{{ case_log.case.id }}</td>
-                                        <td><a class="text-dark" href={% url 'case_detail' case_log.case.pk %}>{{ case_log.case.name }}</a></td>
-                                        <td>{{ case_log.case.last_log.date|default:_("Не запускалось") }}</td>
-                                        <td>{{ case_log.run_by }}</td>
-                                        {%  if case_log.status == "0" %}
-                                            <td class="text-center bg-danger text-light rounded">{{ case_log.get_status_display }}</td>
-                                        {% elif case_log.status == "1" %}
-                                            <td class="text-center bg-success text-light rounded">{{ case_log.get_status_display }}</td>
-                                        {% else %}
-                                            <td class="text-center bg-secondary text-light rounded">{{ case_log.get_status_display }}</td>
-                                        {% endif %}
-                                        <td>{{ case_log.case.comment }}</td>
-                                    </tr>
-                                    {% endfor %}
+{#                                    {% for case_log in plan.last_log.caselog_set.all %}#}
+{#                                    <tr>#}
+{#                                        <td>{{ case_log.case.id }}</td>#}
+{#                                        <td><a class="text-dark" href={% url 'case_detail' case_log.case.pk %}>{{ case_log.case.name }}</a></td>#}
+{#                                        <td>{{ case_log.case.last_log.date|default:_("Не запускалось") }}</td>#}
+{#                                        <td>{{ case_log.run_by }}</td>#}
+{#                                        {%  if case_log.status == "0" %}#}
+{#                                            <td class="text-center bg-danger text-light rounded">{{ case_log.get_status_display }}</td>#}
+{#                                        {% elif case_log.status == "1" %}#}
+{#                                            <td class="text-center bg-success text-light rounded">{{ case_log.get_status_display }}</td>#}
+{#                                        {% else %}#}
+{#                                            <td class="text-center bg-secondary text-light rounded">{{ case_log.get_status_display }}</td>#}
+{#                                        {% endif %}#}
+{#                                        <td>{{ case_log.case.comment }}</td>#}
+{#                                    </tr>#}
+{#                                    {% endfor %}#}
                                 </tbody>
                             </table>
                         </div>
                         <h2 class="planLog__title">{% trans "Лог тест плана" %}</h2>
                         <div class="planLog__table">
-                            <table class="table table-lg table-hover border">
+                            <table class="display_plan_log table table-lg table-hover border">
                                 <thead>
                                 <tr>
                                     <th scope="col">{% trans "Дата последнего запуска" %}</th>
@@ -68,20 +68,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for log in logs %}
-                                    <tr>
-                                    <td>{{ log.last_run }}</td>
-                                    <td>{{ log.plan.create_by }}</td>
-                                        {%  if log.status == "0" %}
-                                            <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
-                                        {% elif log.status == "1" %}
-                                            <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
-                                        {% else %}
-                                            <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
-                                        {% endif %}
-                                    <td>{{ log.comment }}</td>
-                                    </tr>
-                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -91,4 +77,143 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+
+    <script>
+        $(document).ready(function () {
+            $('table.display_plan_log').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                {#"ordering": false,#}
+                "order": [[0, 'desc']],
+                "language": {
+                    "processing": "Подождите...",
+                    "search": "Поиск:",
+                    "lengthMenu": "Показать _MENU_ записей",
+                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                    "infoPostFix": "",
+                    "loadingRecords": "Загрузка записей...",
+                    "zeroRecords": "Записи отсутствуют.",
+                    "emptyTable": "В таблице отсутствуют данные",
+                    "paginate": {
+                        "first": "Первая",
+                        "previous": "Предыдущая",
+                        "next": "Следующая",
+                        "last": "Последняя"
+                    },
+                    "aria": {
+                        "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                        "sortDescending": ": активировать для сортировки столбца по убыванию"
+                    }
+                },
+                "serverSide": true,
+                "ajax": { "url": "{% url 'rel_plan_log' plan.pk %}?format=datatables",},
+                "columns": [
+                    {
+                        data: "last_run",
+                        render: function (data, type, row) {
+                            return moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
+                        }
+                    },
+                    {
+                        "data": "run_by.get_full_name",
+                        "orderable": false
+
+                    },
+                    {
+                        data: "status",
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            switch (cellData) {
+                                case '1':
+                                    $(td).addClass('text-center bg-success text-light rounded');
+                                    break;
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded');
+                                    break;
+                                default:
+                                    $(td).addClass('text-center bg-secondary text-light rounded');
+                                    break;
+                            }
+                        },
+                        render: function (data, type, row) {
+                            if (data === '0') return "Провалено";
+                            else return "Успешно";
+                        },
+                        "orderable": false
+                    },
+                    {
+                        "data": "comment",
+                        "orderable": false
+                    }
+                ],
+
+            });
+            $('table.display_plan_cases').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "order": [[0, 'asc']],
+                "language": {
+                    "processing": "Подождите...",
+                    "search": "Поиск:",
+                    "lengthMenu": "Показать _MENU_ записей",
+                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                    "infoPostFix": "",
+                    "loadingRecords": "Загрузка записей...",
+                    "zeroRecords": "Записи отсутствуют.",
+                    "emptyTable": "В таблице отсутствуют данные",
+                    "paginate": {
+                        "first": "Первая",
+                        "previous": "Предыдущая",
+                        "next": "Следующая",
+                        "last": "Последняя"
+                    },
+                    "aria": {
+                        "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                        "sortDescending": ": активировать для сортировки столбца по убыванию"
+                    }
+                },
+                "serverSide": true,
+                "ajax": { "url": "{% url 'rel_case_log' plan.last_log.pk %}?format=datatables",},
+                "columns": [
+                    {data: "case.id"},
+                    {data: "case.name"},
+                    {
+                        data: "last_run",
+                        render: function (data, type, row) {
+                            return moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
+                        }
+                    },
+                    {data: "run_by.get_full_name"},
+                    {
+                        data: "status",
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            switch (cellData) {
+                                case '1':
+                                    $(td).addClass('text-center bg-success text-light rounded');
+                                    break;
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded');
+                                    break;
+                                default:
+                                    $(td).addClass('text-center bg-secondary text-light rounded');
+                                    break;
+                            }
+                        },
+                        render: function (data, type, row) {
+                            if (data === '0') return "Провалено";
+                            else return "Успешно";
+                        },
+                    },
+                    {data: "comment"}
+                ]
+
+            });
+        })
+    </script>
 {% endblock %}

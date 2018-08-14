@@ -207,8 +207,10 @@ input:checked + .slider:before {
 }
 
 .planrun__card {
-    max-width: 300px;
+    width: 25rem;
     margin: 10px;
+    position: relative;
+    height: 22rem;
 }
 
 .planrun__container {
@@ -221,5 +223,12 @@ input:checked + .slider:before {
 }
 
 .planrun__comment-case {
-    min-height: 8vw;
+    height: 8vw;
+    resize: none;
+}
+
+.planrun_card-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

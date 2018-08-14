@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+
 # Create your tags here.
 
 
@@ -76,6 +77,8 @@ class PlanLog(models.Model):
         verbose_name = _("Лог плана")
         verbose_name_plural = _('Логи планов')
 
-
     def __str__(self):
         return self.plan.name
+
+    def get_absolute_url(self):
+        return reverse('dashboard')

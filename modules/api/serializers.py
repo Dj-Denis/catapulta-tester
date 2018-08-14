@@ -1,6 +1,7 @@
 import django_rq
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.paginator import Paginator
 from registration.models import RegistrationProfile
 from registration.signals import user_registered, user_activated
 from rest_framework import serializers
@@ -14,9 +15,11 @@ from modules.test_plans.models import Plan, PlanCases, PlanLog
 
 
 class AccountSerializer(serializers.ModelSerializer):
+    get_full_name = serializers.CharField(read_only=True)
+
     class Meta:
         model = Account
-        fields = ('id', 'first_name', 'second_name', 'email')
+        fields = ('id', 'first_name', 'second_name', 'email', 'get_full_name')
 
 
 class TagItemField(serializers.RelatedField):
@@ -47,7 +50,7 @@ class TaggedRelatedField(serializers.RelatedField):
 
 
 class CaseSerializer(serializers.ModelSerializer):
-    create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
+    create_by = AccountSerializer(read_only=True)
     tag_list = TaggedRelatedField(queryset=TaggedItem.objects.all(), many=True, required=False)
     id = serializers.IntegerField(read_only=True)
 
@@ -70,9 +73,40 @@ class CaseSerializer(serializers.ModelSerializer):
 
 
 class CaseLogSerializer(serializers.ModelSerializer):
+    run_by = AccountSerializer(read_only=True)
+    case = CaseSerializer(read_only=True)
+
     class Meta:
         model = CaseLog
-        fields = ('case', 'comment', 'run_by', 'status', 'plan_run_log')
+        fields = ('case', 'comment', 'run_by', 'status')
+
+
+class PlanLogRelatedSerializer(serializers.ModelSerializer):
+    last_run = serializers.DateTimeField(read_only=True)
+    run_by = AccountSerializer(read_only=True)
+    caselog_set = CaseLogSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = PlanLog
+        fields = ('id', 'plan', 'comment', 'status', 'run_by', 'last_run', 'caselog_set')
+
+
+class PlanLogSerializer(serializers.ModelSerializer):
+    last_run = serializers.DateTimeField(read_only=True)
+    run_by = AccountSerializer(read_only=True)
+    caselog_set = serializers.SerializerMethodField('paginated_caselog')
+
+    class Meta:
+        model = PlanLog
+        fields = ('id', 'plan', 'comment', 'status', 'run_by', 'last_run', 'caselog_set')
+
+    def paginated_caselog(self, obj):
+        page_size = 10
+        paginator = Paginator(obj.caselog_set.all(), page_size)
+        page = self.context['request'].query_params.get('page') or 1
+        logs = paginator.page(page)
+        serializers = CaseLogSerializer(logs, many=True)
+        return serializers.data
 
 
 class PlanSerializer(serializers.ModelSerializer):
@@ -88,6 +122,34 @@ class PlanSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         plan = Plan.objects.create(**validated_data, create_by=user)
         return plan
+
+
+class PlanDetailSerializer(serializers.ModelSerializer):
+    planlog_set = serializers.SerializerMethodField('paginated_planlog')
+
+    class Meta:
+        model = Plan
+        fields = ('id', 'name', 'description', 'status', 'create_at', 'update_at', 'create_by', 'cases', 'planlog_set')
+
+    def paginated_planlog(self, obj):
+        page_size = 10
+        print(obj)
+        paginator = Paginator(obj.planlog_set.all(), page_size)
+        page = self.context['request'].query_params.get('page') or 1
+        logs = paginator.page(page)
+        serializers = PlanLogSerializer(logs, many=True)
+
+        return serializers.data
+
+
+
+class CaseLogRelatedSerializer(serializers.ModelSerializer):
+    run_by = AccountSerializer(read_only=True)
+    case = CaseSerializer()
+
+    class Meta:
+        model = CaseLog
+        fields = ('case', 'comment', 'run_by', 'status', 'date')
 
 
 class PlanUpdateSerializer(serializers.ModelSerializer):
@@ -129,11 +191,6 @@ class PlanCaseSerializer(serializers.ModelSerializer):
         for case in cases:
             plan_case = PlanCases.objects.create(plan=plan, case=case)
         return plan_case
-
-class PlanLogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PlanLog
-        fields = ('plan', 'comment','status', 'run_by')
 
 
 class RegisterSerializer(serializers.ModelSerializer):

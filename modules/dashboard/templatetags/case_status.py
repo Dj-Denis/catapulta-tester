@@ -14,7 +14,7 @@ def case_status(request):
             try:
                 logs = case.last_two_logs
                 if logs[0].status != logs[1].status:
-                    if logs[1].status == '1':
+                    if logs[1].status == '0':
                         messages.add_message(request, messages.WARNING, format_html(
                             "{} <a href='{}' class='alert-warning-link font-weight-bold'> {}</a> {}".format(_("Кейс"), logs[1].case.get_absolute_url(), logs[1].case.name, _("закончился с ошибкой"))))
             except IndexError:

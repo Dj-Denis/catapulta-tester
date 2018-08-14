@@ -6,7 +6,8 @@ from modules.report.models import Report
 from modules.test_cases.models import Case, CaseLog
 from modules.test_plans.models import Plan, PlanCases, PlanLog
 from .serializers import PlanSerializer, AccountSerializer, CaseSerializer, PlanCaseSerializer, PlanUpdateSerializer, \
-    RegisterSerializer, ActivationSerializer, ReportSerializer, CaseLogSerializer, PlanLogSerializer
+    RegisterSerializer, ActivationSerializer, ReportSerializer, CaseLogSerializer, PlanLogSerializer, \
+    PlanDetailSerializer, PlanLogRelatedSerializer, CaseLogRelatedSerializer
 
 # Create your views here.
 
@@ -52,7 +53,7 @@ class PlanListApi(generics.ListAPIView):
 
 class PlanDetailApi(generics.RetrieveAPIView):
     queryset = Plan.objects.all()
-    serializer_class = PlanSerializer
+    serializer_class = PlanDetailSerializer
 
 
 class PlanCreateApi(generics.CreateAPIView):
@@ -73,6 +74,20 @@ class PlanDeleteApi(generics.DestroyAPIView):
 class PlanLogCreateApi(generics.CreateAPIView):
     queryset = PlanLog.objects.all()
     serializer_class = PlanLogSerializer
+
+
+class PlanLogReadApi(generics.RetrieveAPIView):
+    queryset = PlanLog.objects.order_by('last_run')
+    serializer_class = PlanLogSerializer
+
+
+class PlanLogRelatedApi(generics.ListAPIView):
+    queryset = PlanLog.objects.all()
+    serializer_class = PlanLogRelatedSerializer
+
+    def get_queryset(self):
+        q = self.queryset.filter(plan_id=self.kwargs['pk'])
+        return q
 
 """
 Case API`s
@@ -108,6 +123,14 @@ class CaseLogCreateApi(generics.CreateAPIView):
     queryset = CaseLog.objects.all()
     serializer_class = CaseLogSerializer
 
+
+class CaseLogRelatedApi(generics.ListAPIView):
+    queryset = CaseLog.objects.all()
+    serializer_class = CaseLogRelatedSerializer
+
+    def get_queryset(self):
+        q = self.queryset.filter(plan_run_log_id=self.kwargs['pk'])
+        return q
 
 """
 Plan-Cases relation API`s

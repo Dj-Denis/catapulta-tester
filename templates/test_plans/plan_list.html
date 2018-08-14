@@ -131,22 +131,22 @@
                             </table>
                             {% if is_paginated %}
                                 <ul class="pagination">
-                                    {% if plan_list.has_previous %}
-                                        <li class="page-item"><a class="page-link" href="?page={{ plan_list.previous_page_number }}&{{ request.get_full_path|get_filter }}">&laquo;</a></li>
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|get_filter }}">&laquo;</a></li>
                                     {% else %}
                                         <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
                                     {% endif %}
 
                                     {% for i in paginator.page_range %}
-                                        {% if plan_list.number == i %}
+                                        {% if page_obj.number == i %}
                                             <li class="active page-item"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
                                         {% else %}
                                             <li class="page-item"><a class="page-link" href="?page={{ i }}&{{ request.get_full_path|get_filter }}">{{ i }}</a></li>
                                         {% endif %}
                                     {% endfor %}
 
-                                    {% if plan_list.has_next %}
-                                        <li class="page-item"><a class="page-link" href="?page={{ plan_list.next_page_number }}&{{ request.get_full_path|get_filter }}">&raquo;</a></li>
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|get_filter }}">&raquo;</a></li>
                                     {% else %}
                                         <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
                                     {% endif %}

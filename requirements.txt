@@ -31,3 +31,4 @@ asgi_redis
 channels_redis
 websocket-client
 django-braces
+djangorestframework-datatables
