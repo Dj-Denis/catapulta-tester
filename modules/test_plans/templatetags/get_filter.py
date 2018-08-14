@@ -12,3 +12,5 @@ def get_filter(filter):
             if 'page' in i:
                 elements.pop(elements.index(i))
         return '&'.join(elements)
+    else:
+        return ''

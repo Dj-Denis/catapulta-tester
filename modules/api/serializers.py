@@ -9,8 +9,8 @@ from modules.account.models import Account
 from modules.report.models import Report
 from modules.report.tasks import create_report
 from modules.tags.models import TaggedItem, Tag
-from modules.test_cases.models import Case
-from modules.test_plans.models import Plan, PlanCases
+from modules.test_cases.models import Case, CaseLog
+from modules.test_plans.models import Plan, PlanCases, PlanLog
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -64,8 +64,15 @@ class CaseSerializer(serializers.ModelSerializer):
         tag_list = validated_data.pop('tag_list')
         print(self.context['request'])
         for tag in tag_list:
-            TaggedItem.objects.create(tag=tag, content_type=ContentType.objects.get_for_model(instance), object_id=instance.pk)
+            TaggedItem.objects.create(tag=tag, content_type=ContentType.objects.get_for_model(instance),
+                                      object_id=instance.pk)
         return super(CaseSerializer, self).update(instance, validated_data)
+
+
+class CaseLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CaseLog
+        fields = ('case', 'comment', 'run_by', 'status', 'plan_run_log')
 
 
 class PlanSerializer(serializers.ModelSerializer):
@@ -123,6 +130,11 @@ class PlanCaseSerializer(serializers.ModelSerializer):
             plan_case = PlanCases.objects.create(plan=plan, case=case)
         return plan_case
 
+class PlanLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlanLog
+        fields = ('plan', 'comment','status', 'run_by')
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -165,7 +177,6 @@ class ActivationSerializer(serializers.Serializer):
 
 
 class ReportSerializer(serializers.ModelSerializer):
-
     name = serializers.CharField(max_length=300, write_only=True)
     status = serializers.CharField(max_length=30, read_only=True)
 

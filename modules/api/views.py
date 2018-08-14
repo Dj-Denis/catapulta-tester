@@ -3,10 +3,10 @@ from rest_framework import generics
 
 from modules.account.models import Account
 from modules.report.models import Report
-from modules.test_cases.models import Case
-from modules.test_plans.models import Plan, PlanCases
+from modules.test_cases.models import Case, CaseLog
+from modules.test_plans.models import Plan, PlanCases, PlanLog
 from .serializers import PlanSerializer, AccountSerializer, CaseSerializer, PlanCaseSerializer, PlanUpdateSerializer, \
-    RegisterSerializer, ActivationSerializer, ReportSerializer
+    RegisterSerializer, ActivationSerializer, ReportSerializer, CaseLogSerializer, PlanLogSerializer
 
 # Create your views here.
 
@@ -70,6 +70,10 @@ class PlanDeleteApi(generics.DestroyAPIView):
     serializer_class = PlanSerializer
 
 
+class PlanLogCreateApi(generics.CreateAPIView):
+    queryset = PlanLog.objects.all()
+    serializer_class = PlanLogSerializer
+
 """
 Case API`s
 """
@@ -98,6 +102,11 @@ class CaseUpdateApi(generics.UpdateAPIView):
 class CaseDeleteApi(generics.DestroyAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
+
+
+class CaseLogCreateApi(generics.CreateAPIView):
+    queryset = CaseLog.objects.all()
+    serializer_class = CaseLogSerializer
 
 
 """

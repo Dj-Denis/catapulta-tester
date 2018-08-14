@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-5 text-right">
                                 <a class="btn btn-info" href={% url "plan_edit" plan.pk %}> {% trans "Редактировать" %}</a>
-                                <a href="#" class="btn btn-primary">Запустить тест план</a>
+                                <a class="btn btn-primary" href="{% url "plan_run" %}?plan_id={{ plan.pk }}">{% trans "Запустить план" %}</a>
                                 <a class="btn btn-warning" href={% url 'plan_list' %}> {% trans "Вернутся в список" %}</a>
                                 <a  class="btn btn-danger" href={% url 'plan_delete' plan.pk %}>{% trans "Удалить" %}</a>
 {#                                <a class="btn btn-success" href="{% url 'plan_csv' plan.pk %}">Експорт в CSV</a>#}
@@ -37,20 +37,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for case in cases %}
+                                    {% for case_log in plan.last_log.caselog_set.all %}
                                     <tr>
-                                        <td>{{ case.id }}</td>
-                                        <td><a class="text-dark" href={% url 'case_detail' case.pk %}>{{ case.name }}</a></td>
-                                        <td>{{ case.last_run|date:"D d M Y"|default:_("Не запускалось") }}</td>
-                                        <td>{{ case.create_by }}</td>
-                                        {%  if case.status == "0" %}
-                                            <td class="text-center bg-secondary text-light rounded">{{ case.get_status_display }}</td>
-                                        {% elif case.status == "1" %}
-                                            <td class="text-center bg-success text-light rounded">{{ case.get_status_display }}</td>
+                                        <td>{{ case_log.case.id }}</td>
+                                        <td><a class="text-dark" href={% url 'case_detail' case_log.case.pk %}>{{ case_log.case.name }}</a></td>
+                                        <td>{{ case_log.case.last_log.date|default:_("Не запускалось") }}</td>
+                                        <td>{{ case_log.run_by }}</td>
+                                        {%  if case_log.status == "0" %}
+                                            <td class="text-center bg-danger text-light rounded">{{ case_log.get_status_display }}</td>
+                                        {% elif case_log.status == "1" %}
+                                            <td class="text-center bg-success text-light rounded">{{ case_log.get_status_display }}</td>
                                         {% else %}
-                                            <td class="text-center bg-danger text-light rounded">{{ case.get_status_display }}</td>
+                                            <td class="text-center bg-secondary text-light rounded">{{ case_log.get_status_display }}</td>
                                         {% endif %}
-                                        <td>{{ case.comment }}</td>
+                                        <td>{{ case_log.case.comment }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -70,12 +70,12 @@
                                 <tbody>
                                 {% for log in logs %}
                                     <tr>
-                                    <td>{{ log.date|date:"D d M Y" }}</td>
+                                    <td>{{ log.last_run }}</td>
                                     <td>{{ log.plan.create_by }}</td>
                                         {%  if log.status == "0" %}
-                                            <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
-                                        {% elif log.status == "1" %}
                                             <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
+                                        {% elif log.status == "1" %}
+                                            <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
                                         {% else %}
                                             <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
                                         {% endif %}

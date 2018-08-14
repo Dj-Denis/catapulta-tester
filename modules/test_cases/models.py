@@ -47,14 +47,15 @@ class Case(models.Model):
 
 class CaseLog(models.Model):
     CASE_STATUS_CHOICES = (
-        ('0', _('Успешно')),
-        ('1', _('Провалено'))
+        ('0', _('Провалено')),
+        ('1', _('Успешно'))
     )
     case = models.ForeignKey(Case, on_delete=models.CASCADE, verbose_name=_('Кейс'))
-    comment = models.TextField(verbose_name=_('Коментарий'))
+    comment = models.TextField(verbose_name=_('Коментарий'), blank=True, default='')
     date = models.DateTimeField(verbose_name=_('Дата'), auto_now_add=True)
     status = models.CharField(max_length=20, verbose_name=_('Статус'), choices=CASE_STATUS_CHOICES, default='0')
     run_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Запускал'))
+    plan_run_log = models.ForeignKey('test_plans.PlanLog', on_delete=models.CASCADE, verbose_name=_('Лог плана'))
 
     class Meta:
         verbose_name = _("Лог кейса")

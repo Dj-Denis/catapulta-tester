@@ -63,18 +63,19 @@ class PlanCases(models.Model):
 
 class PlanLog(models.Model):
     PLAN_STATUS_CHOICES = (
-        ('0', _('Успешно')),
-        ('1', _('Провалено'))
+        ('0', _('Провалено')),
+        ('1', _('Успешно'))
     )
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, verbose_name=_('План'))
-    comment = models.TextField(verbose_name=_("Коментарий"))
-    status = models.CharField(max_length=30, choices=PLAN_STATUS_CHOICES, default='0')
+    comment = models.TextField(verbose_name=_("Коментарий"), blank=True, default='')
+    status = models.CharField(max_length=30, choices=PLAN_STATUS_CHOICES, default='1')
     last_run = models.DateTimeField(verbose_name=_('Дата'), auto_now_add=True)
     run_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Запущен'))
 
     class Meta:
         verbose_name = _("Лог плана")
         verbose_name_plural = _('Логи планов')
+
 
     def __str__(self):
         return self.plan.name

@@ -120,14 +120,14 @@
                                         <td>{{ case.id }}</td>
                                         <td><a class="text-dark"
                                                href={% url 'case_detail' case.pk %}>{{ case.name }}</a></td>
-                                        <td class="align-middle">{{ case.last_run|default_if_none:_("Не запускался") }}</td>
+                                        <td class="align-middle">{{ case.last_log.date|default:_("Не запускался") }}</td>
                                         <td class="align-middle">{{ case.last_log.run_by }}</td>
-                                        {% if case.status == "0" %}
-                                            <td class="align-middle text-center bg-secondary text-light rounded">{{ case.get_status_display }}</td>
-                                        {% elif case.status == "1" %}
-                                            <td class="align-middle text-center bg-success text-light rounded">{{ case.get_status_display }}</td>
+                                        {% if case.last_log.status == "0" %}
+                                            <td class="align-middle text-center bg-danger text-light rounded">{{ case.last_log.get_status_display }}</td>
+                                        {% elif case.last_log.status == "1" %}
+                                            <td class="align-middle text-center bg-success text-light rounded">{{ case.last_log.get_status_display }}</td>
                                         {% else %}
-                                            <td class="align-middle text-center bg-danger text-light rounded">{{ case.get_status_display }}</td>
+                                            <td class="align-middle text-center bg-secondary text-light rounded">Не выполнялся</td>
                                         {% endif %}
                                         <td class="align-middle">{{ case.plan_set.all.count|default_if_none:_("Нет плана") }}</td>
                                         <td class="align-middle"><a class="text-dark"

@@ -59,7 +59,7 @@ class AccountAdd(LoginRequiredMixin, CreateView):
         if request.user.is_admin:
             return super(AccountAdd, self).dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            return PermissionDenied()
 
 
 class AccountDelete(LoginRequiredMixin, DeleteView):
@@ -97,7 +97,7 @@ class GroupCreate(LoginRequiredMixin, CreateView):
         if request.user.is_admin:
             return super(GroupCreate, self).dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            return PermissionDenied()
 
 
 class GroupEdit(LoginRequiredMixin, UpdateView):
@@ -111,7 +111,7 @@ class GroupEdit(LoginRequiredMixin, UpdateView):
         if request.user.is_admin:
             return super(GroupEdit, self).dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            return PermissionDenied()
 
 
 class GroupDelete(LoginRequiredMixin, DeleteView):
@@ -123,4 +123,4 @@ class GroupDelete(LoginRequiredMixin, DeleteView):
         if request.user.is_admin:
             return super(GroupDelete, self).dispatch(request, *args, **kwargs)
         else:
-            return self.handle_no_permission()
+            return PermissionDenied()

@@ -186,8 +186,40 @@ input:checked + .slider:before {
     margin: 15px;
 }
 
-@media (max-width: 1200px) {
-    .container__dashboard{
+@media (max-width: 700px) {
+    .container__dashboard {
         flex-direction: column;
     }
+}
+
+.plan_run_popup {
+    border: 5px solid #666;
+    padding: 10px;
+    background: #3A3A3A;
+    top: 20px;
+    position: absolute;
+    display: none;
+}
+
+.plan_run_popup label {
+    display: inline-block;
+    color: #cecece;
+}
+
+.planrun__card {
+    max-width: 300px;
+    margin: 10px;
+}
+
+.planrun__container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.planrun__comment {
+    width: 100%;
+}
+
+.planrun__comment-case {
+    min-height: 8vw;
 }

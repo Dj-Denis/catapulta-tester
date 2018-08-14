@@ -14,7 +14,7 @@ from djqscsv import render_to_csv_response
 from modules.account.models import Account
 from modules.test_cases.mixins import GroupRequiredMixin
 from modules.test_cases.models import Case
-from .forms import PlanUpdateForm
+from .forms import PlanUpdateForm, PlanLogForm
 from .models import Plan, PlanLog
 
 
@@ -62,8 +62,8 @@ class PlanDetail(LoginRequiredMixin, GroupRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super(PlanDetail, self).get_context_data(**kwargs)
-        ctx['cases'] = Case.objects.filter(plan=self.object)
-        ctx['logs'] = PlanLog.objects.filter(plan=self.object)
+        ctx['cases'] = Case.objects.filter(plan=self.object).order_by('pk')
+        ctx['logs'] = PlanLog.objects.filter(plan=self.object).order_by('-last_run')
         return ctx
 
 
@@ -96,3 +96,28 @@ class CSVExportView(SingleObjectMixin, View):
 
     def get(self, request, *args, **kwargs):
         return render_to_csv_response(Case.objects.filter(plancases__plan_id=self.get_object().pk).all())
+
+
+class PlanRun(LoginRequiredMixin, GroupRequiredMixin, CreateView):
+    model = PlanLog
+    form_class = PlanLogForm
+    success_url = reverse_lazy('dashboard')
+
+    def get_context_data(self, **kwargs):
+        data = super(PlanRun, self).get_context_data(**kwargs)
+        return data
+
+    def get_initial(self):
+        initial = super(PlanRun, self).get_initial()
+        initial['id'] = self.request.GET.get('plan_id')
+        return initial
+    
+    def form_valid(self, form):
+        form.instance.create_by = self.request.user
+        # form.save()
+        return super(PlanRun, self).form_valid(form)
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(PlanRun, self).get_form_kwargs()
+    #     kwargs.update(self.kwargs)
+    #     return kwargs
