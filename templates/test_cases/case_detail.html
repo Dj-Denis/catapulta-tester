@@ -24,7 +24,7 @@
                                 {% trans "Предусловия" %}
                             </div>
                             <div class="precondition__content h6 mb-4">
-                                {{ case.precondition }}
+                                {{ case.precondition|linebreaks }}
                             </div>
                         </div>
                         <div class="description">
@@ -32,13 +32,13 @@
                                 {% trans "Описание" %}
                             </div>
                             <div class="description__content h6 mb-4">
-                                {{ case.description }}
+                                {{ case.description|linebreaks }}
                             </div>
                         </div>
                         <div class="expectedResults">
                             <div class="expectedResults__title h4">{% trans "Ожидаемые результаты" %}</div>
                             <div class="expectedResults__content h6 mb-4">
-                                {{ case.excepted_result }}
+                                {{ case.excepted_result|linebreaks }}
                             </div>
                         </div>
                         <div class="testPlan">

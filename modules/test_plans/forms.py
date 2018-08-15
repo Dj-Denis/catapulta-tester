@@ -111,7 +111,7 @@ class PlanLogForm(forms.ModelForm):
                     HTML("<p class='card-subtitle mb-2 text-muted'>Предварительные условия:</p>"),
                     HTML("<p class=card-text>%s</p>" % case.case.precondition),
                     HTML("<p class='card-subtitle mb-2 text-muted'>Ожидаемый результат:</p>"),
-                    HTML("<p class=card-text>%s</p>" % case.case.excepted_result),
+                    HTML("<p class='card-text'>%s</p>" % case.case.excepted_result),
                     Div(Field('case_status_%s' % case.case_id, template='account/select.html'),
                     Field('case_comment_%s' % case.case_id, css_class='planrun__comment-case'),
                                         css_class='planrun_card-body'), css_class='planrun__card'),)

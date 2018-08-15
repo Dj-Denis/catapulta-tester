@@ -227,3 +227,7 @@ td.details-control {
 tr.shown td.details-control {
     background: url('../img/details_close.png') no-repeat center center;
 }
+
+.card-text {
+    white-space: pre-wrap;
+}
