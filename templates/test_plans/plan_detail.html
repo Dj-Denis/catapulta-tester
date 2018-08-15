@@ -45,13 +45,13 @@
                         </div>
                         <h2 class="planLog__title">{% trans "Лог тест плана" %}</h2>
                         <div class="planLog__table">
-                            <table class="display_plan_log table table-lg table-hover border">
+                            <table class="display_plan_log table table-lg table-hover border align-middle">
                                 <thead>
                                 <tr>
-                                    <th></th>
                                     <th scope="col">{% trans "Дата последнего запуска" %}</th>
                                     <th scope="col">{% trans "Запустил" %}</th>
                                     <th scope="col">{% trans "Статус запуска" %}</th>
+                                    <th>{% trans "Коментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -113,7 +113,8 @@
                             data: "case",
                             render: function (data, type, row) {
                                 return "<a class=\"text-dark\" href=" + document.location.origin + data.url + ">" + data.name + "</a>"
-                            }
+                            },
+                            "width": "200px"
                         },
                         {
                             data: "last_run",
@@ -126,28 +127,28 @@
                             data: "status",
                             "createdCell": function (td, cellData, rowData, row, col) {
                                 switch (cellData) {
-                                    case '1':
-                                        $(td).addClass('text-center bg-success text-light rounded');
-                                        break;
-                                    case '0':
-                                        $(td).addClass('text-center bg-danger text-light rounded');
-                                        break;
-                                    default:
-                                        $(td).addClass('text-center bg-secondary text-light rounded');
-                                        break;
-                                }
+                                case '1':
+                                    $(td).addClass('text-center bg-success text-light rounded align-middle');
+                                    break;
+                                case '2':
+                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
+                                    break;
+                                default:
+                                    $(td).addClass('text-center bg-secondary text-light rounded align-middle');
+                                    break;
+                            }
                             },
-                            render: function (data, type, row) {
-                                if (data === '0') return "Провалено";
-                                else return "Успешно";
-                            },
+                           render: function (data, type, row) {
+                            if (data === '2') return "Провалено";
+                            else return "Успешно";
+                        },
                         },
                     ],
                 {% else %}
                     "ajax": {"url": "{% url 'case_plan_rel' plan.pk %}?format=datatables&columns[6][data]=name&columns[7][data]=url",},
                     "columns": [
                         {
-                            "className": 'details-control',
+                            "className": 'details-control align-middle',
                             "orderable": false,
                             "data": null,
                             "defaultContent": '',
@@ -157,19 +158,23 @@
                             render: function (data, type, row) {
                                 console.log(row);
                                 return "<a class=\"text-dark\" href=" + document.location.origin + row.url +">" + row.name + "</a>"
-                            }
+                            },
+                            "className": "align-middle"
+
                         },
                         {
                             data: '',
                             render: function () {
                                 return '';
-                            }
+                            },
+                            "className": "align-middle"
                         },
                         {
                             data: '',
                             render: function () {
                                 return '';
-                            }
+                            },
+                            "className": "align-middle"
                         },
                         {
                             data: 'id',
@@ -178,7 +183,8 @@
                                 },
                             render: function () {
                              return "Не запускалось"
-                            }
+                            },
+                            "className": "align-middle"
                         },
                     ],
                 {% endif %}
@@ -211,34 +217,31 @@
                 "ajax": {"url": "{% url 'rel_plan_log' plan.pk %}?format=datatables&columns[4][data]=comment&columns[5][data]=url&columns[6][data]=last_run",},
                 "columns": [
                     {
-                        "className": 'details-control',
-                        "orderable": false,
-                        "data": null,
-                        "defaultContent": '',
-                    },
-                    {
                         {#data: "",#}
                         render: function (data, type, row) {
                             var date = moment(row.last_run).locale('ru').format('D MMMM YYYY г. H:mm');
                             return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + date + "</a>"
-                        }
+                        },
+                        "width": "200px",
+                        "className": "align-middle"
                     },
                     {
                         "data": "run_by.get_full_name",
-
+                        "width": "150px",
+                        "className": "align-middle"
                     },
                     {
                         data: "status",
                         "createdCell": function (td, cellData, rowData, row, col) {
                             switch (cellData) {
                                 case '1':
-                                    $(td).addClass('text-center bg-success text-light rounded');
+                                    $(td).addClass('text-center bg-success text-light rounded align-middle');
                                     break;
                                 case '0':
-                                    $(td).addClass('text-center bg-danger text-light rounded');
+                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
                                     break;
                                 default:
-                                    $(td).addClass('text-center bg-secondary text-light rounded');
+                                    $(td).addClass('text-center bg-secondary text-light rounded align-middle');
                                     break;
                             }
                         },
@@ -246,7 +249,13 @@
                             if (data === '0') return "Провалено";
                             else return "Успешно";
                         },
+                        "width": "200px",
+                        "className": "align-middle"
                     },
+                    {
+                        data: "comment",
+                        "className": "align-middle"
+                    }
 
                 ],
 

@@ -43,6 +43,8 @@ class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 
 class PlanLogForm(forms.ModelForm):
 
+    comment = forms.CharField(widget=forms.Textarea, label='Коментарий к плану', required=False)
+
     # def clean(self):
     #     # print('2')
     #     return
@@ -69,7 +71,7 @@ class PlanLogForm(forms.ModelForm):
                         plan_run_log=planlog, run_by=self.instance.create_by, status=int(case_status)).save()
             case.status = case_status
             case.save()
-            if not case_status:
+            if case_status == 2:
                 planlog.status = 0
                 planlog.save()
                 plan = Plan.objects.get(pk=self.plan_id)
