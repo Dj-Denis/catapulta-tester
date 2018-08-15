@@ -13,8 +13,10 @@
                                 {% csrf_token %}
                                 {{ form|crispy }}
                                 <div class="actions mt-2 d-flex justify-content-between align-items-center">
-                                    <button type="submit" name="submit" class="btn btn-md btn-success">{% trans "Подтвердить" %}</button>
-                                    <button type="button" class="btn btn-md btn-danger" name="button">{% trans "Отменить" %}</button>
+                                    <button type="submit" name="submit"
+                                            class="btn btn-md btn-success">{% trans "Подтвердить" %}</button>
+                                    <button type="button" class="btn btn-md btn-danger"
+                                            name="button">{% trans "Отменить" %}</button>
                                 </div>
                             </form>
 
@@ -24,4 +26,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
 {% endblock %}

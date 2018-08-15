@@ -158,6 +158,49 @@ class CaseLogRelatedSerializer(serializers.ModelSerializer):
         fields = ('case', 'comment', 'run_by', 'status', 'date')
 
 
+class CasePlanRelatedSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    url = serializers.SerializerMethodField()
+    last_run = serializers.SerializerMethodField()
+    run_by = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
+
+
+    class Meta:
+        model = Case
+        fields = (
+            'id', 'name', 'description', 'precondition', 'excepted_result', 'comment', 'url', 'last_run', "run_by", "status")
+
+    def __init__(self, *args, **kwargs):
+        # print(kwargs['context'])
+        super(CasePlanRelatedSerializer, self).__init__(*args, **kwargs)
+        self.plan_id = self.context['request'].parser_context['kwargs']['pk']
+
+    def get_last_run(self, obj):
+        case_log = CaseLog.objects.filter(plan_run_log__plan_id=self.plan_id, case_id=obj.pk).last()
+        if case_log is not None:
+            return case_log.date
+        else:
+            return ''
+
+    def get_run_by(self, obj):
+        case_log = CaseLog.objects.filter(plan_run_log__plan_id=self.plan_id, case_id=obj.pk).last()
+        if case_log is not None:
+            return case_log.run_by.get_full_name()
+        else:
+            return ''
+
+    def get_status(self, obj):
+        case_log = CaseLog.objects.filter(plan_run_log__plan_id=self.plan_id, case_id=obj.pk).last()
+        if case_log is not None:
+            return case_log.status
+        else:
+            return 'Не запускалось'
+
+    def get_url(self, obj):
+        return obj.get_absolute_url()
+
+
 class PlanUpdateSerializer(serializers.ModelSerializer):
     create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
     cases = serializers.PrimaryKeyRelatedField(queryset=Case.objects.all(), many=True)

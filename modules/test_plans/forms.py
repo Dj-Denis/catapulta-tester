@@ -3,17 +3,22 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Field, Submit, HTML
 from django import forms
 
+from modules.test_cases.models import Case
 from modules.test_cases.models import CaseLog
 from .models import Plan, PlanLog
 from .models import PlanCases
 
 
 class PlanUpdateForm(forms.ModelForm):
-    cases = forms.CheckboxSelectMultiple()
+    # cases = forms.CheckboxSelectMultiple(attrs={'required': False})
+    cases = forms.ModelMultipleChoiceField(required=False, queryset=Case.objects.all())
+    # forms.
 
     def __init__(self, *args, **kwargs):
         super(PlanUpdateForm, self).__init__(*args, **kwargs)
         self.fields['cases'].widget.attrs['class'] = 'searchable'
+        self.fields['cases'].widget.attrs['required'] = False
+        print(self.fields['cases'].widget.attrs)
 
     def save(self, commit=True):
         plan = super().save(commit=False)

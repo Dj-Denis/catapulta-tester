@@ -100,7 +100,7 @@
                 },
                 "serverSide": true,
                 {% if plan.last_log.pk %}
-                    "ajax": {"url": "{% url 'case_log_plan_rel' plan.last_log.pk %}?format=datatables&columns[6][data]=comment",},
+                    "ajax": {"url": "{% url 'case_plan_rel' plan.pk %}?format=datatables&columns[6][data]=comment&columns[7][data]=url",},
                     "columns": [
                         {
                             "className": 'details-control',
@@ -108,21 +108,26 @@
                             "data": null,
                             "defaultContent": '',
                         },
-                        {data: "case.id"},
+                        {data: "id"},
                         {
-                            data: "case",
+                            data: "name",
                             render: function (data, type, row) {
-                                return "<a class=\"text-dark\" href=" + document.location.origin + data.url + ">" + data.name + "</a>"
+                                return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + row.name + "</a>"
                             },
                             "width": "200px"
                         },
                         {
                             data: "last_run",
                             render: function (data, type, row) {
-                                return moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
+                                console.log(data);
+                                if (data){
+                                    var date = moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
+                                }
+                                else {var date = '';}
+                                return date;
                             }
                         },
-                        {data: "run_by.get_full_name"},
+                        {data: "run_by"},
                         {
                             data: "status",
                             "createdCell": function (td, cellData, rowData, row, col) {
@@ -139,8 +144,15 @@
                             }
                             },
                            render: function (data, type, row) {
-                            if (data === '2') return "Провалено";
-                            else return "Успешно";
+                                switch (data) {
+                                    case '1':
+                                        return "Успешно";
+                                    case '2':
+                                        return "Провалено";
+                                    default:
+                                        return "Не запускалось"
+
+                                }
                         },
                         },
                     ],
