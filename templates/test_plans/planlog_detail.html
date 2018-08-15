@@ -76,11 +76,12 @@
                     {
                         data: "status",
                         "createdCell": function (td, cellData, rowData, row, col) {
+                            console.log(cellData);
                             switch (cellData) {
                                 case '1':
                                     $(td).addClass('text-center bg-success text-light rounded');
                                     break;
-                                case '0':
+                                case '2':
                                     $(td).addClass('text-center bg-danger text-light rounded');
                                     break;
                                 default:
@@ -89,7 +90,7 @@
                             }
                         },
                         render: function (data, type, row) {
-                            if (data === '0') return "Провалено";
+                            if (data === '2') return "Провалено";
                             else return "Успешно";
                         },
                     },

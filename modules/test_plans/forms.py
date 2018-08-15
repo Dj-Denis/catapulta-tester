@@ -42,7 +42,6 @@ class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 
 
 class PlanLogForm(forms.ModelForm):
-    id = forms.IntegerField(label='')
 
     # def clean(self):
     #     # print('2')
@@ -52,8 +51,10 @@ class PlanLogForm(forms.ModelForm):
         return self.is_bound
 
     def save(self, commit=True):
+        print(self.errors)
         planlog = PlanLog()
         planlog.plan_id = self.plan_id
+        # print(self)
         planlog.comment = self.cleaned_data.get('comment')
         planlog.run_by = self.instance.create_by
         planlog.save()
@@ -87,7 +88,6 @@ class PlanLogForm(forms.ModelForm):
         super(PlanLogForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
-        self.fields['id'].widget.attrs['class'] = 'd-none'
         self.plan_id = self.initial['id']
         plan = Plan.objects.get(pk=self.plan_id)
         self.cases = plan.plancases_set.all()
@@ -115,4 +115,4 @@ class PlanLogForm(forms.ModelForm):
 
     class Meta:
         model = PlanLog
-        fields = ['comment', 'id']
+        fields = ['comment']
