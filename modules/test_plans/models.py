@@ -34,13 +34,6 @@ class Plan(models.Model):
     def last_log(self):
         return self.planlog_set.filter().last()
 
-    @property
-    def succeed_count(self):
-        return self.plancases_set.filter(case__status='1').count()
-
-    @property
-    def failed_count(self):
-        return self.plancases_set.filter(case__status='2').count()
 
 
 class PlanCases(models.Model):
@@ -82,3 +75,11 @@ class PlanLog(models.Model):
 
     def get_absolute_url(self):
         return reverse('plan_log', args=[str(self.id)])
+
+    @property
+    def get_success(self):
+        return self.caselog_set.filter(status='1')
+
+    @property
+    def get_failed(self):
+        return self.caselog_set.filter(status='0')

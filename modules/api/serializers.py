@@ -57,7 +57,8 @@ class CaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ('id', 'name', 'description', 'precondition', 'excepted_result', 'comment', 'create_by', 'tag_list', 'url')
+        fields = (
+        'id', 'name', 'description', 'precondition', 'excepted_result', 'comment', 'create_by', 'tag_list', 'url')
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -98,6 +99,7 @@ class PlanLogRelatedSerializer(serializers.ModelSerializer):
     def get_url(self, obj):
         return obj.get_absolute_url()
 
+
 class PlanLogSerializer(serializers.ModelSerializer):
     last_run = serializers.DateTimeField(read_only=True)
     run_by = AccountSerializer(read_only=True)
@@ -110,6 +112,7 @@ class PlanLogSerializer(serializers.ModelSerializer):
     def paginated_caselog(self, obj):
         page_size = 10
         paginator = Paginator(obj.caselog_set.all(), page_size)
+        print(self.context)
         page = self.context['request'].query_params.get('page') or 1
         logs = paginator.page(page)
         serializers = CaseLogSerializer(logs, many=True)
@@ -120,10 +123,11 @@ class PlanSerializer(serializers.ModelSerializer):
     create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
     cases = serializers.HyperlinkedRelatedField(view_name='case_detail_api', many=True, read_only=True)
     id = serializers.IntegerField(read_only=True)
+    planlog_set = serializers.HyperlinkedRelatedField(view_name='plan_log', read_only=True, many=True)
 
     class Meta:
         model = Plan
-        fields = ('id', 'name', 'description', 'status', 'create_at', 'update_at', 'create_by', 'cases')
+        fields = ('id', 'name', 'description', 'status', 'create_at', 'update_at', 'create_by', 'cases', 'planlog_set')
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -132,7 +136,7 @@ class PlanSerializer(serializers.ModelSerializer):
 
 
 class PlanDetailSerializer(serializers.ModelSerializer):
-    planlog_set = serializers.SerializerMethodField('paginated_planlog')
+    # planlog_set = serializers.HyperlinkedModelSerializer()
 
     class Meta:
         model = Plan
@@ -140,7 +144,6 @@ class PlanDetailSerializer(serializers.ModelSerializer):
 
     def paginated_planlog(self, obj):
         page_size = 10
-        print(obj)
         paginator = Paginator(obj.planlog_set.all(), page_size)
         page = self.context['request'].query_params.get('page') or 1
         logs = paginator.page(page)

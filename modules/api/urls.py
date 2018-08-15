@@ -24,6 +24,7 @@ urlpatterns = [
     path('case_log/new', CaseLogCreateApi.as_view()),
     path('case_log_rel/case/<int:pk>', CaseLogCaseRelatedApi.as_view(), name='case_log_case_rel'),
     path('case_log_rel/plan/<int:pk>', CaseLogPlanRelatedApi.as_view(), name='case_log_plan_rel'),
+    path('case_rel/plan/<int:pk>', CaseRelatedApi.as_view(), name='case_plan_rel'),
     path('plan/link', PlanCasesApi.as_view()),
     path('register/', RegistrationApi.as_view()),
     path('activate/', ActivationApi.as_view()),

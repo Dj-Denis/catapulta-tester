@@ -69,7 +69,7 @@
                             </div>
                             <div class="tags__content mb-4">
                                 {% for tag in tags %}
-                                    <a class="text-dark" href="#">{{ tag.tag.name }}</a>
+                                    <a class="text-dark" href="{% url 'case_list' %}?search_string=&date_from=&date_to=&run_by=&result=&plan=&tags={{ tag.tag_id }}">{{ tag.tag.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
