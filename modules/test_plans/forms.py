@@ -73,9 +73,15 @@ class PlanLogForm(forms.ModelForm):
             if not case_status:
                 planlog.status = 0
                 planlog.save()
+                plan = Plan.objects.get(pk=self.plan_id)
+                plan.status = 2
+                plan.save()
             else:
                 planlog.status = 1
                 planlog.save()
+                plan = Plan.objects.get(pk=self.plan_id)
+                plan.status = 1
+                plan.save()
 
         return planlog
 
