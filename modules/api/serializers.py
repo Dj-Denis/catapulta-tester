@@ -53,10 +53,11 @@ class CaseSerializer(serializers.ModelSerializer):
     create_by = AccountSerializer(read_only=True)
     tag_list = TaggedRelatedField(queryset=TaggedItem.objects.all(), many=True, required=False)
     id = serializers.IntegerField(read_only=True)
+    url = serializers.SerializerMethodField()
 
     class Meta:
         model = Case
-        fields = ('id', 'name', 'description', 'precondition', 'excepted_result', 'comment', 'create_by', 'tag_list')
+        fields = ('id', 'name', 'description', 'precondition', 'excepted_result', 'comment', 'create_by', 'tag_list', 'url')
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -70,6 +71,9 @@ class CaseSerializer(serializers.ModelSerializer):
             TaggedItem.objects.create(tag=tag, content_type=ContentType.objects.get_for_model(instance),
                                       object_id=instance.pk)
         return super(CaseSerializer, self).update(instance, validated_data)
+
+    def get_url(self, obj):
+        return obj.get_absolute_url()
 
 
 class CaseLogSerializer(serializers.ModelSerializer):
@@ -85,11 +89,14 @@ class PlanLogRelatedSerializer(serializers.ModelSerializer):
     last_run = serializers.DateTimeField(read_only=True)
     run_by = AccountSerializer(read_only=True)
     caselog_set = CaseLogSerializer(read_only=True, many=True)
+    url = serializers.SerializerMethodField()
 
     class Meta:
         model = PlanLog
-        fields = ('id', 'plan', 'comment', 'status', 'run_by', 'last_run', 'caselog_set')
+        fields = ('id', 'plan', 'comment', 'status', 'run_by', 'last_run', 'caselog_set', 'url')
 
+    def get_url(self, obj):
+        return obj.get_absolute_url()
 
 class PlanLogSerializer(serializers.ModelSerializer):
     last_run = serializers.DateTimeField(read_only=True)
@@ -140,7 +147,6 @@ class PlanDetailSerializer(serializers.ModelSerializer):
         serializers = PlanLogSerializer(logs, many=True)
 
         return serializers.data
-
 
 
 class CaseLogRelatedSerializer(serializers.ModelSerializer):

@@ -34,18 +34,18 @@
                                 <div class="collapse" id="extendedSearch">
                                     <div class="form-row mt-2">
                                         <div class="col-2">
-                                            <lable class="" for="fromDate">{% trans "Дата запуска 'с'" %}</lable>
+                                            <label class="" for="fromDate">{% trans "Дата запуска 'с'" %}</label>
                                             <input class="form-control" type="date" name="date_from"
                                                    value="{{ request.GET.date_from }}" id="fromDate">
                                         </div>
                                         <div class="col-2">
-                                            <lable class="" for="toDate">{% trans "'по'" %}</lable>
+                                            <label class="" for="toDate">{% trans "'по'" %}</label>
                                             <input class="form-control" type="date" name="date_to"
                                                    value="{{ request.GET.date_to }}" id=toDate>
                                         </div>
                                         <div class="col-3">
-                                            <lable class=""
-                                                   for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</lable>
+                                            <label class=""
+                                                   for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</label>
                                             <select class="custom-select mr-sm-2" id="inlineFormUserSelect"
                                                     name="run_by">
                                                 <option value="">____</option>
@@ -60,7 +60,7 @@
                                             </select>
                                         </div>
                                         <div class="col-2">
-                                            <lable class="" for="inlineFormResultSelect">{% trans "Результат" %}</lable>
+                                            <label class="" for="inlineFormResultSelect">{% trans "Результат" %}</label>
                                             <select class="custom-select mr-sm-2" name="result"
                                                     id="inlineFormResultSelect">
                                                 <option value="">____</option>
@@ -84,14 +84,14 @@
                                             </select>
                                         </div>
                                         <div class="col-3">
-                                            <lable class="" for="inlineFormPlanSelect">{% trans "Тест план" %}</lable>
+                                            <label class="" for="inlineFormPlanSelect">{% trans "Тест план" %}</label>
                                             <select class="custom-select mr-sm-2" id="inlineFormPlanSelect" name="plan">
                                                 <option value="">____</option>
                                                 {% selected plan_list request.GET.plan %}
                                             </select>
                                         </div>
                                         <div class="col-auto">
-                                            <lable class="" for="tagsSearch">{% trans "Теги" %}</lable>
+                                            <label class="" for="tagsSearch">{% trans "Теги" %}</label>
                                             <select class="tags-search" name="tags" id="" multiple="multiple">
                                                 {% selected tag_list selected_tags %}
                                             </select>

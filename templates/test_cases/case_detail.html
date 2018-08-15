@@ -12,8 +12,10 @@
                                 <h4 class="section__title">{{ case.name }}</h4>
                             </div>
                             <div class="col-6 text-right">
-                                <a class="btn btn-info" href={% url 'case_edit' case.pk %}> {% trans "Редактировать" %}</a>
-                                <a class="btn btn-warning" href={% url 'case_list' %}> {% trans "Вернутся в список" %}</a>
+                                <a class="btn btn-info"
+                                   href={% url 'case_edit' case.pk %}> {% trans "Редактировать" %}</a>
+                                <a class="btn btn-warning"
+                                   href={% url 'case_list' %}> {% trans "Вернутся в список" %}</a>
                                 <a class="btn btn-danger" href={% url 'case_delete' case.pk %}>{% trans "Удалить" %}</a>
                             </div>
                         </div>
@@ -49,14 +51,15 @@
                                         <th>Название</th>
                                     </tr>
                                     </thead>
-                                <tbody>
+                                    <tbody>
                                     {% for plan in case.plan_set.all %}
                                         <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                       <td> <a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a></td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><a class="text-dark" href={% url "plan_detail" plan.pk %}>{{ plan }}</a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
-                                </tbody>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -74,28 +77,16 @@
                             <div class="runLog__title h4">
                                 {% trans "Лог запуска" %}
                             </div>
-                            <table class="table table-lg table-hover table-bordered mb-4">
+                            <table class="display_case_logs table table-lg table-hover table-bordered mb-4">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th scope="col">{% trans "Дата запуска" %}</th>
                                     <th scope="col">{% trans "Запустил" %}</th>
                                     <th scope="col">{% trans "Статус" %}</th>
-                                    <th scope="col">{% trans "Комментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for log in case.caselog_set.all %}
-                                    <tr>
-                                    <td>{{ log.date|date:"D d M Y" }}</td>
-                                    <td>{{ log.run_by }}</td>
-                                    {% if log.status == "0" %}
-                                        <td class="text-center bg-success text-light rounded">{{ log.get_status_display }}</td>
-                                    {% else %}
-                                        <td class="text-center bg-danger text-light rounded">{{ log.get_status_display }}</td>
-                                    {% endif %}
-                                    <td>{{ log.comment }}</td>
-                                    </tr>
-                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -105,4 +96,84 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        function format(d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>Коментарий:</td>' +
+                '<td>' + d.comment + '</td>' +
+                '</tr>' +
+                '</table>';
+        }
+
+        $(document).ready(function () {
+            var table = $('table.display_case_logs').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "language":{
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+                },
+                "serverSide": true,
+                "ordering": false,
+                "ajax": {"url": "{% url 'case_log_case_rel' case.pk %}?format=datatables&columns[4][data]=comment",},
+                "columns": [
+                    {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": '',
+                    },
+                    {
+                        data: "date",
+                        render: function (data, type, row) {
+                            var date = moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
+
+                            return date;
+                        }
+                    },
+                    {data: "run_by.get_full_name"},
+                    {
+                        data: "status",
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            switch (cellData) {
+                                case '1':
+                                    $(td).addClass('text-center bg-success text-light rounded');
+                                    break;
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded');
+                                    break;
+                                default:
+                                    $(td).addClass('text-center bg-secondary text-light rounded');
+                                    break;
+                            }
+                        },
+                        render: function (data, type, row) {
+                            if (data === '0') return "Провалено";
+                            else return "Успешно";
+                        },
+                    },
+                ],
+                {#"order": [[3, 'asc']],#}
+            });
+
+            $('table.display_case_logs tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    console.log(row.data());
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+    </script>
 {% endblock %}

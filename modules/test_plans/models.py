@@ -81,4 +81,4 @@ class PlanLog(models.Model):
         return self.plan.name
 
     def get_absolute_url(self):
-        return reverse('dashboard')
+        return reverse('plan_log', args=[str(self.id)])

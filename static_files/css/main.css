@@ -207,10 +207,10 @@ input:checked + .slider:before {
 }
 
 .planrun__card {
-    width: 25rem;
+    width: 43vw;
     margin: 10px;
     position: relative;
-    height: 22rem;
+    height: auto;
 }
 
 .planrun__container {
@@ -228,7 +228,15 @@ input:checked + .slider:before {
 }
 
 .planrun_card-body {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     width: 100%;
+}
+
+td.details-control {
+    background: url('../img/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../img/details_close.png') no-repeat center center;
 }

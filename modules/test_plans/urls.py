@@ -9,5 +9,6 @@ urlpatterns = [
     path('plan_edit/<int:pk>', PlanUpdate.as_view(), name='plan_edit'),
     path('plan_delete/<int:pk>', PlanDelete.as_view(), name='plan_delete'),
     path('plan_csv/<int:pk>', CSVExportView.as_view(), name='plan_csv'),
-    path('plan_run/', PlanRun.as_view(), name='plan_run')
+    path('plan_run/', PlanRun.as_view(), name='plan_run'),
+    path('plan_log/<int:pk>', PlanLogDetail.as_view(), name='plan_log')
 ]

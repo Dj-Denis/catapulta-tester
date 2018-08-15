@@ -13,11 +13,14 @@
                                 <h4 class="plan__title">{{ plan.name }}</h4>
                             </div>
                             <div class="col-5 text-right">
-                                <a class="btn btn-info" href={% url "plan_edit" plan.pk %}> {% trans "Редактировать" %}</a>
-                                <a class="btn btn-primary" href="{% url "plan_run" %}?plan_id={{ plan.pk }}">{% trans "Запустить план" %}</a>
-                                <a class="btn btn-warning" href={% url 'plan_list' %}> {% trans "Вернутся в список" %}</a>
-                                <a  class="btn btn-danger" href={% url 'plan_delete' plan.pk %}>{% trans "Удалить" %}</a>
-{#                                <a class="btn btn-success" href="{% url 'plan_csv' plan.pk %}">Експорт в CSV</a>#}
+                                <a class="btn btn-info"
+                                   href={% url "plan_edit" plan.pk %}> {% trans "Редактировать" %}</a>
+                                <a class="btn btn-primary"
+                                   href="{% url "plan_run" %}?plan_id={{ plan.pk }}">{% trans "Запустить план" %}</a>
+                                <a class="btn btn-warning"
+                                   href={% url 'plan_list' %}> {% trans "Вернутся в список" %}</a>
+                                <a class="btn btn-danger" href={% url 'plan_delete' plan.pk %}>{% trans "Удалить" %}</a>
+                                {#                                <a class="btn btn-success" href="{% url 'plan_csv' plan.pk %}">Експорт в CSV</a>#}
                             </div>
                         </div>
                         <div class="plan__decription">
@@ -28,31 +31,15 @@
                             <table class="display_plan_cases table table-lg table-hover border justify-content-center">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th scope="col">ID</th>
                                     <th scope="col">{% trans "Название тест кейса" %}</th>
                                     <th scope="col">{% trans "Дата последнего запуска" %}</th>
                                     <th scope="col">{% trans "Запустил" %}</th>
                                     <th scope="col">{% trans "Статут запуска" %}</th>
-                                    <th scope="col">{% trans "Коментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-{#                                    {% for case_log in plan.last_log.caselog_set.all %}#}
-{#                                    <tr>#}
-{#                                        <td>{{ case_log.case.id }}</td>#}
-{#                                        <td><a class="text-dark" href={% url 'case_detail' case_log.case.pk %}>{{ case_log.case.name }}</a></td>#}
-{#                                        <td>{{ case_log.case.last_log.date|default:_("Не запускалось") }}</td>#}
-{#                                        <td>{{ case_log.run_by }}</td>#}
-{#                                        {%  if case_log.status == "0" %}#}
-{#                                            <td class="text-center bg-danger text-light rounded">{{ case_log.get_status_display }}</td>#}
-{#                                        {% elif case_log.status == "1" %}#}
-{#                                            <td class="text-center bg-success text-light rounded">{{ case_log.get_status_display }}</td>#}
-{#                                        {% else %}#}
-{#                                            <td class="text-center bg-secondary text-light rounded">{{ case_log.get_status_display }}</td>#}
-{#                                        {% endif %}#}
-{#                                        <td>{{ case_log.case.comment }}</td>#}
-{#                                    </tr>#}
-{#                                    {% endfor %}#}
                                 </tbody>
                             </table>
                         </div>
@@ -61,10 +48,10 @@
                             <table class="display_plan_log table table-lg table-hover border">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th scope="col">{% trans "Дата последнего запуска" %}</th>
                                     <th scope="col">{% trans "Запустил" %}</th>
                                     <th scope="col">{% trans "Статус запуска" %}</th>
-                                    <th scope="col">{% trans "Коментарий" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -82,107 +69,40 @@
 {% block script %}
 
     <script>
+
+    function format(d) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>Коментарий:</td>' +
+                '<td>' + d.comment + '</td>' +
+                '</tr>' +
+                '</table>';
+        }
+
         $(document).ready(function () {
-            $('table.display_plan_log').DataTable({
+
+            var table_1 = $('table.display_plan_cases').DataTable({
                 "searching": false,
                 "lengthChange": false,
-                {#"ordering": false,#}
-                "order": [[0, 'desc']],
+                "ordering": false,
                 "language": {
-                    "processing": "Подождите...",
-                    "search": "Поиск:",
-                    "lengthMenu": "Показать _MENU_ записей",
-                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
-                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
-                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
-                    "infoPostFix": "",
-                    "loadingRecords": "Загрузка записей...",
-                    "zeroRecords": "Записи отсутствуют.",
-                    "emptyTable": "В таблице отсутствуют данные",
-                    "paginate": {
-                        "first": "Первая",
-                        "previous": "Предыдущая",
-                        "next": "Следующая",
-                        "last": "Последняя"
-                    },
-                    "aria": {
-                        "sortAscending": ": активировать для сортировки столбца по возрастанию",
-                        "sortDescending": ": активировать для сортировки столбца по убыванию"
-                    }
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
                 },
                 "serverSide": true,
-                "ajax": { "url": "{% url 'rel_plan_log' plan.pk %}?format=datatables",},
+                "ajax": {"url": "{% url 'case_log_plan_rel' plan.last_log.pk %}?format=datatables&columns[6][data]=comment",},
                 "columns": [
-                    {
-                        data: "last_run",
-                        render: function (data, type, row) {
-                            return moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
-                        }
+                     {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": '',
                     },
-                    {
-                        "data": "run_by.get_full_name",
-                        "orderable": false
-
-                    },
-                    {
-                        data: "status",
-                        "createdCell": function (td, cellData, rowData, row, col) {
-                            switch (cellData) {
-                                case '1':
-                                    $(td).addClass('text-center bg-success text-light rounded');
-                                    break;
-                                case '0':
-                                    $(td).addClass('text-center bg-danger text-light rounded');
-                                    break;
-                                default:
-                                    $(td).addClass('text-center bg-secondary text-light rounded');
-                                    break;
-                            }
-                        },
-                        render: function (data, type, row) {
-                            if (data === '0') return "Провалено";
-                            else return "Успешно";
-                        },
-                        "orderable": false
-                    },
-                    {
-                        "data": "comment",
-                        "orderable": false
-                    }
-                ],
-
-            });
-            $('table.display_plan_cases').DataTable({
-                "searching": false,
-                "lengthChange": false,
-                "order": [[0, 'asc']],
-                "language": {
-                    "processing": "Подождите...",
-                    "search": "Поиск:",
-                    "lengthMenu": "Показать _MENU_ записей",
-                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
-                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
-                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
-                    "infoPostFix": "",
-                    "loadingRecords": "Загрузка записей...",
-                    "zeroRecords": "Записи отсутствуют.",
-                    "emptyTable": "В таблице отсутствуют данные",
-                    "paginate": {
-                        "first": "Первая",
-                        "previous": "Предыдущая",
-                        "next": "Следующая",
-                        "last": "Последняя"
-                    },
-                    "aria": {
-                        "sortAscending": ": активировать для сортировки столбца по возрастанию",
-                        "sortDescending": ": активировать для сортировки столбца по убыванию"
-                    }
-                },
-                "serverSide": true,
-                "ajax": { "url": "{% url 'rel_case_log' plan.last_log.pk %}?format=datatables",},
-                "columns": [
                     {data: "case.id"},
-                    {data: "case.name"},
+                    {data: "case",
+                    render: function (data, type, row) {
+                        return "<a class=\"text-dark\" href=" + document.location.origin + data.url + ">" + data.name + "</a>"
+                    }
+                    },
                     {
                         data: "last_run",
                         render: function (data, type, row) {
@@ -210,9 +130,90 @@
                             else return "Успешно";
                         },
                     },
-                    {data: "comment"}
                 ]
 
+            });
+
+            $('table.display_plan_cases tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table_1.row(tr);
+
+                if (row.child.isShown()) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    console.log(row.data());
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+
+            var table_2 = $('table.display_plan_log').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "ordering": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+                },
+                "serverSide": true,
+                "ajax": {"url": "{% url 'rel_plan_log' plan.pk %}?format=datatables&columns[4][data]=comment&columns[5][data]=url&columns[6][data]=last_run",},
+                "columns": [
+                     {
+                        "className": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": '',
+                    },
+                    {
+                        {#data: "",#}
+                        render: function (data, type, row) {
+                            var date = moment(row.last_run).locale('ru').format('D MMMM YYYY г. H:mm');
+                            return "<a class=\"text-dark\" href=" +  document.location.origin + row.url + ">" + date + "</a>"
+                        }
+                    },
+                    {
+                        "data": "run_by.get_full_name",
+
+                    },
+                    {
+                        data: "status",
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            switch (cellData) {
+                                case '1':
+                                    $(td).addClass('text-center bg-success text-light rounded');
+                                    break;
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded');
+                                    break;
+                                default:
+                                    $(td).addClass('text-center bg-secondary text-light rounded');
+                                    break;
+                            }
+                        },
+                        render: function (data, type, row) {
+                            if (data === '0') return "Провалено";
+                            else return "Успешно";
+                        },
+                    },
+
+                ],
+
+            });
+
+             $('table.display_plan_log tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table_2.row(tr);
+
+                if (row.child.isShown()) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    console.log(row.ajax.json());
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
             });
         })
     </script>

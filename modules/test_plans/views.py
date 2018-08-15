@@ -111,13 +111,11 @@ class PlanRun(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         initial = super(PlanRun, self).get_initial()
         initial['id'] = self.request.GET.get('plan_id')
         return initial
-    
+
     def form_valid(self, form):
         form.instance.create_by = self.request.user
-        # form.save()
         return super(PlanRun, self).form_valid(form)
 
-    # def get_form_kwargs(self):
-    #     kwargs = super(PlanRun, self).get_form_kwargs()
-    #     kwargs.update(self.kwargs)
-    #     return kwargs
+
+class PlanLogDetail(LoginRequiredMixin, GroupRequiredMixin, DetailView):
+    model = PlanLog
