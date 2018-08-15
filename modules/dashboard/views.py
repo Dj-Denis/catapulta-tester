@@ -45,7 +45,7 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, ListView):
         table_l = Plan.objects.filter(*q_list_l).order_by('pk')
         table_r = Plan.objects.filter(*q_list_r).order_by('pk')
         ctx['plan_success_count'] = table_r.filter(status='1').distinct().count() or 0
-        ctx['plan_failed_count'] = table_r.filter(status='0').count() or 0
+        ctx['plan_failed_count'] = table_r.filter(status='2').count() or 0
         ctx['plan_count'] = table_r.count()
         ctx['plan_before_count'] = table_l.count()
         paginator_l = Paginator(table_l, self.paginate_by)
