@@ -71,7 +71,10 @@ class PlanLogForm(forms.ModelForm):
             case.status = case_status
             case.save()
             if not case_status:
-                planlog.status = int(case_status)
+                planlog.status = 0
+                planlog.save()
+            else:
+                planlog.status = 1
                 planlog.save()
 
         return planlog

@@ -48,12 +48,12 @@
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
                                                     <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался")}}</td>
-                                                    {% if plan.status == "0" %}
-                                                        <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
-                                                    {% elif plan.status == "1" %}
-                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.get_status_display }}</td>
+                                                    {% if plan.last_log.status == "0" %}
+                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.last_log.get_status_display }}</td>
+                                                    {% elif plan.last_log.status == "1" %}
+                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.last_log.get_status_display }}</td>
                                                     {% else %}
-                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-secondary text-light rounded align-middle">Не выполнялось</td>
                                                     {% endif %}
                                                 </tr>
                                             {% endfor %}
@@ -130,12 +130,12 @@
                                                     <td><a class="text-dark"
                                                            href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
                                                     <td class="align-middle">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
-                                                    {% if plan.status == "0" %}
-                                                        <td class="text-center bg-secondary text-light rounded align-middle">{{ plan.get_status_display }}</td>
-                                                    {% elif plan.status == "1" %}
-                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.get_status_display }}</td>
+                                                    {% if plan.last_log.status == "0" %}
+                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.last_log.get_status_display }}</td>
+                                                    {% elif plan.last_log.status == "1" %}
+                                                        <td class="text-center bg-success text-light rounded align-middle">{{ plan.last_log.get_status_display }}</td>
                                                     {% else %}
-                                                        <td class="text-center bg-danger text-light rounded align-middle">{{ plan.get_status_display }}</td>
+                                                        <td class="text-center bg-secondary text-light rounded align-middle">Не выполнялось</td>
                                                     {% endif %}
                                                 </tr>
                                             {% endfor %}

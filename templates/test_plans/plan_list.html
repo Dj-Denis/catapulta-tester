@@ -110,12 +110,12 @@
                                         <td class="align-middle">{{ plan.cases.count }}</td>
                                         <td class="align-middle">{{ plan.last_log.get_success.count|default:0 }}</td>
                                         <td class="align-middle">{{ plan.last_log.get_failed.count|default:0 }}</td>
-                                        {% if plan.status == "0" %}
-                                            <td class="align-middle text-center bg-secondary text-light rounded">{{ plan.get_status_display }}</td>
-                                        {% elif plan.status == "1" %}
-                                            <td class="align-middle text-center bg-success text-light rounded">{{ plan.get_status_display }}</td>
+                                        {% if plan.last_log.status == "0" %}
+                                            <td class="align-middle text-center bg-danger text-light rounded">{{ plan.last_log.get_status_display }}</td>
+                                        {% elif plan.last_log.status == "1" %}
+                                            <td class="align-middle text-center bg-success text-light rounded">{{ plan.last_log.get_status_display }}</td>
                                         {% else %}
-                                            <td class="align-middle text-center bg-danger text-light rounded">{{ plan.get_status_display }}</td>
+                                            <td class="align-middle text-center bg-secondary text-light rounded">Не выполнялось</td>
                                         {% endif %}
                                         <td>
                                             <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i
