@@ -6,8 +6,8 @@
             <div class="container-fludi container-wide">
                 <div class="card">
                     <article class="card-body">
-                        <a class="card-title text-dark" href={% url 'plan_detail' planlog.plan_id %}>{{ planlog.plan.name }}</a>
-
+                        <a class=" text-dark" href={% url 'plan_detail' planlog.plan_id %}><h5
+                                class="card-title text-center">{{ planlog.plan.name }}</h5></a>
                         <table class="display_plan_cases table table-lg table-hover border justify-content-center">
                             <thead>
                             <tr>

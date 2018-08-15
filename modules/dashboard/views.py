@@ -38,13 +38,12 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, ListView):
                     planlog__last_run__lte=(
                             delorean.parse(date_from, dayfirst=False) - datetime.timedelta(weeks=4)).end_of_day))
             elif len(date_to) != 0:
-                q_list_r.append(Q(planlog__last_run__range=['1990-1-1',
-                                                                                 delorean.parse(date_to).end_of_day]))
-                q_list_r.append(Q(planlog__last_run__lte=(delorean.parse(date_to, dayfirst=False) -
+                q_list_r.append(Q(planlog__last_run__range=['1990-1-1', delorean.parse(date_to).end_of_day]))
+                q_list_l.append(Q(planlog__last_run__lte=(delorean.parse(date_to, dayfirst=False) -
                                                           datetime.timedelta(weeks=4)).end_of_day))
-        table_l = Plan.objects.filter(*q_list_l).order_by('pk')
-        table_r = Plan.objects.filter(*q_list_r).order_by('pk')
-        ctx['plan_success_count'] = table_r.filter(status='1').distinct().count() or 0
+        table_l = Plan.objects.order_by('pk').distinct().filter(*q_list_l)
+        table_r = Plan.objects.order_by('pk').distinct().filter(*q_list_r)
+        ctx['plan_success_count'] = table_r.filter(status='1').count() or 0
         ctx['plan_failed_count'] = table_r.filter(status='2').count() or 0
         ctx['plan_count'] = table_r.count()
         ctx['plan_before_count'] = table_l.count()

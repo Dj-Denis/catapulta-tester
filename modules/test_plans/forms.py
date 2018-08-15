@@ -62,7 +62,10 @@ class PlanLogForm(forms.ModelForm):
         print(self.cases)
         for case in self.cases:
             case_id = case.case_id
-            case_status = self.cleaned_data.get('case_status_%s' % case_id)
+            if self.cleaned_data.get('case_status_%s' % case_id):
+                case_status = 1
+            else:
+                case_status = 2
             case_comment = self.cleaned_data.get('case_comment_%s' % case_id)
             print(case_id)
             print(case_comment)

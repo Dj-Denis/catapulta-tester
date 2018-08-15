@@ -43,7 +43,7 @@ class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
                 q_list.append(Q(planlog__last_run__gte=req['date_from']))
             if req['date_to'] != '':
                 q_list.append(Q(planlog__last_run__lte=req['date_to'] + ' 23:59:59'))
-            resp = Plan.objects.filter(*q_list).distinct()
+            resp = Plan.objects.filter(*q_list).distinct().order_by('pk')
             paginator = Paginator(resp, self.paginate_by)
             page = self.request.GET.get('page')
             try:

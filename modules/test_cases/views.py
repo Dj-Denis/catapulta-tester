@@ -54,7 +54,7 @@ class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
             if len(whit_tags) != 0:
                 q_list.append(Q(pk__in=set(whit_tags)))
 
-            resp = Case.objects.filter(*q_list).distinct()
+            resp = Case.objects.filter(*q_list).distinct().order_by('pk')
             paginator = Paginator(resp, self.paginate_by)
             page = self.request.GET.get('page')
             try:

@@ -184,7 +184,7 @@ input:checked + .slider:before {
 
 .table__dashboard {
     margin: 15px;
-    width: 45vw;
+    width: 45vmax;
 }
 
 @media (max-width: 700px) {
