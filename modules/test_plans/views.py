@@ -101,7 +101,7 @@ class CSVExportView(SingleObjectMixin, View):
 class PlanRun(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     model = PlanLog
     form_class = PlanLogForm
-    success_url = reverse_lazy('dashboard')
+    # success_url = reverse_lazy('plan_log')
 
     def get_context_data(self, **kwargs):
         data = super(PlanRun, self).get_context_data(**kwargs)
