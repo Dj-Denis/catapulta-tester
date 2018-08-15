@@ -7,8 +7,6 @@ register = template.Library()
 @register.simple_tag
 def selected(objects, sel):
     resp = ''
-    print(objects)
-    print(sel)
     for obj in objects:
         if str(obj.pk) in sel:
             resp += '<option value="{}" selected>{}</option>'.format(obj.pk, obj.name)

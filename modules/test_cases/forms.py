@@ -30,7 +30,6 @@ class CustomMultipleChoiceField(ChoiceField):
         # Validate that each value in the value list is in self.choices.
         for val in value:
             if not self.valid_value(val):
-                print(val)
                 tag = Tag()
                 tag.name = val
                 tag.save()

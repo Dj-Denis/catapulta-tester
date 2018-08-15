@@ -29,4 +29,3 @@ class CaseCreateTestCase(TestCase):
         self.client.logout()
         self.assertTrue(self.client.login(username="test@test.com", password='qwerty12345'))
         response = self.client.post('/case/case_detail/50', {'submit': True})
-        print(response)

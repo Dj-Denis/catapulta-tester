@@ -41,7 +41,6 @@ class TaggedItemSerializer(serializers.ModelSerializer):
 
 class TaggedRelatedField(serializers.RelatedField):
     def to_internal_value(self, data):
-        print(data)
         return Tag.objects.get(pk=data)
 
     def to_representation(self, value):
@@ -67,7 +66,6 @@ class CaseSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         tag_list = validated_data.pop('tag_list')
-        print(self.context['request'])
         for tag in tag_list:
             TaggedItem.objects.create(tag=tag, content_type=ContentType.objects.get_for_model(instance),
                                       object_id=instance.pk)
@@ -112,7 +110,6 @@ class PlanLogSerializer(serializers.ModelSerializer):
     def paginated_caselog(self, obj):
         page_size = 10
         paginator = Paginator(obj.caselog_set.all(), page_size)
-        print(self.context)
         page = self.context['request'].query_params.get('page') or 1
         logs = paginator.page(page)
         serializers = CaseLogSerializer(logs, many=True)
@@ -232,7 +229,6 @@ class ActivationSerializer(serializers.Serializer):
         fields = ('activation_key',)
 
     def create(self, validated_data):
-        print(validated_data)
         user, activated = RegistrationProfile.objects.activate_user(**validated_data,
                                                                     site=get_current_site(self.context['request']))
         if activated:

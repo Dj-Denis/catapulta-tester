@@ -8,7 +8,6 @@ class ChannelConsumer(WebsocketConsumer):
     def connect(self):
         self.ch_name = self.scope['url_route']['kwargs']['channel_name']
         self.channel_group_name = 'channel_%s' % self.ch_name
-        print(self.channel_group_name)
 
         # Join room group
         async_to_sync(self.channel_layer.group_add)(

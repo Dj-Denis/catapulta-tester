@@ -17,7 +17,6 @@ class PlanUpdateForm(forms.ModelForm):
 
     def save(self, commit=True):
         plan = super().save(commit=False)
-        print(plan)
 
         orig_cases = PlanCases.objects.filter(plan=plan)
         new_cases = []
@@ -50,7 +49,6 @@ class PlanLogForm(forms.ModelForm):
     #     return
     #
     def is_valid(self):
-        print(self.errors)
         return self.is_bound
 
     def save(self, commit=True):
@@ -59,7 +57,6 @@ class PlanLogForm(forms.ModelForm):
         planlog.comment = self.cleaned_data.get('comment')
         planlog.run_by = self.instance.create_by
         planlog.save()
-        print(self.cases)
         for case in self.cases:
             case_id = case.case_id
             if self.cleaned_data.get('case_status_%s' % case_id):
@@ -67,8 +64,6 @@ class PlanLogForm(forms.ModelForm):
             else:
                 case_status = 2
             case_comment = self.cleaned_data.get('case_comment_%s' % case_id)
-            print(case_id)
-            print(case_comment)
             CaseLog(case_id=case_id, comment=case_comment,
                         plan_run_log=planlog, run_by=self.instance.create_by, status=int(case_status)).save()
             case.status = case_status
