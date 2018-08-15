@@ -119,7 +119,7 @@
                 },
                 "serverSide": true,
                 "ordering": false,
-                "ajax": {"url": "{% url 'case_log_case_rel' case.pk %}?format=datatables&columns[4][data]=comment",},
+                "ajax": {"url": "{% url 'case_log_case_rel' case.pk %}?format=datatables&columns[4][data]=comment&columns[5][data]=url",},
                 "columns": [
                     {
                         "className": 'details-control',
@@ -130,9 +130,10 @@
                     {
                         data: "date",
                         render: function (data, type, row) {
+                            console.log(row);
                             var date = moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
-
-                            return date;
+                            var url = "<a class='text-dark' href=" + document.location.origin + row.url + ">" + date + "</a>";
+                            return url;
                         }
                     },
                     {data: "run_by.get_full_name"},

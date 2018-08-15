@@ -152,10 +152,15 @@ class PlanDetailSerializer(serializers.ModelSerializer):
 class CaseLogRelatedSerializer(serializers.ModelSerializer):
     run_by = AccountSerializer(read_only=True)
     case = CaseSerializer()
+    url = serializers.SerializerMethodField()
 
     class Meta:
         model = CaseLog
-        fields = ('case', 'comment', 'run_by', 'status', 'date')
+        fields = ('case', 'comment', 'run_by', 'status', 'date', 'url')
+
+    def get_url(self, obj):
+        url = PlanLog.objects.get(caselog=obj).get_absolute_url()
+        return url
 
 
 class CasePlanRelatedSerializer(serializers.ModelSerializer):
