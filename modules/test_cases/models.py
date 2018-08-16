@@ -7,9 +7,9 @@ from django.utils.translation import gettext as _
 
 class Case(models.Model):
     CASE_STATUS_CHOICES = (
-        ('0', _('Не выполнялось')),
+        ('0', _('Провалено')),
         ('1', _('Успешно')),
-        ('2', _('Провалено'))
+        ('2', _('Не выполнялось'))
     )
 
     name = models.CharField(verbose_name=_("Имя"), blank=False, max_length=100)
@@ -17,7 +17,7 @@ class Case(models.Model):
     create_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Автор'))
     precondition = models.TextField(verbose_name=_("Предварительные условия"), blank=True, default='')
     excepted_result = models.TextField(verbose_name=_("Ожидаемый результат"))
-    status = models.CharField(max_length=20, verbose_name=_('Статус'), choices=CASE_STATUS_CHOICES, default='0')
+    status = models.CharField(max_length=20, verbose_name=_('Статус'), choices=CASE_STATUS_CHOICES, default='2')
     comment = models.TextField(verbose_name=_('Коментарий'), blank=True, default='')
     last_run = models.DateTimeField(verbose_name=_("Последний запуск"), blank=True, null=True)
 

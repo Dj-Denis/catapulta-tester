@@ -132,11 +132,11 @@
                             data: "status",
                             "createdCell": function (td, cellData, rowData, row, col) {
                                 switch (cellData) {
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
+                                    break;
                                 case '1':
                                     $(td).addClass('text-center bg-success text-light rounded align-middle');
-                                    break;
-                                case '2':
-                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
                                     break;
                                 default:
                                     $(td).addClass('text-center bg-secondary text-light rounded align-middle');
@@ -145,10 +145,10 @@
                             },
                            render: function (data, type, row) {
                                 switch (data) {
+                                    case '0':
+                                        return "Провалено";
                                     case '1':
                                         return "Успешно";
-                                    case '2':
-                                        return "Провалено";
                                     default:
                                         return "Не запускалось"
 

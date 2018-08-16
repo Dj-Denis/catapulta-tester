@@ -231,3 +231,7 @@ tr.shown td.details-control {
 .card-text {
     white-space: pre-wrap;
 }
+
+.table-last_run {
+    width: 100px;
+}

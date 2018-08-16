@@ -19,6 +19,9 @@ class Plan(models.Model):
     status = models.CharField(max_length=30, choices=PLAN_STATUS_CHOICES, default='0')
     create_by = models.ForeignKey('account.Account', on_delete=models.CASCADE, verbose_name=_('Создан'))
     cases = models.ManyToManyField('test_cases.Case', through='PlanCases')
+    last_run = models.DateTimeField(verbose_name=_("Последний запуск"), blank=True, null=True)
+
+
 
     class Meta:
         verbose_name = _("План")

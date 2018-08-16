@@ -65,9 +65,9 @@
                                                     id="inlineFormResultSelect">
                                                 <option value="">____</option>
                                                 {% if request.GET.result == '0' %}
-                                                    <option value="0" selected>{% trans "Не выполнялось" %}</option>
+                                                    <option value="0" selected>{% trans "Провалено" %}</option>
                                                 {% else %}
-                                                    <option value="0">{% trans "Не выполнялось" %}</option>
+                                                    <option value="0">{% trans "Провалено" %}</option>
                                                 {% endif %}
 
                                                 {% if request.GET.result == '1' %}
@@ -77,9 +77,9 @@
                                                 {% endif %}
 
                                                 {% if request.GET.result == '2' %}
-                                                    <option value="2" selected>{% trans "Провалено" %}</option>
+                                                    <option value="2" selected>{% trans "Не выполнялось" %}</option>
                                                 {% else %}
-                                                    <option value="2">{% trans "Провалено" %}</option>
+                                                    <option value="2">{% trans "Не выполнялось" %}</option>
                                                 {% endif %}
                                             </select>
                                         </div>

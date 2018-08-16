@@ -40,9 +40,9 @@ class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
             if req['run_by'] != '':
                 q_list.append(Q(planlog__run_by_id__exact=req['run_by']))
             if req['date_from'] != '':
-                q_list.append(Q(planlog__last_run__gte=req['date_from']))
+                q_list.append(Q(last_run__gte=req['date_from']))
             if req['date_to'] != '':
-                q_list.append(Q(planlog__last_run__lte=req['date_to'] + ' 23:59:59'))
+                q_list.append(Q(last_run__lte=req['date_to'] + ' 23:59:59'))
             resp = Plan.objects.filter(*q_list).distinct().order_by('pk')
             paginator = Paginator(resp, self.paginate_by)
             page = self.request.GET.get('page')

@@ -14,7 +14,6 @@
                             <p class="card-text">{{ planlog.comment }}</p>
                         </div>
 
-
                         <div>
                             <p class="card-subtitle mb-2 mt-4 text-muted">Подробнее:</p>
 
@@ -64,7 +63,8 @@
                         render: function (data, type, row) {
                             return "<a class=\"text-dark\" href=" + document.location.origin + data.url + ">" + data.name + "</a>"
                         },
-                        "className": "align-middle"
+                        "className": "align-middle",
+                        "width": "500px",
                     },
                     {
                         data: "last_run",
@@ -84,11 +84,11 @@
                         "createdCell": function (td, cellData, rowData, row, col) {
                             console.log(cellData);
                             switch (cellData) {
+                                case '0':
+                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
+                                    break;
                                 case '1':
                                     $(td).addClass('text-center bg-success text-light rounded align-middle');
-                                    break;
-                                case '2':
-                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
                                     break;
                                 default:
                                     $(td).addClass('text-center bg-secondary text-light rounded align-middle');
@@ -96,8 +96,15 @@
                             }
                         },
                         render: function (data, type, row) {
-                            if (data === '2') return "Провалено";
-                            else return "Успешно";
+                            switch (data) {
+                                case '0':
+                                    return "Провалено";
+                                case '1':
+                                    return "Успешно";
+                                default:
+                                    return "Не запускалось"
+
+                            }
                         },
                         "className": "align-middle"
                     },
