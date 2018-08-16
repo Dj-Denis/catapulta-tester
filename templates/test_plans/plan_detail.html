@@ -31,7 +31,6 @@
                             <table class="display_plan_cases table table-lg table-hover border justify-content-center">
                                 <thead>
                                 <tr>
-                                    <th></th>
                                     <th scope="col">ID</th>
                                     <th scope="col">{% trans "Название тест кейса" %}</th>
                                     <th scope="col">{% trans "Дата последнего запуска" %}</th>
@@ -44,6 +43,17 @@
                             </table>
                         </div>
                         <h2 class="planLog__title">{% trans "Лог тест плана" %}</h2>
+
+                        {#                        <div class="col-auto">#}
+                        {#                            <label class="" for="fromDate">{% trans "Дата запуска 'с'" %}</label>#}
+                        {#                            <input class="form-control" type="date" name="date_from"#}
+                        {#                                   value="{{ request.GET.date_from }}" id="fromDate">#}
+                        {#                        </div>#}
+                        {#                        <div class="col-auto">#}
+                        {#                            <label class="" for="toDate">{% trans "'по'" %}</label>#}
+                        {#                            <input class="form-control" type="date" name="date_to"#}
+                        {#                                   value="{{ request.GET.date_to }}" id=toDate>#}
+                        {#                        </div>#}
                         <div class="planLog__table">
                             <table class="display_plan_log table table-lg table-hover border align-middle">
                                 <thead>
@@ -92,58 +102,69 @@
         $(document).ready(function () {
 
             var table_1 = $('table.display_plan_cases').DataTable({
-                "searching": false,
+                {#"searching": true,#}
                 "lengthChange": false,
                 "ordering": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
                 },
+                "oLanguage": {
+                    "sSearch": "Поиск по названию:"
+                },
+                "processing": true,
                 "serverSide": true,
                 {% if plan.last_log.pk %}
-                    "ajax": {"url": "{% url 'case_plan_rel' plan.pk %}?format=datatables&columns[6][data]=comment&columns[7][data]=url",},
+                    "ajax": {"url": "{% url 'case_plan_rel' plan.pk %}?format=datatables&columns[5][data]=comment&columns[6][data]=url",},
                     "columns": [
                         {
-                            "className": 'details-control',
-                            "orderable": false,
-                            "data": null,
-                            "defaultContent": '',
+                            data: "id",
+                            "searchable": false
                         },
-                        {data: "id"},
                         {
                             data: "name",
                             render: function (data, type, row) {
                                 return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + row.name + "</a>"
                             },
-                            "width": "200px"
+                            "width": "200px",
+                            "searcheble": true
                         },
                         {
                             data: "last_run",
+                            name: "last_run",
+                            type: "date",
                             render: function (data, type, row) {
                                 console.log(data);
-                                if (data){
+                                if (data) {
                                     var date = moment(data).locale('ru').format('D MMMM YYYY г. H:mm');
                                 }
-                                else {var date = '';}
+                                else {
+                                    var date = '';
+                                }
                                 return date;
-                            }
+                            },
+                            "searchable": false
                         },
-                        {data: "run_by"},
+                        {
+                            data: "run_by",
+                            "searchable": false
+                        },
                         {
                             data: "status",
+                            "searchable": false,
                             "createdCell": function (td, cellData, rowData, row, col) {
                                 switch (cellData) {
-                                case '0':
-                                    $(td).addClass('text-center bg-danger text-light rounded align-middle');
-                                    break;
-                                case '1':
-                                    $(td).addClass('text-center bg-success text-light rounded align-middle');
-                                    break;
-                                default:
-                                    $(td).addClass('text-center bg-secondary text-light rounded align-middle');
-                                    break;
-                            }
+                                    case '0':
+                                        $(td).addClass('text-center bg-danger text-light rounded align-middle');
+                                        break;
+                                    case '1':
+                                        $(td).addClass('text-center bg-success text-light rounded align-middle');
+                                        break;
+                                    default:
+                                        $(td).addClass('text-center bg-secondary text-light rounded align-middle');
+                                        break;
+                                }
                             },
-                           render: function (data, type, row) {
+                            render: function (data, type, row) {
                                 switch (data) {
                                     case '0':
                                         return "Провалено";
@@ -153,94 +174,85 @@
                                         return "Не запускалось"
 
                                 }
-                        },
+                            },
                         },
                     ],
                 {% else %}
                     "ajax": {"url": "{% url 'case_plan_rel' plan.pk %}?format=datatables&columns[6][data]=name&columns[7][data]=url",},
                     "columns": [
                         {
-                            "className": 'details-control align-middle',
-                            "orderable": false,
-                            "data": null,
-                            "defaultContent": '',
+                            data: "id",
+                            "searchable": false
                         },
-                        {data: "id"},
                         {
                             render: function (data, type, row) {
-                                console.log(row);
-                                return "<a class=\"text-dark\" href=" + document.location.origin + row.url +">" + row.name + "</a>"
+                                return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + row.name + "</a>"
                             },
-                            "className": "align-middle"
-
+                            "className": "align-middle",
+                            "searchable": true
                         },
                         {
                             data: '',
                             render: function () {
                                 return '';
                             },
-                            "className": "align-middle"
+                            "className": "align-middle",
+                            "searchable": false
                         },
                         {
                             data: '',
                             render: function () {
                                 return '';
                             },
-                            "className": "align-middle"
+                            "className": "align-middle",
+                            "searchable": false
                         },
                         {
                             data: 'id',
                             "createdCell": function (td, cellData, rowData, row, col) {
                                 $(td).addClass('text-center bg-secondary text-light rounded');
-                                },
-                            render: function () {
-                             return "Не запускалось"
                             },
-                            "className": "align-middle"
+                            render: function () {
+                                return "Не запускалось"
+                            },
+                            "className": "align-middle",
+                            "searchable": false
                         },
                     ],
                 {% endif %}
 
             });
 
-            $('table.display_plan_cases tbody').on('click', 'td.details-control', function () {
-                var tr = $(this).closest('tr');
-                var row = table_1.row(tr);
-
-                if (row.child.isShown()) {
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    console.log(row.data());
-                    row.child(format(row.data())).show();
-                    tr.addClass('shown');
-                }
-            });
 
             var table_2 = $('table.display_plan_log').DataTable({
-                "searching": false,
+                "searching": true,
                 "lengthChange": false,
                 "ordering": false,
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json",
+                    "search": "Дата"
+                },
+                "oLanguage": {
+                    "sSearch": "Поиск по дате:"
                 },
                 "serverSide": true,
                 "ajax": {"url": "{% url 'rel_plan_log' plan.pk %}?format=datatables&columns[4][data]=comment&columns[5][data]=url&columns[6][data]=last_run",},
                 "columns": [
                     {
-                        {#data: "",#}
+                        data: "last_run",
                         render: function (data, type, row) {
                             var date = moment(row.last_run).locale('ru').format('D MMMM YYYY г. H:mm');
                             return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + date + "</a>"
                         },
                         "width": "200px",
-                        "className": "align-middle"
+                        "className": "align-middle",
+                        "searchable": true
                     },
                     {
                         "data": "run_by.get_full_name",
                         "width": "150px",
-                        "className": "align-middle"
+                        "className": "align-middle",
+                        "searchable": false
                     },
                     {
                         data: "status",
@@ -262,31 +274,23 @@
                             else return "Успешно";
                         },
                         "width": "200px",
-                        "className": "align-middle"
+                        "className": "align-middle",
+                        "searchable": false
                     },
                     {
                         data: "comment",
-                        "className": "align-middle"
+                        "className": "align-middle",
+                        "searchable": false
                     }
 
                 ],
+                initComplete: function () {
+                    $('#DataTables_Table_1_filter input').attr('type', 'date');
+                }
 
             });
 
-            $('table.display_plan_log tbody').on('click', 'td.details-control', function () {
-                var tr = $(this).closest('tr');
-                var row = table_2.row(tr);
+        });
 
-                if (row.child.isShown()) {
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    console.log(row.ajax.json());
-                    row.child(format(row.data())).show();
-                    tr.addClass('shown');
-                }
-            });
-        })
     </script>
 {% endblock %}

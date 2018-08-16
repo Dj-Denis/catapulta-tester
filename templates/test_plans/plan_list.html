@@ -31,18 +31,18 @@
                                 <div class="collapse" id="extendedSearch">
                                     <div class="form-row mt-2">
                                         <div class="col-auto">
-                                            <lable class="" for="fromDate">{% trans "Дата запуска 'с'" %}</lable>
+                                            <label class="" for="fromDate">{% trans "Дата запуска 'с'" %}</label>
                                             <input class="form-control" type="date" name="date_from"
                                                    value="{{ request.GET.date_from }}" id="fromDate">
                                         </div>
                                         <div class="col-auto">
-                                            <lable class="" for="toDate">{% trans "'по'" %}</lable>
+                                            <label class="" for="toDate">{% trans "'по'" %}</label>
                                             <input class="form-control" type="date" name="date_to"
                                                    value="{{ request.GET.date_to }}" id=toDate>
                                         </div>
                                         <div class="col-auto">
-                                            <lable class=""
-                                                   for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</lable>
+                                            <label class=""
+                                                   for="inlineFormUserSelect">{% trans "Ответственный за запуск" %}</label>
                                             <select class="custom-select mr-sm-2" id="inlineFormUserSelect"
                                                     name="run_by">
                                                 <option value="">____</option>
@@ -102,7 +102,7 @@
                                 <tbody>
                                 {% for plan in plan_list %}
                                     <tr>
-                                        <td>{{ plan.id }}</td>
+                                        <td>{{ plan.pk }}</td>
                                         <td><a class="text-dark"
                                                href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
                                         <td class="align-middle table-last_run p-0">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>

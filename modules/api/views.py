@@ -82,6 +82,9 @@ class PlanLogReadApi(generics.RetrieveAPIView):
 
 
 class PlanLogRelatedApi(generics.ListAPIView):
+    """
+    Planlog list related to specified plan
+    """
     queryset = PlanLog.objects.all().order_by('-last_run')
     serializer_class = PlanLogRelatedSerializer
 
@@ -126,6 +129,8 @@ class CaseLogCreateApi(generics.CreateAPIView):
 
 
 class CaseRelatedApi(generics.ListAPIView):
+    """Caselog list related to specified case"""
+
     serializer_class = CasePlanRelatedSerializer
 
     def get_queryset(self):

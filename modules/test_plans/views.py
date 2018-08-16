@@ -24,6 +24,7 @@ from .models import Plan, PlanLog
 class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Plan
     paginate_by = 10
+    queryset = Plan.objects.order_by('pk')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super(PlanList, self).get_context_data(**kwargs)
@@ -43,7 +44,7 @@ class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
                 q_list.append(Q(last_run__gte=req['date_from']))
             if req['date_to'] != '':
                 q_list.append(Q(last_run__lte=req['date_to'] + ' 23:59:59'))
-            resp = Plan.objects.filter(*q_list).distinct().order_by('pk')
+            resp = Plan.objects.filter(*q_list).order_by('pk').distinct()
             paginator = Paginator(resp, self.paginate_by)
             page = self.request.GET.get('page')
             try:
