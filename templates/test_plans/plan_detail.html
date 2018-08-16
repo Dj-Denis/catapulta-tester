@@ -20,7 +20,7 @@
                                 <a class="btn btn-warning"
                                    href={% url 'plan_list' %}> {% trans "Вернутся в список" %}</a>
                                 <a class="btn btn-danger" href={% url 'plan_delete' plan.pk %}>{% trans "Удалить" %}</a>
-                                {#                                <a class="btn btn-success" href="{% url 'plan_csv' plan.pk %}">Експорт в CSV</a>#}
+{#                                <a class="btn btn-success" href="{% url 'plan_csv' plan.pk %}">Експорт в CSV</a>#}
                             </div>
                         </div>
                         <div class="plan__decription">
@@ -43,17 +43,6 @@
                             </table>
                         </div>
                         <h2 class="planLog__title">{% trans "Лог тест плана" %}</h2>
-
-                        {#                        <div class="col-auto">#}
-                        {#                            <label class="" for="fromDate">{% trans "Дата запуска 'с'" %}</label>#}
-                        {#                            <input class="form-control" type="date" name="date_from"#}
-                        {#                                   value="{{ request.GET.date_from }}" id="fromDate">#}
-                        {#                        </div>#}
-                        {#                        <div class="col-auto">#}
-                        {#                            <label class="" for="toDate">{% trans "'по'" %}</label>#}
-                        {#                            <input class="form-control" type="date" name="date_to"#}
-                        {#                                   value="{{ request.GET.date_to }}" id=toDate>#}
-                        {#                        </div>#}
                         <div class="planLog__table">
                             <table class="display_plan_log table table-lg table-hover border align-middle">
                                 <thead>
@@ -230,7 +219,6 @@
                 "ordering": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json",
-                    "search": "Дата"
                 },
                 "oLanguage": {
                     "sSearch": "Поиск по дате:"
@@ -249,7 +237,7 @@
                         "searchable": true
                     },
                     {
-                        "data": "run_by.get_full_name",
+                        "data": "run_by.full_name",
                         "width": "150px",
                         "className": "align-middle",
                         "searchable": false

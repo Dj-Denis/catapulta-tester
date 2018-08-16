@@ -15,11 +15,14 @@ from modules.test_plans.models import Plan, PlanCases, PlanLog
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    get_full_name = serializers.CharField(read_only=True)
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Account
-        fields = ('id', 'first_name', 'second_name', 'email', 'get_full_name')
+        fields = ('id', 'first_name', 'second_name', 'email', 'full_name')
+
+    def get_full_name(self, obj):
+        return obj.get_full_name()
 
 
 class TagItemField(serializers.RelatedField):
@@ -117,20 +120,45 @@ class PlanLogSerializer(serializers.ModelSerializer):
 
 
 class PlanSerializer(serializers.ModelSerializer):
-    create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
+    # create_by = serializers.HyperlinkedRelatedField(view_name='account_detail', read_only=True)
+    create_by = AccountSerializer()
     cases = serializers.HyperlinkedRelatedField(view_name='case_detail_api', many=True, read_only=True)
     id = serializers.IntegerField(read_only=True)
     planlog_set = serializers.HyperlinkedRelatedField(view_name='plan_log', read_only=True, many=True)
+    success = serializers.SerializerMethodField()
+    failed = serializers.SerializerMethodField()
+    run_by = serializers.SerializerMethodField()
 
     class Meta:
         model = Plan
-        fields = ('id', 'name', 'description', 'status', 'create_at', 'update_at', 'create_by', 'cases', 'planlog_set')
+        fields = ('id', 'name', 'description', 'status', 'create_at', 'update_at', 'create_by', 'cases', 'planlog_set',
+                  'success', 'failed', 'run_by')
 
     def create(self, validated_data):
         user = self.context['request'].user
         plan = Plan.objects.create(**validated_data, create_by=user)
         return plan
 
+    def get_success(self, obj):
+        last_log = obj.last_log
+        if last_log:
+            return last_log.get_success.count()
+        else:
+            return '0'
+
+    def get_failed(self, obj):
+        last_log = obj.last_log
+        if last_log:
+            return last_log.get_failed.count()
+        else:
+            return '0'
+
+    def get_run_by(self, obj):
+        last_log = obj.last_log
+        if last_log:
+            return AccountSerializer(last_log.run_by).data
+        else:
+            return {}
 
 class PlanDetailSerializer(serializers.ModelSerializer):
     # planlog_set = serializers.HyperlinkedModelSerializer()

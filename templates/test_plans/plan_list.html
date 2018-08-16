@@ -57,7 +57,7 @@
                                             </select>
                                         </div>
                                         <div class="col-auto">
-                                            <lable class="" for="inlineFormResultSelect">{% trans "Результат" %}</lable>
+                                            <label class="" for="inlineFormResultSelect">{% trans "Результат" %}</label>
                                             <select class="custom-select mr-sm-2" name="result"
                                                     id="inlineFormResultSelect">
                                                 <option value="">____</option>
@@ -85,7 +85,7 @@
                             </form>
                         </div>
                         <div class="content__table mt-4">
-                            <table class=" table table-lg table-hover border">
+                            <table class="table-planList table table-lg table-hover border">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -100,53 +100,60 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for plan in plan_list %}
-                                    <tr>
-                                        <td>{{ plan.pk }}</td>
-                                        <td><a class="text-dark"
-                                               href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
-                                        <td class="align-middle table-last_run p-0">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
-                                        <td class="align-middle">{{ plan.last_log.run_by }}</td>
-                                        <td class="align-middle">{{ plan.cases.count }}</td>
-                                        <td class="align-middle">{{ plan.last_log.get_success.count|default:0 }}</td>
-                                        <td class="align-middle">{{ plan.last_log.get_failed.count|default:0 }}</td>
-                                        {% if plan.last_log.status == "0" %}
-                                            <td class="align-middle text-center bg-danger text-light rounded">{{ plan.last_log.get_status_display }}</td>
-                                        {% elif plan.last_log.status == "1" %}
-                                            <td class="align-middle text-center bg-success text-light rounded">{{ plan.last_log.get_status_display }}</td>
-                                        {% else %}
-                                            <td class="align-middle text-center bg-secondary text-light rounded">Не выполнялось</td>
-                                        {% endif %}
-                                        <td>
-                                            <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i
-                                                    class="fa fa-pencil-square-o"
-                                                    aria-hidden="true"></i></a>
-                                            <a class="text-dark" href={% url 'plan_delete' plan.pk %}><i
-                                                    class="fa fa-trash-o"
-                                                    aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                                                {% for plan in plan_list %}
+                                                                    <tr>
+                                                                        <td>{{ plan.pk }}</td>
+                                                                        <td><a class="text-dark"
+                                                                               href={% url 'plan_detail' plan.pk %}>{{ plan.name }}</a></td>
+                                                                        <td class="align-middle table-last_run p-0">{{ plan.last_log.last_run|date:"D d M Y"|default:_("Не запускался") }}</td>
+                                                                        <td class="align-middle">{{ plan.last_log.run_by }}</td>
+                                                                        <td class="align-middle">{{ plan.cases.count }}</td>
+                                                                        <td class="align-middle">{{ plan.last_log.get_success.count|default:0 }}</td>
+                                                                        <td class="align-middle">{{ plan.last_log.get_failed.count|default:0 }}</td>
+                                                                        {% if plan.last_log.status == "0" %}
+                                                                            <td class="align-middle text-center bg-danger text-light rounded">{{ plan.last_log.get_status_display }}</td>
+                                                                        {% elif plan.last_log.status == "1" %}
+                                                                            <td class="align-middle text-center bg-success text-light rounded">{{ plan.last_log.get_status_display }}</td>
+                                                                        {% else %}
+                                                                            <td class="align-middle text-center bg-secondary text-light rounded">Не выполнялось</td>
+                                                                        {% endif %}
+                                                                        <td>
+                                                                            <a class="text-dark" href={% url 'plan_edit' plan.pk %}><i
+                                                                                    class="fa fa-pencil-square-o"
+                                                                                    aria-hidden="true"></i></a>
+                                                                            <a class="text-dark" href={% url 'plan_delete' plan.pk %}><i
+                                                                                    class="fa fa-trash-o"
+                                                                                    aria-hidden="true"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
                                 </tbody>
                             </table>
                             {% if is_paginated %}
                                 <ul class="pagination">
                                     {% if page_obj.has_previous %}
-                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|get_filter }}">&laquo;</a></li>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|get_filter }}">&laquo;</a>
+                                        </li>
                                     {% else %}
                                         <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
                                     {% endif %}
 
                                     {% for i in paginator.page_range %}
                                         {% if page_obj.number == i %}
-                                            <li class="active page-item"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+                                            <li class="active page-item"><span class="page-link">{{ i }}<span
+                                                    class="sr-only">(current)</span></span></li>
                                         {% else %}
-                                            <li class="page-item"><a class="page-link" href="?page={{ i }}&{{ request.get_full_path|get_filter }}">{{ i }}</a></li>
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ i }}&{{ request.get_full_path|get_filter }}">{{ i }}</a>
+                                            </li>
                                         {% endif %}
                                     {% endfor %}
 
                                     {% if page_obj.has_next %}
-                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|get_filter }}">&raquo;</a></li>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|get_filter }}">&raquo;</a>
+                                        </li>
                                     {% else %}
                                         <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
                                     {% endif %}
@@ -159,3 +166,108 @@
         </div>
     </div>
 {% endblock %}
+{##}
+{#{% block script %}#}
+{#    <script>#}
+{#        $('table.table-planList').DataTable({#}
+{#            "searching": true,#}
+{#            "lengthChange": false,#}
+{#            "ordering": false,#}
+{#            "language": {#}
+{#                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json",#}
+{#            },#}
+{#            "oLanguage": {#}
+{#                "sSearch": "Поиск по дате:"#}
+{#            },#}
+{#            "serverSide": true,#}
+{#            "ajax": {"url": "{% url 'plan_list_api' %}?format=datatables&",},#}
+{#            "columns": [#}
+{#                {#}
+{#                    data: 'id',#}
+{#                },#}
+{#                {#}
+{#                    data: 'name'#}
+{#                },#}
+{#                {#}
+{#                    data: "last_run",#}
+{#                    render: function (data, type, row) {#}
+{#                        var date = moment(row.last_run).locale('ru').format('D MMMM YYYY г. H:mm');#}
+{#                        return "<a class=\"text-dark\" href=" + document.location.origin + row.url + ">" + date + "</a>"#}
+{#                    },#}
+{#                    "width": "200px",#}
+{#                    "className": "align-middle",#}
+{#                    "searchable": false#}
+{#                },#}
+{#                {#}
+{#                    "data": "run_by",#}
+{#                    render: function (data, type, row) {#}
+{#                        if (data.full_name) return data.full_name;#}
+{#                        else return '';#}
+{#                    },#}
+{#                    "width": "150px",#}
+{#                    "className": "align-middle",#}
+{#                    "searchable": false#}
+{#                },#}
+{#                {#}
+{#                    data: 'cases',#}
+{#                    render: function (data, type, row) {#}
+{#                        console.log(data);#}
+{#                        return data.length;#}
+{#                    }#}
+{#                },#}
+{#                {#}
+{#                    data: 'success'#}
+{#                },#}
+{#                {#}
+{#                    data: 'failed'#}
+{#                },#}
+{#                {#}
+{#                    data: "status",#}
+{#                    "createdCell": function (td, cellData, rowData, row, col) {#}
+{#                        switch (cellData) {#}
+{#                            case '1':#}
+{#                                $(td).addClass('text-center bg-success text-light rounded align-middle');#}
+{#                                break;#}
+{#                            case '2':#}
+{#                                $(td).addClass('text-center bg-danger text-light rounded align-middle');#}
+{#                                break;#}
+{#                            default:#}
+{#                                $(td).addClass('text-center bg-secondary text-light rounded align-middle');#}
+{#                                break;#}
+{#                        }#}
+{#                    },#}
+{#                    render: function (data, type, row) {#}
+{#                        switch (data) {#}
+{#                            case '1':#}
+{#                                return "Успешно";#}
+{#                            case '2':#}
+{#                                return "Провалено";#}
+{#                            case '0':#}
+{#                                return "Не выполнялось";#}
+{#                        }#}
+{#                    },#}
+{#                    "width": "100px",#}
+{#                    "className": "align-middle",#}
+{#                    "searchable": false#}
+{#                },#}
+{#                {#}
+                    {#data: ''#}
+{#                    render: function (data, type, row) {#}
+{#                        return "<a class=\"text-dark m-2 text-center\" href="+ document.location.origin + '/plan/plan_edit/' + row.id + "><i\n" +#}
+{#                            "class=\"fa fa-pencil-square-o\"\n" +#}
+{#                            "aria-hidden=\"true\"></i></a>" +#}
+{#                            "<a class=\"text-dark m-2 text-center\" href="+ document.location.origin + '/plan/plan_delete/' + row.id +"><i\n" +#}
+{#                            "class=\"fa fa-trash-o\"\n" +#}
+{#                            "aria-hidden=\"true\"></i></a>";#}
+{#                    },#}
+{#                    "width": "100px",#}
+{#                    "className": "align-middle",#}
+{##}
+{##}
+{#                }#}
+{#            ],#}
+{#        });#}
+{##}
+{#        #}
+{#    </script>#}
+{#{% endblock %}#}
