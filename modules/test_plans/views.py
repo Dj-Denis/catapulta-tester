@@ -34,7 +34,7 @@ class PlanList(LoginRequiredMixin, GroupRequiredMixin, ListView):
         if len(req) != 0:
             q_list = []
             if req['search_string'] != '':
-                q_list.append(Q(name=req['search_string']))
+                q_list.append(Q(name__contains=req['search_string']))
             if req['result'] != '':
                 q_list.append(Q(status=req['result']))
             if req['run_by'] != '':

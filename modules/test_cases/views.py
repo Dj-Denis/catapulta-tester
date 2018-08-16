@@ -36,7 +36,7 @@ class CaseList(LoginRequiredMixin, GroupRequiredMixin, ListView):
             q_list = []
             whit_tags = []
             if req['search_string'] != '':
-                q_list.append(Q(name=req['search_string']))
+                q_list.append(Q(name__contains=req['search_string']))
             if req['result'] != '':
                 q_list.append(Q(status=req['result']))
             if req['run_by'] != '':
